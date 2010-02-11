@@ -1,0 +1,3 @@
+#!/usr/bin/env perl
+use CXGN::TomatoGenome::CmdLine;
+CXGN::TomatoGenome::CmdLine->run;
