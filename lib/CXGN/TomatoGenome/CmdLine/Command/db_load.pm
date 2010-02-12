@@ -31,6 +31,11 @@ sub abstract {
     'load BACs from the file-based BAC repository into the DB'
 }
 
+sub validate_args {
+    my ($self, $opt, $args) = @_;
+    @$args and $self->usage_error("unknown argument '$args->[0]'");
+}
+
 sub execute {
     my ( $self, $opt, $args ) = @_;
 
