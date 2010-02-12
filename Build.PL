@@ -33,9 +33,11 @@ my $build = Module::Build->new(
         'namespace::autoclean'         => '0.09',
     },
     build_requires => {
+	'aliased'          => 0,
         'App::Cmd::Tester' => 0,
         'Data::Dumper'     => 0,
         'File::Temp'       => 0,
+        'Fatal'            => 0,
         'FindBin'          => 0,
         'Path::Class'      => 0,
 	'Test::Output'     => 0,
