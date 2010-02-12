@@ -33,7 +33,7 @@ my $result = test_app( CmdLine, [ 'db_load',
 				  '--db_dsn' => $ENV{TOMATO_GENOME_TEST_DSN},
 				]);
 
-like $result->stdout, qr(loading seq file .*C06HBa0082B05.1.v1.seq
+like $result->stdout, qr(loading seq file .*C06HBa0082B05.1.v1.seq),
      'output mentions loading test file'
     or diag Dumper $result;
 
