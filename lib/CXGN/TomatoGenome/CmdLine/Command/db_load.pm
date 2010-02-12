@@ -3,12 +3,14 @@ use Moose;
 use namespace::autoclean;
 use Carp;
 
+
 extends 'CXGN::TomatoGenome::CmdLine::Command';
    with 'CXGN::TomatoGenome::CmdLine::DBConnector';
    with 'CXGN::TomatoGenome::CmdLine::DBICFactory';
 
 use Path::Class;
 use Hash::Util qw/ lock_keys /;
+use File::Basename;
 
 use CXGN::Genomic::Clone;
 use CXGN::TomatoGenome::BACPublish qw/ glob_pattern parse_filename /;
@@ -43,7 +45,8 @@ sub execute {
     $self->vprint("searching for seqfiles matching $glob_pat...\n");
     foreach my $bac_seq ( glob glob_pattern('all_seqs',$self->ftpsite_root ) ) {
 	if( $self->already_loaded( $bac_seq ) ) {
-	    $self->vprint("already loaded $bac_seq\n");
+	    my $bn = basename($bac_seq);
+	    $self->vprint("skipping $bn, already loaded.\n");
 	}
 	else {
 	    $self->vprint("loading seq file $bac_seq\n");
