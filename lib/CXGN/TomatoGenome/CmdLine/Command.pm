@@ -21,7 +21,7 @@ has 'debug' => (
 
 sub vprint {
     my $self = shift;
-    print @_ unless $self->quiet && !$self->debug;
+    print @_ unless $self->quiet;
 }
 
 sub vsay {
