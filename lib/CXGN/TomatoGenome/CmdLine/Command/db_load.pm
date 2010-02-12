@@ -163,11 +163,15 @@ sub parse_desc {
   return \%info;
 }
 
+my $vprint_organism;
 sub tomato_organism {
-    shift
-	->chado
-        ->resultset('Organism::Organism')
-        ->find_or_create({ genus => 'Solanum', species => 'lycopersicum' });
+    my $self = shift;
+    my $o = $self->chado
+                 ->resultset('Organism::Organism')
+                 ->find({ genus => 'Lycopersicon', species => 'Solanum lycopersicum', common_name => 'tomato' })
+		 or die "tomato organism not present in DB\n";
+    $self->vsay("loading with organism_id ".$o->organism_id) unless $vprint_organism++;
+    return $o;
 }
 
 # get the cvterm for BAC clones from chado

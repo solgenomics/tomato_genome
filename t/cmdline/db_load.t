@@ -22,8 +22,9 @@ $ENV{TOMATO_GENOME_TEST_DSN}
 
 
 my $tempdir = File::Temp->newdir;
-my $test_file = dir( $FindBin::RealBin )->parent->subdir('data')->file('C06HBa0082B05.1.v1.seq');
-my $dest_file = dir($tempdir)->subdir('chr06')->subdir('finished')->file('C06HBa0082B05.1.v1.seq');
+my $tf = 'C06HBa0012B01.1.v87.seq';
+my $test_file = dir( $FindBin::RealBin )->parent->subdir('data')->file($tf);
+my $dest_file = dir($tempdir)->subdir('chr06')->subdir('finished')->file($tf);
 $dest_file->dir->mkpath;
 copy( "$test_file", "$dest_file" );
 
@@ -33,11 +34,13 @@ my $result = test_app( CmdLine, [ 'db_load',
 				  '--db_dsn' => $ENV{TOMATO_GENOME_TEST_DSN},
 				]);
 
-like $result->stdout, qr(loading seq file .*C06HBa0082B05.1.v1.seq),
+like $result->stdout, qr(loading seq file .*$tf),
      'output mentions loading test file'
     or diag Dumper $result;
 
-is   $result->stderr, '',
+my $err = $result->stderr;
+$err =~ s/^DBD::Pg[^\n]+\n//; #< ignore DBD::Pg warnings
+is   $err, '',
      'nothing on stderr'
     or diag Dumper $result;
 

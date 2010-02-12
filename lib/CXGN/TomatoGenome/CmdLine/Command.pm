@@ -24,6 +24,10 @@ sub vprint {
     print @_ unless $self->quiet && !$self->debug;
 }
 
+sub vsay {
+    shift->vprint(@_,"\n");
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;
