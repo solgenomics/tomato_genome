@@ -13,6 +13,8 @@ my $build = Module::Build->new(
 
     recursive_test_files => 1,
 
+    script_files => [ grep -f && -x, glob('scripts/*'), glob('scripts/old/*') ],
+
     # and now the list of perl module dependencies
     requires => {
 
