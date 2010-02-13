@@ -1,0 +1,1004 @@
+--- temp_patchgen	2009-08-09 15:05:44.000000000 -0700
++++ validate_submission.pl	2009-08-09 15:05:41.000000000 -0700
+@@ -11,8 +11,6 @@
+ 
+ #use Data::Dumper;
+ 
+-use CXGN::TomatoGenome::BACSubmission;
+-
+ sub usage {
+   my $message = shift || '';
+   $message = "Error: $message\n" if $message;
+@@ -34,6 +32,7 @@
+   -t <dir>
+       Set the directory this script uses for temporarily decompressing
+       submission files. Defaults to $tempdir.
++
+ EOU
+ }
+ 
+@@ -161,24 +160,6 @@
+ 
+ =cut
+ 
+-use base qw/Exporter/;
+-
+-BEGIN {
+-  our @EXPORT_OK = qw/ every_other_elem
+-		       any  all none notall true false
+-		       max min flatten
+-		       collate
+-		       str_in
+-                       distinct
+-		       balanced_split
+-		       evens odds
+-		       index_where
+-		       list_join
+-		       group
+-		     /;
+-}
+-our @EXPORT_OK;
+-
+ sub every_other_elem(@) {
+   my $last = 0;
+   map {$last = !$last; $last ? ($_) : ()} @_;
+@@ -501,6 +482,8 @@
+ ###
+ 1;#do not remove
+ ###
++
++
+ package CXGN::Genomic::CloneIdentifiers;
+ use strict;
+ no strict 'refs'; #using symbolic refs
+@@ -510,12 +493,6 @@
+ 
+ use Data::Dumper;
+ 
+-use Bio::DB::GenBank;
+-use Memoize;
+-
+-use CXGN::DB::Connection;
+-use CXGN::Tools::List qw/str_in flatten collate/;
+-
+ =head1 NAME
+ 
+ CXGN::Genomic::CloneIdentifiers - functions for parsing and generating
+@@ -531,24 +508,6 @@
+ 
+ =head1 FUNCTIONS
+ 
+-All functions below are EXPORT_OK.
+-
+-=cut
+-
+-use base qw/Exporter/;
+-
+-BEGIN {
+-  our @EXPORT_OK = qw(
+-		      guess_clone_ident_type
+-		      parse_clone_ident
+-		      assemble_clone_ident
+-		      clean_clone_ident
+-		      clone_ident_glob
+-		     );
+-}
+-our @EXPORT_OK;
+-
+-
+ =head2 guess_clone_ident_type
+ 
+   Usage: my $type = CXGN::Genomic::Clone->guess_clone_ident_type('C02HBa0011A02')
+@@ -643,7 +602,7 @@
+ 
+   #validate the types we've been given or guessed
+   foreach my $type (@types) {
+-    str_in($type,NAME_TYPES)
++    CXGN::Tools::List::str_in($type,NAME_TYPES)
+       or croak "invalid clone_ident type '$type' passed to parse_clone_ident";
+   }
+ 
+@@ -687,7 +646,7 @@
+   ref $parsed eq 'HASH' or croak "second argument to assemble_clone_ident must be a hash ref";
+   croak "second argument to assemble_clone_ident must be a valid clone_ident type must specify a type\n"
+     unless $type;
+-  str_in($type,NAME_TYPES)
++  CXGN::Tools::List::str_in($type,NAME_TYPES)
+     or croak "invalid clone_ident type '$type' passed to assemble_clone_ident";
+ 
+   return "_assemble_clone_ident_$type"->($parsed);
+@@ -729,7 +688,7 @@
+ 
+ sub clone_ident_glob {
+   my ($type) = @_;
+-  str_in($type,NAME_TYPES)
++  CXGN::Tools::List::str_in($type,NAME_TYPES)
+     or croak "invalid clone_ident type '$type' passed to clone_ident_glob";
+ 
+   my $chrnum = '{'.join(',',map{sprintf '%02d',$_}(0..12)).'}'; #< bsd glob for nums 00-12
+@@ -746,7 +705,10 @@
+ # a sub-parser should return nothing if the name it's given is not of
+ # its type
+ 
+-our $sep = '[^a-zA-Z\d\/]?';
++our $sep;
++BEGIN {
++    $sep = '[^a-zA-Z\d\/]?';
++}
+ 
+ sub _parse_clone_ident_old_cornell {
+   my ($name) = @_;
+@@ -761,15 +723,12 @@
+ 
+   return unless ($1 && $2 && $3);
+ 
+-  my %clone_types = _lookup_clone_types();
+   my $lib = _recognize_lib('hba');
+-  my $clone_type = $clone_types{$lib}
+-    or return;
+   return { lib       => $lib,
+ 	   plate     => $1+0,
+ 	   row       => uc($2),
+ 	   col       => $3+0,
+-	   clonetype => $clone_type,
++	   clonetype => $lib eq 'SL_FOS' ? 'fosmid' : 'bac',
+ 	   match     => $MATCH,
+ 	 };
+ 
+@@ -778,33 +737,29 @@
+ sub _parse_clone_ident_intl_clone {
+   my ($name) = @_;
+ 
+-  return
+-    unless $name =~ /^([a-z]{2}
+-		     _
+-		     [a-z]{2,}
+-                     ) #library name
+-		     -
+-		     (\d{1,3})      #plate number
+-		     ([a-z])   #row
+-		     (\d{1,2})      #column
+-		    $/ix;
+-
+-  return unless ($1 && $2 && $3 && $4);
+-
+-  my $lib = $1;
+-  $lib = _recognize_lib($lib) || $lib;
+-
+-  my %clone_types = _lookup_clone_types();
+-  my $clone_type = $clone_types{$lib}
+-    or return;
+-
+-  return { lib       => $lib,
+-	   plate     => $2+0,
+-	   row       => uc($3),
+-	   col       => $4+0,
+-	   clonetype => $clone_type,
+-	   match     => $MATCH,
+-	 };
++    return
++      unless $name =~ /^([a-z]{2}
++			 _
++			 [a-z]{2,}
++                        ) #library name
++			-
++			(\d{1,3})      #plate number
++			([a-z])   #row
++			(\d{1,2})      #column
++		       $/ix;
++
++    return unless ($1 && $2 && $3 && $4);
++
++    my $lib = $1;
++    $lib = _recognize_lib($lib) || $lib;
++
++    return { lib       => $lib,
++	     plate     => $2+0,
++	     row       => uc($3),
++	     col       => $4+0,
++	     clonetype => $lib eq 'SL_FOS' ? 'fosmid' : 'bac',
++	     match     => $MATCH,
++	   };
+ 
+ }
+ sub _parse_clone_ident_agi_bac {
+@@ -823,22 +778,18 @@
+ 
+   #warn "matched agi_bac\n";
+ 
+-  return unless ($2 && $3 && $4);
+-
+-  my $lib = $1;
+-  $lib = _recognize_lib($lib) || $lib;
++    return unless ($2 && $3 && $4);
+ 
+-  my %clone_types = _lookup_clone_types();
+-  my $clone_type = $clone_types{$lib}
+-    or return;
++    my $lib = $1;
++    $lib = _recognize_lib($lib) || $lib;
+ 
+-  return { lib       => $lib,
+-	   plate     => $2+0,
+-	   row       => uc($3),
+-	   col       => $4+0,
+-	   clonetype => $clone_type,
+-	   match     => $MATCH,
+-	 };
++    return { lib       => $lib,
++	     plate     => $2+0,
++	     row       => uc($3),
++	     col       => $4+0,
++	     clonetype => $lib eq 'SL_FOS' ? 'fosmid' : 'bac',
++	     match     => $MATCH,
++	   };
+ }
+ sub _parse_clone_ident_agi_bac_with_chrom {
+   my ($name) = @_;
+@@ -854,24 +805,18 @@
+ 			  $sep                #maybe a separator
+ 			  (\d{1,3})           #column number
+ 			  $/ix;
+-  my $match = $MATCH;
+ 
+   my $lib = $2; #clean up the library name if needed
+   $lib = _recognize_lib($lib) || $lib;
+ 
+-  my %clone_types = _lookup_clone_types();
+-
+-  my $clone_type = $clone_types{$lib}
+-    or return;
+-
+   my $h = {
+ 	  chr       => $1+0 || 'unmapped',
+ 	  lib       => $lib,
+ 	  plate     => $3+0,
+ 	  row       => uc($4),
+ 	  col       => $5+0,
+-	  clonetype => $clone_type,
+-	  match     => $match,
++	  clonetype => $lib eq 'SL_FOS' ? 'fosmid' : 'bac',
++	  match     => $MATCH,
+ 	 };
+   return $h;
+ 
+@@ -931,15 +876,11 @@
+   my $lib = $1;
+   $lib = _recognize_lib($lib) || $lib;
+ 
+-  my %clone_types = _lookup_clone_types();
+-  my $clone_type = $clone_types{$lib}
+-    or return;
+-
+   return { lib       => $lib,
+ 	   plate     => $2+0,
+ 	   row       => uc($3),
+ 	   col       => $4+0,
+-	   clonetype => $clone_type,
++	   clonetype => $lib eq 'SL_FOS' ? 'fosmid' : 'bac',
+ 	   match     => $MATCH,
+ 	 };
+ }
+@@ -954,10 +895,6 @@
+   ($organism,$libname) = $libname =~ /^(sl|le)?$sep([a-z\d]{1,10})$/i;
+   #warn "split into $organism, $libname\n";
+ 
+-  my %known_libs = _lookup_shortnames();
+-  return $known_libs{lc $libname} if $known_libs{lc $libname};
+-
+-
+   #lowercase strings, change any erroneous numbers to the
+   #letters that they would look like
+   sub lc_and_no_nums {
+@@ -967,8 +904,33 @@
+     $s2;
+   }
+ 
+-  # hash of known library abbreviations as abbrev => shortname
+-  my %known_lib_abbrevs = flatten _lookup_abbreviations();
++  #list of known library abbreviations
++  my %known_lib_abbrevs = ( hba  => 'LE_HBa',
++			    h    => 'LE_HBa',
++			    slh  => 'LE_HBa',
++			    leh  => 'LE_HBa',
++			    a    => 'LE_HBa',
++
++			    m  => 'SL_MboI',
++			    mbo  => 'SL_MboI',
++			    mboi => 'SL_MboI',
++			    mbi  => 'SL_MboI',
++			    moi  => 'SL_MboI',
++			    slm  => 'SL_MboI',
++
++			    f  => 'SL_FOS',
++			    fos  => 'SL_FOS',
++			    slf  => 'SL_FOS',
++
++			    sle  => 'SL_EcoRI',
++			    e  => 'SL_EcoRI',
++			    eco  => 'SL_EcoRI',
++			    ecor => 'SL_EcoRI',
++			    ecori=> 'SL_EcoRI',
++			    eri  => 'SL_EcoRI',
++			    eci  => 'SL_EcoRI',
++			    ecr  => 'SL_EcoRI',
++			  );
+ 
+   my $result = $known_lib_abbrevs{lc_and_no_nums($libname)};
+   #warn "recognized as $result\n";
+@@ -1012,10 +974,8 @@
+ sub _validate_parsed {
+   my ($p) = @_;
+ 
+-  my %shortnames = _lookup_shortnames();
+-
+-  $shortnames{lc $p->{lib}} eq $p->{lib}
+-    or croak "invalid library '$p->{lib}' ".Dumper($p);
++  CXGN::Tools::List::str_in($p->{lib},qw/LE_HBa SL_MboI SL_EcoRI SL_FOS LpenBAC LpenCOS/)
++    or croak "invalid library '$p->{lib}'";
+ 
+   $p->{row} =~ /^[A-P]$/
+     or croak "invalid row '$p->{row}' ".Dumper($p);
+@@ -1092,7 +1052,7 @@
+ }
+ sub _assemble_clone_ident_bac_end {
+   my ($parsed) = @_;
+-  defined $parsed->{chromat_id} or croak 'cannot assemble bac end, no chromat id';
++  $parsed->{chromat_id} or croak 'cannot assemble bac end, no chromat id';
+   $parsed->{primer} or croak 'cannot assemble bac end, no primer';
+   return assemble_clone_ident('agi_bac',$parsed).'_'.$parsed->{primer}.'_'.$parsed->{chromat_id};
+ 
+@@ -1178,46 +1138,76 @@
+ 
+ use LWP::Simple;
+ 
+-use XML::LibXML;
+-
+-
+-use Bio::SeqIO;
+-use Bio::SeqUtils;
+-use Bio::Tools::RepeatMasker;
+-use Bio::FeatureIO;
+-
+-
+-use CXGN::Annotation::GAMEXML::Combine qw/combine_game_xml_files/;
+-use CXGN::TomatoGenome::BACPublish qw/valcache/;
+-
+-use CXGN::Genomic::Clone;
+-use CXGN::Genomic::CloneIdentifiers qw/parse_clone_ident assemble_clone_ident clean_clone_ident/;
+-
+-use CXGN::Publish qw/parse_versioned_filepath/;
+-
+-use CXGN::Tools::Run;
+-use CXGN::Tools::File qw/file_contents/;
+-use CXGN::Tools::List qw/str_in/;
+-
+-use CXGN::TomatoGenome::BACSubmission::Analysis;
+-
+-use CXGN::VHost;
+-
+ use constant GENBANK_ACC_PATTERN => qr/^[A-Z_]{2,4}\d+$/;
+ use constant GENBANK_VER_PATTERN => qr/^[A-Z_]{2,4}\d+\.\d+$/;
+ 
+-use Class::MethodMaker
+-  [ scalar => [qw/
+-		  _version
+-		  _tempdir
+-		  _bacname
+-		  _chromosome_number
+-		  _tarfile
+-		  _tarfile_dir
+-		  _renamed_sequences_file
+-		  _vector_screened_sequences_file
+-	       /],
+-  ];
++#### begin generated accessors ####
++sub _tempdir {
++    my ($self,$new) = @_;
++    if ($new) {
++        $self->{_tempdir} = $new;
++    }
++    return $self->{_tempdir};
++}
++sub _bacname {
++    my ($self,$new) = @_;
++    if ($new) {
++        $self->{_bacname} = $new;
++    }
++    return $self->{_bacname};
++}
++sub _tarfile {
++    my ($self,$new) = @_;
++    if ($new) {
++        $self->{_tarfile} = $new;
++    }
++    return $self->{_tarfile};
++}
++sub _tarfile_dir {
++    my ($self,$new) = @_;
++    if ($new) {
++        $self->{_tarfile_dir} = $new;
++    }
++    return $self->{_tarfile_dir};
++}
++sub _renamed_sequences_file {
++    my ($self,$new) = @_;
++    if ($new) {
++        $self->{_renamed_sequences_file} = $new;
++    }
++    return $self->{_renamed_sequences_file};
++}
++sub _vector_screened_sequences_file {
++    my ($self,$new) = @_;
++    if ($new) {
++        $self->{_vector_screened_sequences_file} = $new;
++    }
++    return $self->{_vector_screened_sequences_file};
++}
++sub _version {
++    my ($self,$new) = @_;
++    if ($new) {
++        $self->{_version} = $new;
++    }
++    return $self->{_version};
++}
++sub _chromosome_number {
++    my ($self,$new) = @_;
++    if (defined $new) {
++        $self->{_chromosome_number} = $new;
++    }
++    return $self->{_chromosome_number};
++}
++##### end generated accessors ###
++
++sub open {
++    my ($class,@params) = @_;
++    my $this = {};
++    bless $this,$class;
++    $this->init(@params);
++    return $this;
++}
++
+ 
+ #debugging utils
+ use constant DEBUG => $ENV{CXGNBACSUBMISSIONDEBUG} ? 1 : 0;
+@@ -1226,18 +1216,26 @@
+ $File::Temp::DEBUG = 1 if DEBUG;
+ 
+ #### ERROR CONSTANTS
+-BEGIN {
+-  our @errnames = qw( E_BAD_TARFILE  E_BAD_FILENAME E_BAD_BACNAME E_BAD_LIBNAME
+-		      E_BAC_PARSE    E_NO_TOP_DIR  E_NO_MAIN_SEQ E_NO_MAIN_QUAL
+-		      E_BAD_SEQ_VER  E_UNK_CLONE   E_CLONE_STAT  E_BAD_DATA    E_MULT_SEQS
+-		      E_GB_ACC       E_GB_REC      E_GB_SEQ      E_GB_PHASE_1  E_GB_PHASE_3
+-		      E_SEQ_INFO     E_VEC
+-		    );
+-  our @EXPORT_OK = @errnames;
+-  our %EXPORT_TAGS = (errors => [@errnames]);
+-}
+-use base qw/Exporter/;
+-use enum 'DUMMY',our @errnames; #< DUMMY is there to make it start at 1
++use constant E_BAD_TARFILE   => 1;
++use constant E_BAD_FILENAME  => 2;
++use constant E_BAD_BACNAME   => 3;
++use constant E_BAD_LIBNAME   => 4;
++use constant E_BAC_PARSE     => 5;
++use constant E_NO_TOP_DIR    => 6;
++use constant E_NO_MAIN_SEQ   => 7;
++use constant E_NO_MAIN_QUAL  => 8;
++use constant E_BAD_SEQ_VER   => 9;
++use constant E_UNK_CLONE     => 10;
++use constant E_CLONE_STAT    => 11;
++use constant E_BAD_DATA      => 12;
++use constant E_MULT_SEQS     => 13;
++use constant E_GB_ACC        => 14;
++use constant E_GB_REC        => 15;
++use constant E_GB_SEQ        => 16;
++use constant E_GB_PHASE_1    => 17;
++use constant E_GB_PHASE_3    => 18;
++use constant E_SEQ_INFO      => 19;
++use constant E_VEC           => 20;
+ 
+ =head1 NAME
+ 
+@@ -1295,9 +1293,8 @@
+ =cut
+ 
+ #note: init() is called by open(), which is made by Class::MethodMaker
+-sub open {
+-  my ($class,$tarfile,$stripped) = @_;
+-  my $self = bless {}, $class;
++sub init {
++  my ($self,$tarfile) = @_;
+   local $Carp::CarpLevel = 1; #skip the MethodMaker-generated open() in the call stack
+ 
+   #make sure we have our tarfile and store its name
+@@ -1310,7 +1307,7 @@
+   $self->_bacname($bacname);
+   $self->_tarfile_dir($path);
+ 
+-  my $p = parse_clone_ident($bacname,'agi_bac_with_chrom');
++  my $p = CXGN::Genomic::CloneIdentifiers::parse_clone_ident($bacname,'agi_bac_with_chrom');
+   $self->_chromosome_number($p->{chr}) if $p;
+ 
+   # make a temp dir and decompress the tar file
+@@ -1321,24 +1318,10 @@
+ 		 );
+ 
+ #  dbp "tar -xzf $tarfile -C ".$self->_tempdir."\n";
+-  if( $stripped ) {
+-    eval {
+-      $self->_stripped_decompress($tarfile);
+-    };
+-    warn $EVAL_ERROR if $EVAL_ERROR;
+-  }
+-
+-  unless($stripped && !$EVAL_ERROR) {
+-    eval {
+-      CXGN::Tools::Run->run( 'tar',
+-			     -xzf => $tarfile,
+-			     -C   => $self->_tempdir,
+-			   );
+-    };
+-    if( $EVAL_ERROR ) {
+-        warn $EVAL_ERROR;
+-        $self->{open_failed} = $EVAL_ERROR;
+-    }
++  system "gzip -d -c $tarfile | tar xf - -C ".$self->_tempdir;
++  if( $CHILD_ERROR ) {
++      warn "Failed to decompress $tarfile: $!";
++      $self->{open_failed} = 1;
+   }
+ 
+   #open the sequences file and initialize the version of this object
+@@ -1348,84 +1331,9 @@
+ #  warn "init: $EVAL_ERROR" if $EVAL_ERROR;
+   $self->_version($initial_version) if $initial_version;
+ 
+-  return $self;
+-}
+-
+-=head2 open_stripped
+-
+-  Same as open() above, but do not include any subdirectories in temp
+-  storage or in the tarfile made by new_tarfile().  If this has never
+-  been done before with a particular submission file, caches a
+-  stripped copy of the tarfile in a
+-  .cxgn-bacsubmission-cache/stripped_tarballs directory NEXT TO the
+-  original tarfile.
+-
+-=cut
+-
+-sub open_stripped {
+-  shift->open(shift,'strip');
++  return 1;
+ }
+ 
+-# given a tar file (probably on a networked filesystem), check to see
+-# if we have cached a stripped version of the tarball next to it.  if
+-# so, decompress that into our tempdir.  if not, decompress the full
+-# tar and make a stripped version
+-sub _stripped_decompress {
+-  my ($self,$tarfile) = @_;
+-
+-  confess "trying a stripped decompress on already stripped tarball '$tarfile'"
+-    if $tarfile =~ m!/stripped_tarballs/!;
+-
+-  my ($bn,$dir) = fileparse($tarfile);
+-  my $cache_base = File::Spec->catdir( $dir, '.cxgn-bacsubmission-cache' );
+-  my $stripped_cache = File::Spec->catdir( $cache_base, 'stripped_tarballs' );
+-  my $stripped_tar = File::Spec->catfile( $stripped_cache, $bn );
+-  my @s_stat = stat($stripped_tar);
+-  my @t_stat = stat($stripped_tar);
+-  if( @s_stat && $s_stat[9] >= $t_stat[9] ) { #< if we have a stripped tarball, and it's newer than the file we're opening
+-    dbp "untarring existing stripped tarball\n";
+-    CXGN::Tools::Run->run( 'tar',
+-			   -xzf => $stripped_tar,
+-			   -C   => $self->_tempdir,
+-			   "--exclude='*/*/*'"
+-			 );
+-  } else {
+-    dbp "making new stripped tarball from '$tarfile'\n";
+-    mkdir $cache_base;
+-    mkdir $stripped_cache;
+-
+-    # now untar the tarfile with exclusions, which will read the whole
+-    # tarfile over NFS, but ignore everything but the stripped
+-    # contents
+-    my $t = CXGN::Tools::Run->run( 'tar',
+-                                   -xzf => $tarfile,
+-                                   "--exclude=*/*/*",
+-                                   -C  => $self->_tempdir,
+-                                 );
+-    print $t->out.$t->err;
+-
+-    # and make new tarfile containing only the stripped contents,
+-    # putting it in the stripped location
+-    unless( copy( $self->new_tarfile, $stripped_tar ) ) {
+-      unlink($stripped_tar);
+-      die "$! copying new stripped tarball to '$stripped_tar'";
+-    }
+-    dbp "done making new stripped tarball\n";
+-  }
+-
+-  # cleanup any files in the stripped cache that don't correspond to existing files
+-  foreach my $stripped (glob File::Spec->catfile($stripped_cache,'*')) {
+-    next unless -f $stripped;
+-    my ($bn,$dir) = fileparse($stripped);
+-    my $orig = File::Spec->catfile($dir,'..','..',$bn);
+-    dbp "stripped cleanup looking for orig '$orig'.\n";
+-    unless( -e $orig ) {
+-      dbp "original not found, deleting stripped copy.\n";
+-      rmtree $stripped
+-	or warn "WARNING: $! unlinking $stripped\n";
+-    }
+-  }
+-}
+ 
+ #object method to extract the sequence version number in this tarball's
+ #sequence file.  dies if unable to do so.  returns the version number,
+@@ -1461,7 +1369,7 @@
+ #version number from it
+ sub _extract_version_from_identifier {
+   my ($self,$ident) = @_;
+-  my $p = parse_clone_ident($ident,'versioned_bac_seq')
++  my $p = CXGN::Genomic::CloneIdentifiers::parse_clone_ident($ident,'versioned_bac_seq')
+     or return;
+   return $p->{version};
+ }
+@@ -1871,12 +1779,6 @@
+   dbp "creating new tarfile for ".$self->bac_name."\n";
+   ####tar up the contents of our temp dir###
+ 
+-  #figure out what to name our new tarball
+-  my $tarname = $self->generated_file_names->{new_tarfile};
+-
+-  #delete the current tar if present
+-  unlink $tarname;
+-
+   #make sure we have a vector screened sequence file by now,
+   #because we have to include that in the tarball
+   #ignore dies from this step, because we might not be operating
+@@ -1892,6 +1794,9 @@
+     grep { ! /^\./ && ! /^$prefix/ } readdir $temp_dh;
+   };
+ 
++  #figure out what to name our new tarball
++  my $tarname = $self->generated_file_names->{new_tarfile};
++
+   #make the new tarball, tarring from the correct perspective
+   my $tempdir = $self->_tempdir;
+ 
+@@ -2325,7 +2230,6 @@
+   If you 'use' this package with the :errors tag, the following error number
+   constants will be imported:
+ 
+-        E_BAD_TARFILE   - the submission tarfile is incomplete or corrupt
+ 	E_BAD_FILENAME  - improperly formatted file name
+ 	E_BAD_BACNAME   - bac name is not correctly formatted
+ 	E_BAD_LIBNAME   - invalid library name
+@@ -2363,7 +2267,7 @@
+   my ($self,$errnum) = @_;
+ 
+   my @errors = ( undef,
+-		 'submission tarfile is corrupt or incompletely uploaded',
++		 'the submission tarfile is incomplete or corrupt',
+ 		 'improperly formatted file name',
+ 		 'bac name is not correctly formatted',
+ 		 'invalid library name',
+@@ -2429,23 +2333,19 @@
+   }
+ 
+   #check if the clone name is correctly formatted
+-  my $parsed = parse_clone_ident($bacname,'agi_bac_with_chrom')
++  my $parsed = CXGN::Genomic::CloneIdentifiers::parse_clone_ident($bacname,'agi_bac_with_chrom')
+     or push @errors,E_BAC_PARSE;#"file's basename '$bacname' is not a parsable BAC name";
+ 
+   #check if the clone name exists in the database
+   my $got_clone = 0;
+   if($parsed) {
+-    if(my $clone = CXGN::Genomic::Clone->retrieve_from_parsed_name($parsed)) {
+-      $got_clone = 1;
++    my $rec = _sgn_registry_info($bacname)
++      or push @errors, E_UNK_CLONE;
+ 
+-      $clone->chromosome_num
+-	and $clone->chromosome_num eq $parsed->{chr}
+-	  and str_in($clone->sequencing_status,qw/in_progress complete/)
++    $rec->{seq_proj}->{disp}
++	and $rec->{seq_proj}->{disp} eq $parsed->{chr}
++	  and CXGN::Tools::List::str_in($rec->{seq_status}->{val},qw/in_progress complete/)
+ 	    or push @errors,E_CLONE_STAT;
+-
+-    } else {
+-      push @errors,E_UNK_CLONE;
+-    }
+   }
+ 
+   #fatal if no subdirectory
+@@ -2509,15 +2409,6 @@
+       push @errors, E_BAD_DATA;
+       warn "error reading sequence file: $EVAL_ERROR\n";
+     }
+-    elsif($got_clone) {
+-      my @vs_seqs = $self->vector_screened_sequences;
+-      my $all = join '', map $_->seq, @vs_seqs;
+-      #do not tolerate any vector matches in the first or last 1000 bases
+-      # but allow up to 50 bases of vector match in the internal parts of the sequence
+-      my $ends = substr($all,0,1000).substr($all,length($all)-1000,1000);
+-      my $all_count = ($all =~ tr/X//);
+-      push @errors, E_VEC if $ends =~ /X/i || $all_count > 50;
+-    }
+   }
+ 
+   my $seqinfo_errors = [];
+@@ -2537,28 +2428,49 @@
+     push @errors, $self->_check_genbank_record;
+   }
+ 
+-  #cache the validation errors if we can write to it
+-  eval { #< just warn if it fails
+-    valcache($self->_tarfile, { text => $self->_err2txt(@errors),
+-				errors => \@errors,
+-			      }
+-	    );
+-  };
+-  warn "cannot write to validation cache: $EVAL_ERROR" if $EVAL_ERROR;
+-
+   return @errors;
+ }
+ 
++use constant SGN_REG_FETCHFORM => 'http://sgn.cornell.edu/maps/physical/clone_async.pl?action=qcloneperl&clone_name=%s';
++#fetch this bac's clone registry information from SGN and check it against the included submission
++memoize('_sgn_registry_info');
++sub _sgn_registry_info {
++  my ($name) = @_;
++
++  confess "must give a clone name\n" unless $name;
++  my $url = sprintf SGN_REG_FETCHFORM,$name;
++  #warn "fetching with url $url\n";
++
++  my $rec;
++  foreach (1..5) {
++    warn "Trying again to fetch SGN clone registry info for $name (attempt $_)...\n" if $_ > 1;
++    $rec = get($url);
++    last if $rec
++      && index($rec,'val') != -1
++      && index($rec,'il_proj') != -1
++      && index($rec,'seq_proj') != -1;
++    sleep 1;
++    $rec ||= "<nothing>"; chomp $rec; $rec .= "\n"; #< clean up the return
++    if ($_==5) {
++      warn "Could not retrieve SGN clone registry info for $name.\nServer returned:\n$rec";
++      return;
++    }
++  }
++  my $stat1 = eval $rec; #< now rec should be a hashref containing clone registry info
++  die $EVAL_ERROR if $EVAL_ERROR;
++  return $stat1;
++}
++
+ #without using bioperl, fetch this bac's genbank record. we're not
+ #using bioperl here because this code has to go into the
+ #validate_submission.pl script, which can't have a dependency on
+ #anything except core modules
+-use constant FETCHFORM => 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?retmode=text&rettype=gbwithparts&db=nucleotide&id=%s&usehistory=n&email=sgn-feedback@sgn.cornell.edu&tool=sgn_bac_pipeline';
++use constant NCBI_FETCHFORM => 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?retmode=text&rettype=gbwithparts&db=nucleotide&id=%s&usehistory=n&email=sgn-feedback@sgn.cornell.edu&tool=sgn_bac_pipeline';
+ memoize('_parsed_gb_entry');
+ sub _parsed_gb_entry {
+   my ($id) = @_;
+   confess "must give an id\n" unless $id;
+-  my $url = sprintf FETCHFORM,$id;
++  my $url = sprintf NCBI_FETCHFORM,$id;
+ #  warn "fetching with url $url\n";
+ 
+   my $rec;
+@@ -2642,15 +2554,20 @@
+   #now check for the expected TOMGEN tag in the comment field
+   my $comment = $entry->{COMMENT};
+ 
++  my $intl_clone_name = CXGN::Genomic::CloneIdentifiers::assemble_clone_ident
++    ( intl_clone =>
++      CXGN::Genomic::CloneIdentifiers::parse_clone_ident($self->bac_name,'agi_bac_with_chrom'),
++    );
++
+   #check for the clone name somewhere in the DEFINITION field
+   #and keywords ITAG and TOMGEN somewhere in the COMMENT field
+   push @errors, E_GB_REC
+     unless
+       #DEFINITION has either SOL bioinformatics-style clone name or intl clone name
+        ( $entry->{DEFINITION} &&
+-	 ( index($entry->{DEFINITION},$self->clone_object->clone_name_with_chromosome || '') != -1
+-           || index($entry->{DEFINITION},$self->clone_object->intl_clone_name) != -1
+-         )
++	 ( index($entry->{DEFINITION},$self->bac_name) != -1
++	   || index($entry->{DEFINITION},$intl_clone_name) != -1
++	 )
+        )
+       #COMMENT exists and has TOMGEN keyword in it
+       && $comment
+@@ -2695,8 +2612,7 @@
+ }
+ sub _err2txt {
+   my $self = shift;
+-  my $bn = basename($self->_tarfile);
+-  return join('',( "Problems with submission file $bn:\n",
++  return join('',( "Submission file ".$self->_tarfile." contained errors:\n",
+ 		   map {my $s=$self->error_string($_); "   - $s\n"} @_,
+ 		 )
+ 	     );
+@@ -2855,6 +2771,7 @@
+   Usage: $submission->chromosome_number(4);
+   Desc : get/set the chromosome number for this BAC submission.
+   Args : (optional) chromosome number to set, with 0 representing 'unknown'
++             warns if this does not match what's in the SGN BAC registry
+   Ret  : chromosome number
+   Side Effects: renames files in the archive.  DOES NOT alter the contents
+                 of any files, particularly sequence deflines.  This is fine
+@@ -2946,6 +2863,28 @@
+ }
+ 
+ 
++
++=head2 file_contents
++
++  Desc: get the entire contents of a file as a string
++  Args: filename
++  Ret : string containing the entire contents of the file
++  Side Effects: reads the file from the filesystem
++
++  Be careful with this function.  If the file is too big, this will
++  take a LOT of memory.
++
++=cut
++
++sub file_contents {
++    my ($filename) = @_;
++    local $/=undef;
++    CORE::open(my $FILE,"$filename") or return;
++    my $file_contents=<$FILE>;
++    CORE::close $FILE;
++    return $file_contents;
++}
++
+ =head2 genbank_accession
+ 
+   Usage: my $gbacc = $submission->genbank_accession
+@@ -3103,14 +3042,14 @@
+     next if $line =~ /^\s*#/; #< skip comments
+     chomp $line;
+     my ($key,$value) = split /\t/,$line;
+-    if( $key =~ /\s/ || str_in($key,@disallowed_keys ) ) {
++    if( $key =~ /\s/ || CXGN::Tools::List::str_in($key,@disallowed_keys ) ) {
+       push @$errors, "invalid key $key in sequencing_info.txt for ".$self->_tarfile;
+     }
+     elsif( $key eq 'org_shortname' ) {
+       #check that this is a valid shortname
+-      our $shortname_list ||= CXGN::Genomic::Clone->db_Main->selectcol_arrayref('select shortname from sgn_people.sp_organization where shortname is not null');
+-      str_in($value,@$shortname_list)
+-	or push @$errors, "unknown organization shortname '$value' in sequencing_info.txt for ".$self->_tarfile;
++      our $shortname_list = [ qw/ cas enea sistemasgenomicos imimbarcelona ibmcpvalencia kazusa inra cbsg iari sanger seminis syngenta useoul keygene sunseeds abch alcorn dnalandmarks kribb ensat ivf-caas upadua unaples agencourt cnia-inta sym-bio cornell jnivts / ];
++      CXGN::Tools::List::str_in($value,@$shortname_list)
++	  or push @$errors, "unknown organization shortname '$value' in sequencing_info.txt for ".$self->_tarfile;
+     }
+ 	
+     $info{$key} = $value;
+@@ -3128,8 +3067,7 @@
+   Args : optional hash-style list of additional key-value pairs to filter for
+   Ret  : list of hashrefs, each of which contains as organization that
+          could have been the sequencer of this submission, based
+-         on what info is found in the sequencing_info.txt file in the
+-         submission
++         on what info is found in the 
+   Side Effects: dies on error
+ 
+ =cut
+@@ -3197,29 +3135,6 @@
+   return File::Spec->catfile( $self->main_submission_dir, 'sequencing_info.txt');
+ }
+ 
+-
+-=head2 clone_object
+-
+-  Usage: my $clone = $submission->clone_object
+-  Desc : get the CXGN::Genomic::Clone object corresponding to this BAC
+-         submission, gets info from the database
+-         NOTE: THIS IS ONLY RELIABLE IF THE SUBMISSION VALIDATES
+-  Ret  : the clone object, or undef if it could not be found
+-  Args : none
+-  Side Effects: none
+-
+-=cut
+-
+-sub clone_object {
+-  my ($self) = @_;
+-
+-  #parse this submission's BAC name
+-  my $parsed_name = parse_clone_ident( $self->bac_name, 'agi_bac_with_chrom' )
+-    or return;
+-
+-  return CXGN::Genomic::Clone->retrieve_from_parsed_name($parsed_name);
+-}
+-
+ =head2 tar_file
+ 
+   Usage: my $submission = BACSubmission->open($tarfile);
+@@ -3319,7 +3234,6 @@
+   return 3;
+ }
+ 
+-
+ #the filename prefix that precedes all files generated by this object
+ sub _generated_file_prefix {
+   'temp-cxgn-bac-submit'
+@@ -3352,70 +3266,3 @@
+   return \%names;
+ }
+ 
+-
+-=head2 submitters
+-
+-  Usage: my @addresses = $sub->submitters
+-  Desc : get the email addresses of the probable submitter contact for
+-         this BAC, uses the bac_contacts_chr_* CXGN configuration
+-         variables
+-  Args : none
+-  Ret  : possibly empty list of
+-        { name => full name, email => email address}, {...}, ...
+-  Side Effects: none
+-
+-=cut
+-
+-our $vhost = CXGN::VHost->new;
+-sub submitters {
+-  my ($self) = @_;
+-
+-
+-#   # does it have project info already in the database?  that's the most
+-#   # reliable information
+-
+-
+-#   # otherwise, is our tarfile in a country_upload directory?  that's
+-#   # a very good indication
+-#   my (undef,$dir,undef) = File::Spec->splitpath($self->_tarfile_dir, 'no_file' );
+-#   my @dirs = File::Spec->splitdir( $dirs );
+-#   my $country_dir = '';
+-#   $country_dir = pop @dirs while $dirs[-1] ne 'country_uploads';
+-#   if( $dirs[-1] eq 'country_uploads' ) {
+-#       # at this point, $country_dir will be 'korea' or something like that
+-#   }
+-
+-  # otherwise, look at its chromosome number and try to guess the
+-  # submitter from that
+-  my $chr = $self->chromosome_number
+-      or return;
+-  $chr = 0 if $chr eq 'unmapped';
+-  my $conf_var_name = 'bac_contacts_chr_'.($chr+0);
+-  my $submitters_string = join ' ',@{our $vhost->get_conf_arrayref($conf_var_name)}
+-      or return;
+-
+-  return map _parse_submitter($_), split /,/,$submitters_string;
+-}
+-sub _parse_submitter {
+-  my ($str) = @_;
+-  #warn "parsing '$str'\n";
+-  my ($email,$name) = do {
+-    if( $str =~ /</ ) {
+-      reverse split /\s*[<>]\s*/,$str;
+-    } else {
+-      $str
+-    }
+-  };
+-
+-  $name =~ s/"|^\s+|\s+$//g if $name;
+-  croak "invalid email address '$email'" unless $email =~ /@/;
+-
+-  return { email => $email, name => $name || ''};
+-}
+-
+-
+-###
+-1;#do not remove
+-###
+-
+-

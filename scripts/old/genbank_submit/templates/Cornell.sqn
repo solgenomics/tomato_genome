@@ -1,0 +1,162 @@
+Seq-submit ::= {
+  sub {
+    contact {
+      contact {
+        name
+          name {
+            last "Mueller" ,
+            first "Lukas" ,
+            initials "L.A." } ,
+        affil
+          std {
+            affil "Cornell University" ,
+            div "Plant Breeding and Genetics" ,
+            city "Ithaca" ,
+            sub "NY" ,
+            country "USA" ,
+            street "Emerson Hall" ,
+            email "lam87@cornell.edu" ,
+            fax "(607) 255 6683" ,
+            phone "(607) 255-6557" ,
+            postal-code "14853" } } } ,
+    cit {
+      authors {
+        names
+          std {
+            {
+              name
+                name {
+                  last "Mueller" ,
+                  first "Lukas" ,
+                  initials "L.A." } } ,
+            {
+              name
+                name {
+                  last "Giovannoni" ,
+                  first "James" ,
+                  initials "J.J." } } ,
+            {
+              name
+                name {
+                  last "van Eck" ,
+                  first "Joyce" ,
+                  initials "J." } } ,
+            {
+              name
+                name {
+                  last "Stack" ,
+                  first "Stephen" ,
+                  initials "S." } } ,
+            {
+              name
+                name {
+                  last "Tanksley" ,
+                  first "Steve" ,
+                  initials "S.D." } } ,
+            {
+              name
+                consortium "Tomato Genome Sequencing" } } ,
+        affil
+          std {
+            affil "Cornell University" ,
+            div "Plant Breeding and Genetics" ,
+            city "Ithaca" ,
+            sub "NY" ,
+            country "USA" ,
+            street "Emerson Hall" ,
+            postal-code "14853" } } ,
+      date
+        std {
+          year 2005 ,
+          month 11 ,
+          day 9 } } ,
+    subtype new ,
+    tool "Sequin 6.00 - LINUX UNIX" } ,
+  data
+    entrys {
+      seq {
+        id {
+          local
+            str "dummyseq" } ,
+        descr {
+          molinfo {
+            biomol genomic } ,
+          source {
+            genome genomic ,
+            org {
+              taxname "Lycopersicon esculentum" ,
+              common "tomato" ,
+              orgname {
+                lineage "Eukaryota; Viridiplantae; Streptophyta; Embryophyta;
+ Tracheophyta; Spermatophyta; Magnoliophyta; eudicotyledons; core eudicots;
+ asterids; lamiids; Solanales; Solanaceae; Solanum; Lycopersicon" ,
+                gcode 1 ,
+                div "PLN" } } } ,
+          create-date
+            std {
+              year 2005 ,
+              month 11 ,
+              day 9 } ,
+          pub {
+            pub {
+              gen {
+                cit "Unpublished" ,
+                authors {
+                  names
+                    std {
+                      {
+                        name
+                          name {
+                            last "Mueller" ,
+                            first "Lukas" ,
+                            initials "L.A." } } ,
+                      {
+                        name
+                          name {
+                            last "Giovannoni" ,
+                            first "James" ,
+                            initials "J.J." } } ,
+                      {
+                        name
+                          name {
+                            last "van Eck" ,
+                            first "Joyce" ,
+                            initials "J." } } ,
+                      {
+                        name
+                          name {
+                            last "Stack" ,
+                            first "Stephen" ,
+                            initials "S." } } ,
+                      {
+                        name
+                          name {
+                            last "Tanksley" ,
+                            first "Steve" ,
+                            initials "S.D." } } ,
+                      {
+                        name
+                          consortium "Tomato Genome Sequencing" } } ,
+                  affil
+                    std {
+                      affil "Cornell University" ,
+                      div "Plant Breeding and Genetics" ,
+                      city "Ithaca" ,
+                      sub "NY" ,
+                      country "USA" ,
+                      street "Emerson Hall" ,
+                      postal-code "14853" } } ,
+                title "Sequencing of Tomato Chromosomes 1, 10 and 11" } } } ,
+          comment "Sequenced by the International Tomato Genome Sequencing
+ project (TOMGEN).  This sequence was finished as follows unless otherwise
+ noted: all regions were either double-stranded or sequenced with an alternate
+ chemistry or covered by high quality data (i.e., phred quality >= 30); an
+ attempt was made to resolve all sequencing problems, such as compressions and
+ repeats; all regions were covered by at least one subclone; and the assembly
+ was confirmed by restriction digest." } ,
+        inst {
+          repr raw ,
+          mol dna ,
+          length 3 ,
+          seq-data
+            ncbi2na '38'H } } } }
