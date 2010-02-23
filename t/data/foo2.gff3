@@ -1,0 +1,859 @@
+##gff-version 3
+##gff-version 3
+scaffold00615	GTH	match	11462	14357	1.000	-	0	ID=scaffold07246_22.1.1_alignment_1;Target=scaffold07246_22.1.1 1 390 +
+scaffold00615	GTH	match_part	14340	14357	1.000	-	0	ID=GTH_match_part_1;Target=scaffold07246_22.1.1 1 18 +;Parent=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	match_part	13683	13863	1.000	-	0	ID=GTH_match_part_2;Target=scaffold07246_22.1.1 19 199 +;Parent=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	match_part	11462	11652	1.000	-	0	ID=GTH_match_part_3;Target=scaffold07246_22.1.1 200 390 +;Parent=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	match	2756814	2757201	1.000	+	0	ID=scaffold07246_42.1.1_alignment_1;Target=scaffold07246_42.1.1 1 303 +
+scaffold00615	GTH	match_part	2756814	2756901	1.000	+	0	ID=GTH_match_part_4;Target=scaffold07246_42.1.1 1 88 +;Parent=scaffold07246_42.1.1_alignment_1
+scaffold00615	GTH	match_part	2756987	2757201	1.000	+	0	ID=GTH_match_part_5;Target=scaffold07246_42.1.1 89 303 +;Parent=scaffold07246_42.1.1_alignment_1
+scaffold01120	GTH	match	2675	5795	1.000	+	0	ID=scaffold01751_3.1.1_alignment_1;Target=scaffold01751_3.1.1 1 1755 +
+scaffold01120	GTH	match_part	2675	2989	1.000	+	0	ID=GTH_match_part_6;Target=scaffold01751_3.1.1 1 315 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	3080	3779	1.000	+	0	ID=GTH_match_part_7;Target=scaffold01751_3.1.1 316 1015 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	3832	4160	1.000	+	0	ID=GTH_match_part_8;Target=scaffold01751_3.1.1 1016 1344 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	5203	5251	1.000	+	0	ID=GTH_match_part_9;Target=scaffold01751_3.1.1 1345 1393 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	5434	5795	1.000	+	0	ID=GTH_match_part_10;Target=scaffold01751_3.1.1 1394 1755 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold00084	GTH	match	42942	44414	1.000	-	0	ID=scaffold00090_458.1.1_alignment_1;Target=scaffold00090_458.1.1 1 1473 +
+scaffold00084	GTH	match_part	42942	44414	1.000	-	0	ID=GTH_match_part_11;Target=scaffold00090_458.1.1 1 1473 +;Parent=scaffold00090_458.1.1_alignment_1
+scaffold00084	GTH	match	49687	61898	1.000	-	0	ID=scaffold00090_457.1.1_alignment_1;Target=scaffold00090_457.1.1 1 4440 +
+scaffold00084	GTH	match_part	61725	61898	1.000	-	0	ID=GTH_match_part_12;Target=scaffold00090_457.1.1 1 174 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	60641	60962	1.000	-	0	ID=GTH_match_part_13;Target=scaffold00090_457.1.1 175 496 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	60318	60509	1.000	-	0	ID=GTH_match_part_14;Target=scaffold00090_457.1.1 497 688 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	60094	60249	1.000	-	0	ID=GTH_match_part_15;Target=scaffold00090_457.1.1 689 844 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	59578	59871	1.000	-	0	ID=GTH_match_part_16;Target=scaffold00090_457.1.1 845 1138 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	59079	59296	1.000	-	0	ID=GTH_match_part_17;Target=scaffold00090_457.1.1 1139 1356 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	58900	58974	1.000	-	0	ID=GTH_match_part_18;Target=scaffold00090_457.1.1 1357 1431 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	58682	58748	1.000	-	0	ID=GTH_match_part_19;Target=scaffold00090_457.1.1 1432 1498 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	57978	58300	1.000	-	0	ID=GTH_match_part_20;Target=scaffold00090_457.1.1 1499 1821 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	56436	56669	1.000	-	0	ID=GTH_match_part_21;Target=scaffold00090_457.1.1 1822 2055 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	56148	56335	1.000	-	0	ID=GTH_match_part_22;Target=scaffold00090_457.1.1 2056 2243 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	55919	56060	1.000	-	0	ID=GTH_match_part_23;Target=scaffold00090_457.1.1 2244 2385 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	55720	55828	1.000	-	0	ID=GTH_match_part_24;Target=scaffold00090_457.1.1 2386 2494 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	54607	54709	1.000	-	0	ID=GTH_match_part_25;Target=scaffold00090_457.1.1 2495 2597 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	54347	54515	1.000	-	0	ID=GTH_match_part_26;Target=scaffold00090_457.1.1 2598 2766 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	54067	54165	1.000	-	0	ID=GTH_match_part_27;Target=scaffold00090_457.1.1 2767 2865 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	53910	53968	1.000	-	0	ID=GTH_match_part_28;Target=scaffold00090_457.1.1 2866 2924 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	52895	53000	1.000	-	0	ID=GTH_match_part_29;Target=scaffold00090_457.1.1 2925 3030 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	52504	52654	1.000	-	0	ID=GTH_match_part_30;Target=scaffold00090_457.1.1 3031 3181 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	51408	51478	1.000	-	0	ID=GTH_match_part_31;Target=scaffold00090_457.1.1 3182 3252 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	49687	50874	1.000	-	0	ID=GTH_match_part_32;Target=scaffold00090_457.1.1 3253 4440 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match	351601	352346	1.000	-	0	ID=scaffold00090_413.1.1_alignment_1;Target=scaffold00090_413.1.1 1 746 +
+scaffold00084	GTH	match_part	351601	352346	1.000	-	0	ID=GTH_match_part_33;Target=scaffold00090_413.1.1 1 746 +;Parent=scaffold00090_413.1.1_alignment_1
+scaffold00084	GTH	match	354364	359917	1.000	-	0	ID=scaffold00090_412.1.1_alignment_1;Target=scaffold00090_412.1.1 1 1670 +
+scaffold00084	GTH	match_part	359735	359917	1.000	-	0	ID=GTH_match_part_34;Target=scaffold00090_412.1.1 1 183 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	358896	358947	1.000	-	0	ID=GTH_match_part_35;Target=scaffold00090_412.1.1 184 235 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	358558	358638	1.000	-	0	ID=GTH_match_part_36;Target=scaffold00090_412.1.1 236 316 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	357516	357634	1.000	-	0	ID=GTH_match_part_37;Target=scaffold00090_412.1.1 317 435 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	356323	356542	1.000	-	0	ID=GTH_match_part_38;Target=scaffold00090_412.1.1 436 655 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	355616	355734	1.000	-	0	ID=GTH_match_part_39;Target=scaffold00090_412.1.1 656 774 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	354364	355259	1.000	-	0	ID=GTH_match_part_40;Target=scaffold00090_412.1.1 775 1670 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match	486134	488478	1.000	-	0	ID=scaffold00090_394.1.1_alignment_1;Target=scaffold00090_394.1.1 1 894 +
+scaffold00084	GTH	match_part	488326	488478	1.000	-	0	ID=GTH_match_part_41;Target=scaffold00090_394.1.1 1 153 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	487965	488173	1.000	-	0	ID=GTH_match_part_42;Target=scaffold00090_394.1.1 154 362 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	487808	487869	1.000	-	0	ID=GTH_match_part_43;Target=scaffold00090_394.1.1 363 424 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	487193	487303	1.000	-	0	ID=GTH_match_part_44;Target=scaffold00090_394.1.1 425 535 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	486954	487046	1.000	-	0	ID=GTH_match_part_45;Target=scaffold00090_394.1.1 536 628 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	486134	486399	1.000	-	0	ID=GTH_match_part_46;Target=scaffold00090_394.1.1 629 894 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match	702170	705182	1.000	+	0	ID=scaffold00090_374.1.1_alignment_1;Target=scaffold00090_374.1.1 1 1623 +
+scaffold00084	GTH	match_part	702170	702414	1.000	+	0	ID=GTH_match_part_47;Target=scaffold00090_374.1.1 1 245 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	702530	702647	1.000	+	0	ID=GTH_match_part_48;Target=scaffold00090_374.1.1 246 363 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	702734	702866	1.000	+	0	ID=GTH_match_part_49;Target=scaffold00090_374.1.1 364 496 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	702962	703157	1.000	+	0	ID=GTH_match_part_50;Target=scaffold00090_374.1.1 497 692 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703236	703341	1.000	+	0	ID=GTH_match_part_51;Target=scaffold00090_374.1.1 693 798 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703420	703560	1.000	+	0	ID=GTH_match_part_52;Target=scaffold00090_374.1.1 799 939 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703655	703815	1.000	+	0	ID=GTH_match_part_53;Target=scaffold00090_374.1.1 940 1100 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703891	704012	1.000	+	0	ID=GTH_match_part_54;Target=scaffold00090_374.1.1 1101 1222 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	704782	705182	1.000	+	0	ID=GTH_match_part_55;Target=scaffold00090_374.1.1 1223 1623 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match	719445	723571	1.000	+	0	ID=scaffold00090_371.1.1_alignment_1;Target=scaffold00090_371.1.1 1 1632 +
+scaffold00084	GTH	match_part	719445	720261	1.000	+	0	ID=GTH_match_part_56;Target=scaffold00090_371.1.1 1 817 +;Parent=scaffold00090_371.1.1_alignment_1
+scaffold00084	GTH	match_part	722757	723571	1.000	+	0	ID=GTH_match_part_57;Target=scaffold00090_371.1.1 818 1632 +;Parent=scaffold00090_371.1.1_alignment_1
+scaffold00084	GTH	match	861155	864382	1.000	+	0	ID=scaffold00090_349.1.1_alignment_1;Target=scaffold00090_349.1.1 1 933 +
+scaffold00084	GTH	match_part	861155	861390	1.000	+	0	ID=GTH_match_part_58;Target=scaffold00090_349.1.1 1 236 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	861494	861620	1.000	+	0	ID=GTH_match_part_59;Target=scaffold00090_349.1.1 237 363 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	861729	861815	1.000	+	0	ID=GTH_match_part_60;Target=scaffold00090_349.1.1 364 450 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	861912	862015	1.000	+	0	ID=GTH_match_part_61;Target=scaffold00090_349.1.1 451 554 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	862595	862763	1.000	+	0	ID=GTH_match_part_62;Target=scaffold00090_349.1.1 555 723 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	863760	863870	1.000	+	0	ID=GTH_match_part_63;Target=scaffold00090_349.1.1 724 834 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	864284	864382	1.000	+	0	ID=GTH_match_part_64;Target=scaffold00090_349.1.1 835 933 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match	1491432	1493542	1.000	+	0	ID=scaffold00090_270.1.1_alignment_1;Target=scaffold00090_270.1.1 1 792 +
+scaffold00084	GTH	match_part	1491432	1491784	1.000	+	0	ID=GTH_match_part_65;Target=scaffold00090_270.1.1 1 353 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1491867	1492028	1.000	+	0	ID=GTH_match_part_66;Target=scaffold00090_270.1.1 354 515 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1492688	1492867	1.000	+	0	ID=GTH_match_part_67;Target=scaffold00090_270.1.1 516 695 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1493018	1493075	1.000	+	0	ID=GTH_match_part_68;Target=scaffold00090_270.1.1 696 753 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1493504	1493542	1.000	+	0	ID=GTH_match_part_69;Target=scaffold00090_270.1.1 754 792 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match	1651442	1658585	1.000	+	0	ID=scaffold00090_247.1.1_alignment_1;Target=scaffold00090_247.1.1 1 4644 +
+scaffold00084	GTH	match_part	1651442	1651974	1.000	+	0	ID=GTH_match_part_70;Target=scaffold00090_247.1.1 1 533 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1652530	1655980	1.000	+	0	ID=GTH_match_part_71;Target=scaffold00090_247.1.1 534 3984 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656050	1656116	1.000	+	0	ID=GTH_match_part_72;Target=scaffold00090_247.1.1 3985 4051 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656295	1656365	1.000	+	0	ID=GTH_match_part_73;Target=scaffold00090_247.1.1 4052 4122 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656447	1656512	1.000	+	0	ID=GTH_match_part_74;Target=scaffold00090_247.1.1 4123 4188 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656597	1656686	1.000	+	0	ID=GTH_match_part_75;Target=scaffold00090_247.1.1 4189 4278 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1657292	1657468	1.000	+	0	ID=GTH_match_part_76;Target=scaffold00090_247.1.1 4279 4455 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1658397	1658585	1.000	+	0	ID=GTH_match_part_77;Target=scaffold00090_247.1.1 4456 4644 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match	1864777	1870499	1.000	+	0	ID=scaffold00090_218.1.1_alignment_1;Target=scaffold00090_218.1.1 1 1537 +
+scaffold00084	GTH	match_part	1864777	1865043	1.000	+	0	ID=GTH_match_part_78;Target=scaffold00090_218.1.1 1 267 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1867210	1867540	1.000	+	0	ID=GTH_match_part_79;Target=scaffold00090_218.1.1 268 598 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1867844	1867993	1.000	+	0	ID=GTH_match_part_80;Target=scaffold00090_218.1.1 599 748 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1868074	1868340	1.000	+	0	ID=GTH_match_part_81;Target=scaffold00090_218.1.1 749 1015 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1869271	1869360	1.000	+	0	ID=GTH_match_part_82;Target=scaffold00090_218.1.1 1016 1105 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1869604	1869682	1.000	+	0	ID=GTH_match_part_83;Target=scaffold00090_218.1.1 1106 1184 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1869867	1869973	1.000	+	0	ID=GTH_match_part_84;Target=scaffold00090_218.1.1 1185 1291 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1870049	1870176	1.000	+	0	ID=GTH_match_part_85;Target=scaffold00090_218.1.1 1292 1419 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1870382	1870499	1.000	+	0	ID=GTH_match_part_86;Target=scaffold00090_218.1.1 1420 1537 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match	1906932	1914749	1.000	+	0	ID=scaffold00090_213.1.1_alignment_1;Target=scaffold00090_213.1.1 1 1382 +
+scaffold00084	GTH	match_part	1906932	1907102	1.000	+	0	ID=GTH_match_part_87;Target=scaffold00090_213.1.1 1 171 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1908241	1908339	1.000	+	0	ID=GTH_match_part_88;Target=scaffold00090_213.1.1 172 270 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1909716	1909823	1.000	+	0	ID=GTH_match_part_89;Target=scaffold00090_213.1.1 271 378 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1909913	1910062	1.000	+	0	ID=GTH_match_part_90;Target=scaffold00090_213.1.1 379 528 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1910339	1910428	1.000	+	0	ID=GTH_match_part_91;Target=scaffold00090_213.1.1 529 618 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1910736	1910787	1.000	+	0	ID=GTH_match_part_92;Target=scaffold00090_213.1.1 619 670 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1910862	1910973	1.000	+	0	ID=GTH_match_part_93;Target=scaffold00090_213.1.1 671 782 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1911842	1912094	1.000	+	0	ID=GTH_match_part_94;Target=scaffold00090_213.1.1 783 1035 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1912283	1912371	1.000	+	0	ID=GTH_match_part_95;Target=scaffold00090_213.1.1 1036 1124 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1914388	1914430	1.000	+	0	ID=GTH_match_part_96;Target=scaffold00090_213.1.1 1125 1167 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1914535	1914749	1.000	+	0	ID=GTH_match_part_97;Target=scaffold00090_213.1.1 1168 1382 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match	1956241	1959618	1.000	+	0	ID=scaffold00090_210.1.1_alignment_1;Target=scaffold00090_210.1.1 1 2741 +
+scaffold00084	GTH	match_part	1956241	1957499	1.000	+	0	ID=GTH_match_part_98;Target=scaffold00090_210.1.1 1 1259 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1957585	1957734	1.000	+	0	ID=GTH_match_part_99;Target=scaffold00090_210.1.1 1260 1409 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1957886	1958156	1.000	+	0	ID=GTH_match_part_100;Target=scaffold00090_210.1.1 1410 1680 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1958257	1958632	1.000	+	0	ID=GTH_match_part_101;Target=scaffold00090_210.1.1 1681 2056 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1958784	1959056	1.000	+	0	ID=GTH_match_part_102;Target=scaffold00090_210.1.1 2057 2329 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1959136	1959330	1.000	+	0	ID=GTH_match_part_103;Target=scaffold00090_210.1.1 2330 2524 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1959402	1959618	1.000	+	0	ID=GTH_match_part_104;Target=scaffold00090_210.1.1 2525 2741 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match	1960465	1963191	1.000	-	0	ID=scaffold00090_209.1.1_alignment_1;Target=scaffold00090_209.1.1 1 1009 +
+scaffold00084	GTH	match_part	1962700	1963191	1.000	-	0	ID=GTH_match_part_105;Target=scaffold00090_209.1.1 1 492 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	match_part	1961241	1961314	1.000	-	0	ID=GTH_match_part_106;Target=scaffold00090_209.1.1 493 566 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	match_part	1960921	1961019	1.000	-	0	ID=GTH_match_part_107;Target=scaffold00090_209.1.1 567 665 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	match_part	1960465	1960808	1.000	-	0	ID=GTH_match_part_108;Target=scaffold00090_209.1.1 666 1009 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00299	GTH	match	343142	343357	1.000	+	0	ID=scaffold03134_21.1.1_alignment_1;Target=scaffold03134_21.1.1 1 216 +
+scaffold00299	GTH	match_part	343142	343357	1.000	+	0	ID=GTH_match_part_109;Target=scaffold03134_21.1.1 1 216 +;Parent=scaffold03134_21.1.1_alignment_1
+scaffold00299	GTH	match	2771105	2786871	1.000	+	0	ID=scaffold03134_3.1.1_alignment_1;Target=scaffold03134_3.1.1 1 2065 +
+scaffold00299	GTH	match_part	2771105	2771479	1.000	+	0	ID=GTH_match_part_110;Target=scaffold03134_3.1.1 1 375 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2772575	2773012	1.000	+	0	ID=GTH_match_part_111;Target=scaffold03134_3.1.1 376 813 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2773165	2773257	1.000	+	0	ID=GTH_match_part_112;Target=scaffold03134_3.1.1 814 906 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2783772	2783911	1.000	+	0	ID=GTH_match_part_113;Target=scaffold03134_3.1.1 907 1046 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2785853	2786871	1.000	+	0	ID=GTH_match_part_114;Target=scaffold03134_3.1.1 1047 2065 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00615	GTH	gene	11462	14357	.	-	0	ID=GTH_gene_1;supporting_alignment=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	mRNA	11462	14357	.	-	0	ID=GTH_gene_1_AGS_1;Parent=GTH_gene_1
+scaffold00615	GTH	exon	14340	14357	1.000	-	0	ID=GTH_exon_1;Parent=GTH_gene_1_AGS_1
+scaffold00615	GTH	exon	13683	13863	1.000	-	0	ID=GTH_exon_2;Parent=GTH_gene_1_AGS_1
+scaffold00615	GTH	exon	11462	11652	1.000	-	0	ID=GTH_exon_3;Parent=GTH_gene_1_AGS_1
+scaffold00615	GTH	gene	2756814	2757201	.	+	0	ID=GTH_gene_2;supporting_alignment=scaffold07246_42.1.1_alignment_1
+scaffold00615	GTH	mRNA	2756814	2757201	.	+	0	ID=GTH_gene_2_AGS_1;Parent=GTH_gene_2
+scaffold00615	GTH	exon	2756814	2756901	1.000	+	0	ID=GTH_exon_4;Parent=GTH_gene_2_AGS_1
+scaffold00615	GTH	exon	2756987	2757201	1.000	+	0	ID=GTH_exon_5;Parent=GTH_gene_2_AGS_1
+scaffold01120	GTH	gene	2675	5795	.	+	0	ID=GTH_gene_3;supporting_alignment=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	mRNA	2675	5795	.	+	0	ID=GTH_gene_3_AGS_1;Parent=GTH_gene_3
+scaffold01120	GTH	exon	2675	2989	1.000	+	0	ID=GTH_exon_6;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	3080	3779	1.000	+	0	ID=GTH_exon_7;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	3832	4160	1.000	+	0	ID=GTH_exon_8;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	5203	5251	1.000	+	0	ID=GTH_exon_9;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	5434	5795	1.000	+	0	ID=GTH_exon_10;Parent=GTH_gene_3_AGS_1
+scaffold00084	GTH	gene	42942	44414	.	-	0	ID=GTH_gene_4;supporting_alignment=scaffold00090_458.1.1_alignment_1
+scaffold00084	GTH	mRNA	42942	44414	.	-	0	ID=GTH_gene_4_AGS_1;Parent=GTH_gene_4
+scaffold00084	GTH	exon	42942	44414	1.000	-	0	ID=GTH_exon_11;Parent=GTH_gene_4_AGS_1
+scaffold00084	GTH	gene	49687	61898	.	-	0	ID=GTH_gene_5;supporting_alignment=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	mRNA	49687	61898	.	-	0	ID=GTH_gene_5_AGS_1;Parent=GTH_gene_5
+scaffold00084	GTH	exon	61725	61898	1.000	-	0	ID=GTH_exon_12;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	60641	60962	1.000	-	0	ID=GTH_exon_13;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	60318	60509	1.000	-	0	ID=GTH_exon_14;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	60094	60249	1.000	-	0	ID=GTH_exon_15;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	59578	59871	1.000	-	0	ID=GTH_exon_16;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	59079	59296	1.000	-	0	ID=GTH_exon_17;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	58900	58974	1.000	-	0	ID=GTH_exon_18;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	58682	58748	1.000	-	0	ID=GTH_exon_19;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	57978	58300	1.000	-	0	ID=GTH_exon_20;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	56436	56669	1.000	-	0	ID=GTH_exon_21;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	56148	56335	1.000	-	0	ID=GTH_exon_22;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	55919	56060	1.000	-	0	ID=GTH_exon_23;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	55720	55828	1.000	-	0	ID=GTH_exon_24;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	54607	54709	1.000	-	0	ID=GTH_exon_25;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	54347	54515	1.000	-	0	ID=GTH_exon_26;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	54067	54165	1.000	-	0	ID=GTH_exon_27;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	53910	53968	1.000	-	0	ID=GTH_exon_28;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	52895	53000	1.000	-	0	ID=GTH_exon_29;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	52504	52654	1.000	-	0	ID=GTH_exon_30;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	51408	51478	1.000	-	0	ID=GTH_exon_31;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	49687	50874	1.000	-	0	ID=GTH_exon_32;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	gene	351601	352346	.	-	0	ID=GTH_gene_6;supporting_alignment=scaffold00090_413.1.1_alignment_1
+scaffold00084	GTH	mRNA	351601	352346	.	-	0	ID=GTH_gene_6_AGS_1;Parent=GTH_gene_6
+scaffold00084	GTH	exon	351601	352346	1.000	-	0	ID=GTH_exon_33;Parent=GTH_gene_6_AGS_1
+scaffold00084	GTH	gene	354364	359917	.	-	0	ID=GTH_gene_7;supporting_alignment=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	mRNA	354364	359917	.	-	0	ID=GTH_gene_7_AGS_1;Parent=GTH_gene_7
+scaffold00084	GTH	exon	359735	359917	1.000	-	0	ID=GTH_exon_34;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	358896	358947	1.000	-	0	ID=GTH_exon_35;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	358558	358638	1.000	-	0	ID=GTH_exon_36;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	357516	357634	1.000	-	0	ID=GTH_exon_37;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	356323	356542	1.000	-	0	ID=GTH_exon_38;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	355616	355734	1.000	-	0	ID=GTH_exon_39;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	354364	355259	1.000	-	0	ID=GTH_exon_40;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	gene	486134	488478	.	-	0	ID=GTH_gene_8;supporting_alignment=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	mRNA	486134	488478	.	-	0	ID=GTH_gene_8_AGS_1;Parent=GTH_gene_8
+scaffold00084	GTH	exon	488326	488478	1.000	-	0	ID=GTH_exon_41;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	487965	488173	1.000	-	0	ID=GTH_exon_42;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	487808	487869	1.000	-	0	ID=GTH_exon_43;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	487193	487303	1.000	-	0	ID=GTH_exon_44;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	486954	487046	1.000	-	0	ID=GTH_exon_45;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	486134	486399	1.000	-	0	ID=GTH_exon_46;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	gene	702170	705182	.	+	0	ID=GTH_gene_9;supporting_alignment=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	mRNA	702170	705182	.	+	0	ID=GTH_gene_9_AGS_1;Parent=GTH_gene_9
+scaffold00084	GTH	exon	702170	702414	1.000	+	0	ID=GTH_exon_47;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	702530	702647	1.000	+	0	ID=GTH_exon_48;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	702734	702866	1.000	+	0	ID=GTH_exon_49;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	702962	703157	1.000	+	0	ID=GTH_exon_50;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703236	703341	1.000	+	0	ID=GTH_exon_51;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703420	703560	1.000	+	0	ID=GTH_exon_52;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703655	703815	1.000	+	0	ID=GTH_exon_53;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703891	704012	1.000	+	0	ID=GTH_exon_54;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	704782	705182	1.000	+	0	ID=GTH_exon_55;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	gene	719445	723571	.	+	0	ID=GTH_gene_10;supporting_alignment=scaffold00090_371.1.1_alignment_1
+scaffold00084	GTH	mRNA	719445	723571	.	+	0	ID=GTH_gene_10_AGS_1;Parent=GTH_gene_10
+scaffold00084	GTH	exon	719445	720261	1.000	+	0	ID=GTH_exon_56;Parent=GTH_gene_10_AGS_1
+scaffold00084	GTH	exon	722757	723571	1.000	+	0	ID=GTH_exon_57;Parent=GTH_gene_10_AGS_1
+scaffold00084	GTH	gene	861155	864382	.	+	0	ID=GTH_gene_11;supporting_alignment=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	mRNA	861155	864382	.	+	0	ID=GTH_gene_11_AGS_1;Parent=GTH_gene_11
+scaffold00084	GTH	exon	861155	861390	1.000	+	0	ID=GTH_exon_58;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	861494	861620	1.000	+	0	ID=GTH_exon_59;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	861729	861815	1.000	+	0	ID=GTH_exon_60;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	861912	862015	1.000	+	0	ID=GTH_exon_61;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	862595	862763	1.000	+	0	ID=GTH_exon_62;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	863760	863870	1.000	+	0	ID=GTH_exon_63;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	864284	864382	1.000	+	0	ID=GTH_exon_64;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	gene	1491432	1493542	.	+	0	ID=GTH_gene_12;supporting_alignment=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	mRNA	1491432	1493542	.	+	0	ID=GTH_gene_12_AGS_1;Parent=GTH_gene_12
+scaffold00084	GTH	exon	1491432	1491784	1.000	+	0	ID=GTH_exon_65;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1491867	1492028	1.000	+	0	ID=GTH_exon_66;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1492688	1492867	1.000	+	0	ID=GTH_exon_67;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1493018	1493075	1.000	+	0	ID=GTH_exon_68;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1493504	1493542	1.000	+	0	ID=GTH_exon_69;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	gene	1651442	1658585	.	+	0	ID=GTH_gene_13;supporting_alignment=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	mRNA	1651442	1658585	.	+	0	ID=GTH_gene_13_AGS_1;Parent=GTH_gene_13
+scaffold00084	GTH	exon	1651442	1651974	1.000	+	0	ID=GTH_exon_70;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1652530	1655980	1.000	+	0	ID=GTH_exon_71;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656050	1656116	1.000	+	0	ID=GTH_exon_72;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656295	1656365	1.000	+	0	ID=GTH_exon_73;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656447	1656512	1.000	+	0	ID=GTH_exon_74;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656597	1656686	1.000	+	0	ID=GTH_exon_75;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1657292	1657468	1.000	+	0	ID=GTH_exon_76;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1658397	1658585	1.000	+	0	ID=GTH_exon_77;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	gene	1864777	1870499	.	+	0	ID=GTH_gene_14;supporting_alignment=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	mRNA	1864777	1870499	.	+	0	ID=GTH_gene_14_AGS_1;Parent=GTH_gene_14
+scaffold00084	GTH	exon	1864777	1865043	1.000	+	0	ID=GTH_exon_78;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1867210	1867540	1.000	+	0	ID=GTH_exon_79;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1867844	1867993	1.000	+	0	ID=GTH_exon_80;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1868074	1868340	1.000	+	0	ID=GTH_exon_81;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1869271	1869360	1.000	+	0	ID=GTH_exon_82;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1869604	1869682	1.000	+	0	ID=GTH_exon_83;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1869867	1869973	1.000	+	0	ID=GTH_exon_84;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1870049	1870176	1.000	+	0	ID=GTH_exon_85;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1870382	1870499	1.000	+	0	ID=GTH_exon_86;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	gene	1906932	1914749	.	+	0	ID=GTH_gene_15;supporting_alignment=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	mRNA	1906932	1914749	.	+	0	ID=GTH_gene_15_AGS_1;Parent=GTH_gene_15
+scaffold00084	GTH	exon	1906932	1907102	1.000	+	0	ID=GTH_exon_87;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1908241	1908339	1.000	+	0	ID=GTH_exon_88;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1909716	1909823	1.000	+	0	ID=GTH_exon_89;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1909913	1910062	1.000	+	0	ID=GTH_exon_90;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1910339	1910428	1.000	+	0	ID=GTH_exon_91;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1910736	1910787	1.000	+	0	ID=GTH_exon_92;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1910862	1910973	1.000	+	0	ID=GTH_exon_93;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1911842	1912094	1.000	+	0	ID=GTH_exon_94;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1912283	1912371	1.000	+	0	ID=GTH_exon_95;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1914388	1914430	1.000	+	0	ID=GTH_exon_96;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1914535	1914749	1.000	+	0	ID=GTH_exon_97;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	gene	1956241	1959618	.	+	0	ID=GTH_gene_16;supporting_alignment=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	mRNA	1956241	1959618	.	+	0	ID=GTH_gene_16_AGS_1;Parent=GTH_gene_16
+scaffold00084	GTH	exon	1956241	1957499	1.000	+	0	ID=GTH_exon_98;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1957585	1957734	1.000	+	0	ID=GTH_exon_99;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1957886	1958156	1.000	+	0	ID=GTH_exon_100;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1958257	1958632	1.000	+	0	ID=GTH_exon_101;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1958784	1959056	1.000	+	0	ID=GTH_exon_102;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1959136	1959330	1.000	+	0	ID=GTH_exon_103;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1959402	1959618	1.000	+	0	ID=GTH_exon_104;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	gene	1960465	1963191	.	-	0	ID=GTH_gene_17;supporting_alignment=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	mRNA	1960465	1963191	.	-	0	ID=GTH_gene_17_AGS_1;Parent=GTH_gene_17
+scaffold00084	GTH	exon	1962700	1963191	1.000	-	0	ID=GTH_exon_105;Parent=GTH_gene_17_AGS_1
+scaffold00084	GTH	exon	1961241	1961314	1.000	-	0	ID=GTH_exon_106;Parent=GTH_gene_17_AGS_1
+scaffold00084	GTH	exon	1960921	1961019	1.000	-	0	ID=GTH_exon_107;Parent=GTH_gene_17_AGS_1
+scaffold00084	GTH	exon	1960465	1960808	1.000	-	0	ID=GTH_exon_108;Parent=GTH_gene_17_AGS_1
+scaffold00299	GTH	gene	343142	343357	.	+	0	ID=GTH_gene_18;supporting_alignment=scaffold03134_21.1.1_alignment_1
+scaffold00299	GTH	mRNA	343142	343357	.	+	0	ID=GTH_gene_18_AGS_1;Parent=GTH_gene_18
+scaffold00299	GTH	exon	343142	343357	1.000	+	0	ID=GTH_exon_109;Parent=GTH_gene_18_AGS_1
+scaffold00299	GTH	gene	2771105	2786871	.	+	0	ID=GTH_gene_19;supporting_alignment=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	mRNA	2771105	2786871	.	+	0	ID=GTH_gene_19_AGS_1;Parent=GTH_gene_19
+scaffold00299	GTH	exon	2771105	2771479	1.000	+	0	ID=GTH_exon_110;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2772575	2773012	1.000	+	0	ID=GTH_exon_111;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2773165	2773257	1.000	+	0	ID=GTH_exon_112;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2783772	2783911	1.000	+	0	ID=GTH_exon_113;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2785853	2786871	1.000	+	0	ID=GTH_exon_114;Parent=GTH_gene_19_AGS_1
+##gff-version 3
+scaffold00615	GTH	match	11462	14357	1.000	-	0	ID=scaffold07246_22.1.1_alignment_1;Target=scaffold07246_22.1.1 1 390 +
+scaffold00615	GTH	match_part	14340	14357	1.000	-	0	ID=GTH_match_part_1;Target=scaffold07246_22.1.1 1 18 +;Parent=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	match_part	13683	13863	1.000	-	0	ID=GTH_match_part_2;Target=scaffold07246_22.1.1 19 199 +;Parent=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	match_part	11462	11652	1.000	-	0	ID=GTH_match_part_3;Target=scaffold07246_22.1.1 200 390 +;Parent=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	match	2756814	2757201	1.000	+	0	ID=scaffold07246_42.1.1_alignment_1;Target=scaffold07246_42.1.1 1 303 +
+scaffold00615	GTH	match_part	2756814	2756901	1.000	+	0	ID=GTH_match_part_4;Target=scaffold07246_42.1.1 1 88 +;Parent=scaffold07246_42.1.1_alignment_1
+scaffold00615	GTH	match_part	2756987	2757201	1.000	+	0	ID=GTH_match_part_5;Target=scaffold07246_42.1.1 89 303 +;Parent=scaffold07246_42.1.1_alignment_1
+scaffold01120	GTH	match	2675	5795	1.000	+	0	ID=scaffold01751_3.1.1_alignment_1;Target=scaffold01751_3.1.1 1 1755 +
+scaffold01120	GTH	match_part	2675	2989	1.000	+	0	ID=GTH_match_part_6;Target=scaffold01751_3.1.1 1 315 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	3080	3779	1.000	+	0	ID=GTH_match_part_7;Target=scaffold01751_3.1.1 316 1015 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	3832	4160	1.000	+	0	ID=GTH_match_part_8;Target=scaffold01751_3.1.1 1016 1344 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	5203	5251	1.000	+	0	ID=GTH_match_part_9;Target=scaffold01751_3.1.1 1345 1393 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	5434	5795	1.000	+	0	ID=GTH_match_part_10;Target=scaffold01751_3.1.1 1394 1755 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold00084	GTH	match	42942	44414	1.000	-	0	ID=scaffold00090_458.1.1_alignment_1;Target=scaffold00090_458.1.1 1 1473 +
+scaffold00084	GTH	match_part	42942	44414	1.000	-	0	ID=GTH_match_part_11;Target=scaffold00090_458.1.1 1 1473 +;Parent=scaffold00090_458.1.1_alignment_1
+scaffold00084	GTH	match	49687	61898	1.000	-	0	ID=scaffold00090_457.1.1_alignment_1;Target=scaffold00090_457.1.1 1 4440 +
+scaffold00084	GTH	match_part	61725	61898	1.000	-	0	ID=GTH_match_part_12;Target=scaffold00090_457.1.1 1 174 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	60641	60962	1.000	-	0	ID=GTH_match_part_13;Target=scaffold00090_457.1.1 175 496 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	60318	60509	1.000	-	0	ID=GTH_match_part_14;Target=scaffold00090_457.1.1 497 688 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	60094	60249	1.000	-	0	ID=GTH_match_part_15;Target=scaffold00090_457.1.1 689 844 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	59578	59871	1.000	-	0	ID=GTH_match_part_16;Target=scaffold00090_457.1.1 845 1138 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	59079	59296	1.000	-	0	ID=GTH_match_part_17;Target=scaffold00090_457.1.1 1139 1356 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	58900	58974	1.000	-	0	ID=GTH_match_part_18;Target=scaffold00090_457.1.1 1357 1431 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	58682	58748	1.000	-	0	ID=GTH_match_part_19;Target=scaffold00090_457.1.1 1432 1498 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	57978	58300	1.000	-	0	ID=GTH_match_part_20;Target=scaffold00090_457.1.1 1499 1821 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	56436	56669	1.000	-	0	ID=GTH_match_part_21;Target=scaffold00090_457.1.1 1822 2055 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	56148	56335	1.000	-	0	ID=GTH_match_part_22;Target=scaffold00090_457.1.1 2056 2243 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	55919	56060	1.000	-	0	ID=GTH_match_part_23;Target=scaffold00090_457.1.1 2244 2385 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	55720	55828	1.000	-	0	ID=GTH_match_part_24;Target=scaffold00090_457.1.1 2386 2494 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	54607	54709	1.000	-	0	ID=GTH_match_part_25;Target=scaffold00090_457.1.1 2495 2597 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	54347	54515	1.000	-	0	ID=GTH_match_part_26;Target=scaffold00090_457.1.1 2598 2766 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	54067	54165	1.000	-	0	ID=GTH_match_part_27;Target=scaffold00090_457.1.1 2767 2865 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	53910	53968	1.000	-	0	ID=GTH_match_part_28;Target=scaffold00090_457.1.1 2866 2924 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	52895	53000	1.000	-	0	ID=GTH_match_part_29;Target=scaffold00090_457.1.1 2925 3030 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	52504	52654	1.000	-	0	ID=GTH_match_part_30;Target=scaffold00090_457.1.1 3031 3181 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	51408	51478	1.000	-	0	ID=GTH_match_part_31;Target=scaffold00090_457.1.1 3182 3252 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	49687	50874	1.000	-	0	ID=GTH_match_part_32;Target=scaffold00090_457.1.1 3253 4440 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match	351601	352346	1.000	-	0	ID=scaffold00090_413.1.1_alignment_1;Target=scaffold00090_413.1.1 1 746 +
+scaffold00084	GTH	match_part	351601	352346	1.000	-	0	ID=GTH_match_part_33;Target=scaffold00090_413.1.1 1 746 +;Parent=scaffold00090_413.1.1_alignment_1
+scaffold00084	GTH	match	354364	359917	1.000	-	0	ID=scaffold00090_412.1.1_alignment_1;Target=scaffold00090_412.1.1 1 1670 +
+scaffold00084	GTH	match_part	359735	359917	1.000	-	0	ID=GTH_match_part_34;Target=scaffold00090_412.1.1 1 183 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	358896	358947	1.000	-	0	ID=GTH_match_part_35;Target=scaffold00090_412.1.1 184 235 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	358558	358638	1.000	-	0	ID=GTH_match_part_36;Target=scaffold00090_412.1.1 236 316 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	357516	357634	1.000	-	0	ID=GTH_match_part_37;Target=scaffold00090_412.1.1 317 435 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	356323	356542	1.000	-	0	ID=GTH_match_part_38;Target=scaffold00090_412.1.1 436 655 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	355616	355734	1.000	-	0	ID=GTH_match_part_39;Target=scaffold00090_412.1.1 656 774 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	354364	355259	1.000	-	0	ID=GTH_match_part_40;Target=scaffold00090_412.1.1 775 1670 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match	486134	488478	1.000	-	0	ID=scaffold00090_394.1.1_alignment_1;Target=scaffold00090_394.1.1 1 894 +
+scaffold00084	GTH	match_part	488326	488478	1.000	-	0	ID=GTH_match_part_41;Target=scaffold00090_394.1.1 1 153 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	487965	488173	1.000	-	0	ID=GTH_match_part_42;Target=scaffold00090_394.1.1 154 362 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	487808	487869	1.000	-	0	ID=GTH_match_part_43;Target=scaffold00090_394.1.1 363 424 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	487193	487303	1.000	-	0	ID=GTH_match_part_44;Target=scaffold00090_394.1.1 425 535 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	486954	487046	1.000	-	0	ID=GTH_match_part_45;Target=scaffold00090_394.1.1 536 628 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	486134	486399	1.000	-	0	ID=GTH_match_part_46;Target=scaffold00090_394.1.1 629 894 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match	702170	705182	1.000	+	0	ID=scaffold00090_374.1.1_alignment_1;Target=scaffold00090_374.1.1 1 1623 +
+scaffold00084	GTH	match_part	702170	702414	1.000	+	0	ID=GTH_match_part_47;Target=scaffold00090_374.1.1 1 245 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	702530	702647	1.000	+	0	ID=GTH_match_part_48;Target=scaffold00090_374.1.1 246 363 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	702734	702866	1.000	+	0	ID=GTH_match_part_49;Target=scaffold00090_374.1.1 364 496 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	702962	703157	1.000	+	0	ID=GTH_match_part_50;Target=scaffold00090_374.1.1 497 692 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703236	703341	1.000	+	0	ID=GTH_match_part_51;Target=scaffold00090_374.1.1 693 798 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703420	703560	1.000	+	0	ID=GTH_match_part_52;Target=scaffold00090_374.1.1 799 939 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703655	703815	1.000	+	0	ID=GTH_match_part_53;Target=scaffold00090_374.1.1 940 1100 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703891	704012	1.000	+	0	ID=GTH_match_part_54;Target=scaffold00090_374.1.1 1101 1222 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	704782	705182	1.000	+	0	ID=GTH_match_part_55;Target=scaffold00090_374.1.1 1223 1623 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match	719445	723571	1.000	+	0	ID=scaffold00090_371.1.1_alignment_1;Target=scaffold00090_371.1.1 1 1632 +
+scaffold00084	GTH	match_part	719445	720261	1.000	+	0	ID=GTH_match_part_56;Target=scaffold00090_371.1.1 1 817 +;Parent=scaffold00090_371.1.1_alignment_1
+scaffold00084	GTH	match_part	722757	723571	1.000	+	0	ID=GTH_match_part_57;Target=scaffold00090_371.1.1 818 1632 +;Parent=scaffold00090_371.1.1_alignment_1
+scaffold00084	GTH	match	861155	864382	1.000	+	0	ID=scaffold00090_349.1.1_alignment_1;Target=scaffold00090_349.1.1 1 933 +
+scaffold00084	GTH	match_part	861155	861390	1.000	+	0	ID=GTH_match_part_58;Target=scaffold00090_349.1.1 1 236 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	861494	861620	1.000	+	0	ID=GTH_match_part_59;Target=scaffold00090_349.1.1 237 363 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	861729	861815	1.000	+	0	ID=GTH_match_part_60;Target=scaffold00090_349.1.1 364 450 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	861912	862015	1.000	+	0	ID=GTH_match_part_61;Target=scaffold00090_349.1.1 451 554 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	862595	862763	1.000	+	0	ID=GTH_match_part_62;Target=scaffold00090_349.1.1 555 723 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	863760	863870	1.000	+	0	ID=GTH_match_part_63;Target=scaffold00090_349.1.1 724 834 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	864284	864382	1.000	+	0	ID=GTH_match_part_64;Target=scaffold00090_349.1.1 835 933 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match	1491432	1493542	1.000	+	0	ID=scaffold00090_270.1.1_alignment_1;Target=scaffold00090_270.1.1 1 792 +
+scaffold00084	GTH	match_part	1491432	1491784	1.000	+	0	ID=GTH_match_part_65;Target=scaffold00090_270.1.1 1 353 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1491867	1492028	1.000	+	0	ID=GTH_match_part_66;Target=scaffold00090_270.1.1 354 515 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1492688	1492867	1.000	+	0	ID=GTH_match_part_67;Target=scaffold00090_270.1.1 516 695 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1493018	1493075	1.000	+	0	ID=GTH_match_part_68;Target=scaffold00090_270.1.1 696 753 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1493504	1493542	1.000	+	0	ID=GTH_match_part_69;Target=scaffold00090_270.1.1 754 792 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match	1651442	1658585	1.000	+	0	ID=scaffold00090_247.1.1_alignment_1;Target=scaffold00090_247.1.1 1 4644 +
+scaffold00084	GTH	match_part	1651442	1651974	1.000	+	0	ID=GTH_match_part_70;Target=scaffold00090_247.1.1 1 533 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1652530	1655980	1.000	+	0	ID=GTH_match_part_71;Target=scaffold00090_247.1.1 534 3984 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656050	1656116	1.000	+	0	ID=GTH_match_part_72;Target=scaffold00090_247.1.1 3985 4051 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656295	1656365	1.000	+	0	ID=GTH_match_part_73;Target=scaffold00090_247.1.1 4052 4122 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656447	1656512	1.000	+	0	ID=GTH_match_part_74;Target=scaffold00090_247.1.1 4123 4188 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656597	1656686	1.000	+	0	ID=GTH_match_part_75;Target=scaffold00090_247.1.1 4189 4278 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1657292	1657468	1.000	+	0	ID=GTH_match_part_76;Target=scaffold00090_247.1.1 4279 4455 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1658397	1658585	1.000	+	0	ID=GTH_match_part_77;Target=scaffold00090_247.1.1 4456 4644 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match	1864777	1870499	1.000	+	0	ID=scaffold00090_218.1.1_alignment_1;Target=scaffold00090_218.1.1 1 1537 +
+scaffold00084	GTH	match_part	1864777	1865043	1.000	+	0	ID=GTH_match_part_78;Target=scaffold00090_218.1.1 1 267 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1867210	1867540	1.000	+	0	ID=GTH_match_part_79;Target=scaffold00090_218.1.1 268 598 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1867844	1867993	1.000	+	0	ID=GTH_match_part_80;Target=scaffold00090_218.1.1 599 748 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1868074	1868340	1.000	+	0	ID=GTH_match_part_81;Target=scaffold00090_218.1.1 749 1015 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1869271	1869360	1.000	+	0	ID=GTH_match_part_82;Target=scaffold00090_218.1.1 1016 1105 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1869604	1869682	1.000	+	0	ID=GTH_match_part_83;Target=scaffold00090_218.1.1 1106 1184 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1869867	1869973	1.000	+	0	ID=GTH_match_part_84;Target=scaffold00090_218.1.1 1185 1291 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1870049	1870176	1.000	+	0	ID=GTH_match_part_85;Target=scaffold00090_218.1.1 1292 1419 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1870382	1870499	1.000	+	0	ID=GTH_match_part_86;Target=scaffold00090_218.1.1 1420 1537 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match	1906932	1914749	1.000	+	0	ID=scaffold00090_213.1.1_alignment_1;Target=scaffold00090_213.1.1 1 1382 +
+scaffold00084	GTH	match_part	1906932	1907102	1.000	+	0	ID=GTH_match_part_87;Target=scaffold00090_213.1.1 1 171 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1908241	1908339	1.000	+	0	ID=GTH_match_part_88;Target=scaffold00090_213.1.1 172 270 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1909716	1909823	1.000	+	0	ID=GTH_match_part_89;Target=scaffold00090_213.1.1 271 378 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1909913	1910062	1.000	+	0	ID=GTH_match_part_90;Target=scaffold00090_213.1.1 379 528 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1910339	1910428	1.000	+	0	ID=GTH_match_part_91;Target=scaffold00090_213.1.1 529 618 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1910736	1910787	1.000	+	0	ID=GTH_match_part_92;Target=scaffold00090_213.1.1 619 670 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1910862	1910973	1.000	+	0	ID=GTH_match_part_93;Target=scaffold00090_213.1.1 671 782 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1911842	1912094	1.000	+	0	ID=GTH_match_part_94;Target=scaffold00090_213.1.1 783 1035 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1912283	1912371	1.000	+	0	ID=GTH_match_part_95;Target=scaffold00090_213.1.1 1036 1124 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1914388	1914430	1.000	+	0	ID=GTH_match_part_96;Target=scaffold00090_213.1.1 1125 1167 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1914535	1914749	1.000	+	0	ID=GTH_match_part_97;Target=scaffold00090_213.1.1 1168 1382 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match	1956241	1959618	1.000	+	0	ID=scaffold00090_210.1.1_alignment_1;Target=scaffold00090_210.1.1 1 2741 +
+scaffold00084	GTH	match_part	1956241	1957499	1.000	+	0	ID=GTH_match_part_98;Target=scaffold00090_210.1.1 1 1259 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1957585	1957734	1.000	+	0	ID=GTH_match_part_99;Target=scaffold00090_210.1.1 1260 1409 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1957886	1958156	1.000	+	0	ID=GTH_match_part_100;Target=scaffold00090_210.1.1 1410 1680 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1958257	1958632	1.000	+	0	ID=GTH_match_part_101;Target=scaffold00090_210.1.1 1681 2056 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1958784	1959056	1.000	+	0	ID=GTH_match_part_102;Target=scaffold00090_210.1.1 2057 2329 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1959136	1959330	1.000	+	0	ID=GTH_match_part_103;Target=scaffold00090_210.1.1 2330 2524 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1959402	1959618	1.000	+	0	ID=GTH_match_part_104;Target=scaffold00090_210.1.1 2525 2741 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match	1960465	1963191	1.000	-	0	ID=scaffold00090_209.1.1_alignment_1;Target=scaffold00090_209.1.1 1 1009 +
+scaffold00084	GTH	match_part	1962700	1963191	1.000	-	0	ID=GTH_match_part_105;Target=scaffold00090_209.1.1 1 492 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	match_part	1961241	1961314	1.000	-	0	ID=GTH_match_part_106;Target=scaffold00090_209.1.1 493 566 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	match_part	1960921	1961019	1.000	-	0	ID=GTH_match_part_107;Target=scaffold00090_209.1.1 567 665 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	match_part	1960465	1960808	1.000	-	0	ID=GTH_match_part_108;Target=scaffold00090_209.1.1 666 1009 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00299	GTH	match	343142	343357	1.000	+	0	ID=scaffold03134_21.1.1_alignment_1;Target=scaffold03134_21.1.1 1 216 +
+scaffold00299	GTH	match_part	343142	343357	1.000	+	0	ID=GTH_match_part_109;Target=scaffold03134_21.1.1 1 216 +;Parent=scaffold03134_21.1.1_alignment_1
+scaffold00299	GTH	match	2771105	2786871	1.000	+	0	ID=scaffold03134_3.1.1_alignment_1;Target=scaffold03134_3.1.1 1 2065 +
+scaffold00299	GTH	match_part	2771105	2771479	1.000	+	0	ID=GTH_match_part_110;Target=scaffold03134_3.1.1 1 375 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2772575	2773012	1.000	+	0	ID=GTH_match_part_111;Target=scaffold03134_3.1.1 376 813 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2773165	2773257	1.000	+	0	ID=GTH_match_part_112;Target=scaffold03134_3.1.1 814 906 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2783772	2783911	1.000	+	0	ID=GTH_match_part_113;Target=scaffold03134_3.1.1 907 1046 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2785853	2786871	1.000	+	0	ID=GTH_match_part_114;Target=scaffold03134_3.1.1 1047 2065 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00615	GTH	gene	11462	14357	.	-	0	ID=GTH_gene_1;supporting_alignment=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	mRNA	11462	14357	.	-	0	ID=GTH_gene_1_AGS_1;Parent=GTH_gene_1
+scaffold00615	GTH	exon	14340	14357	1.000	-	0	ID=GTH_exon_1;Parent=GTH_gene_1_AGS_1
+scaffold00615	GTH	exon	13683	13863	1.000	-	0	ID=GTH_exon_2;Parent=GTH_gene_1_AGS_1
+scaffold00615	GTH	exon	11462	11652	1.000	-	0	ID=GTH_exon_3;Parent=GTH_gene_1_AGS_1
+scaffold00615	GTH	gene	2756814	2757201	.	+	0	ID=GTH_gene_2;supporting_alignment=scaffold07246_42.1.1_alignment_1
+scaffold00615	GTH	mRNA	2756814	2757201	.	+	0	ID=GTH_gene_2_AGS_1;Parent=GTH_gene_2
+scaffold00615	GTH	exon	2756814	2756901	1.000	+	0	ID=GTH_exon_4;Parent=GTH_gene_2_AGS_1
+scaffold00615	GTH	exon	2756987	2757201	1.000	+	0	ID=GTH_exon_5;Parent=GTH_gene_2_AGS_1
+scaffold01120	GTH	gene	2675	5795	.	+	0	ID=GTH_gene_3;supporting_alignment=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	mRNA	2675	5795	.	+	0	ID=GTH_gene_3_AGS_1;Parent=GTH_gene_3
+scaffold01120	GTH	exon	2675	2989	1.000	+	0	ID=GTH_exon_6;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	3080	3779	1.000	+	0	ID=GTH_exon_7;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	3832	4160	1.000	+	0	ID=GTH_exon_8;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	5203	5251	1.000	+	0	ID=GTH_exon_9;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	5434	5795	1.000	+	0	ID=GTH_exon_10;Parent=GTH_gene_3_AGS_1
+scaffold00084	GTH	gene	42942	44414	.	-	0	ID=GTH_gene_4;supporting_alignment=scaffold00090_458.1.1_alignment_1
+scaffold00084	GTH	mRNA	42942	44414	.	-	0	ID=GTH_gene_4_AGS_1;Parent=GTH_gene_4
+scaffold00084	GTH	exon	42942	44414	1.000	-	0	ID=GTH_exon_11;Parent=GTH_gene_4_AGS_1
+scaffold00084	GTH	gene	49687	61898	.	-	0	ID=GTH_gene_5;supporting_alignment=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	mRNA	49687	61898	.	-	0	ID=GTH_gene_5_AGS_1;Parent=GTH_gene_5
+scaffold00084	GTH	exon	61725	61898	1.000	-	0	ID=GTH_exon_12;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	60641	60962	1.000	-	0	ID=GTH_exon_13;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	60318	60509	1.000	-	0	ID=GTH_exon_14;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	60094	60249	1.000	-	0	ID=GTH_exon_15;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	59578	59871	1.000	-	0	ID=GTH_exon_16;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	59079	59296	1.000	-	0	ID=GTH_exon_17;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	58900	58974	1.000	-	0	ID=GTH_exon_18;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	58682	58748	1.000	-	0	ID=GTH_exon_19;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	57978	58300	1.000	-	0	ID=GTH_exon_20;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	56436	56669	1.000	-	0	ID=GTH_exon_21;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	56148	56335	1.000	-	0	ID=GTH_exon_22;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	55919	56060	1.000	-	0	ID=GTH_exon_23;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	55720	55828	1.000	-	0	ID=GTH_exon_24;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	54607	54709	1.000	-	0	ID=GTH_exon_25;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	54347	54515	1.000	-	0	ID=GTH_exon_26;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	54067	54165	1.000	-	0	ID=GTH_exon_27;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	53910	53968	1.000	-	0	ID=GTH_exon_28;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	52895	53000	1.000	-	0	ID=GTH_exon_29;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	52504	52654	1.000	-	0	ID=GTH_exon_30;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	51408	51478	1.000	-	0	ID=GTH_exon_31;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	49687	50874	1.000	-	0	ID=GTH_exon_32;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	gene	351601	352346	.	-	0	ID=GTH_gene_6;supporting_alignment=scaffold00090_413.1.1_alignment_1
+scaffold00084	GTH	mRNA	351601	352346	.	-	0	ID=GTH_gene_6_AGS_1;Parent=GTH_gene_6
+scaffold00084	GTH	exon	351601	352346	1.000	-	0	ID=GTH_exon_33;Parent=GTH_gene_6_AGS_1
+scaffold00084	GTH	gene	354364	359917	.	-	0	ID=GTH_gene_7;supporting_alignment=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	mRNA	354364	359917	.	-	0	ID=GTH_gene_7_AGS_1;Parent=GTH_gene_7
+scaffold00084	GTH	exon	359735	359917	1.000	-	0	ID=GTH_exon_34;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	358896	358947	1.000	-	0	ID=GTH_exon_35;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	358558	358638	1.000	-	0	ID=GTH_exon_36;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	357516	357634	1.000	-	0	ID=GTH_exon_37;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	356323	356542	1.000	-	0	ID=GTH_exon_38;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	355616	355734	1.000	-	0	ID=GTH_exon_39;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	354364	355259	1.000	-	0	ID=GTH_exon_40;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	gene	486134	488478	.	-	0	ID=GTH_gene_8;supporting_alignment=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	mRNA	486134	488478	.	-	0	ID=GTH_gene_8_AGS_1;Parent=GTH_gene_8
+scaffold00084	GTH	exon	488326	488478	1.000	-	0	ID=GTH_exon_41;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	487965	488173	1.000	-	0	ID=GTH_exon_42;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	487808	487869	1.000	-	0	ID=GTH_exon_43;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	487193	487303	1.000	-	0	ID=GTH_exon_44;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	486954	487046	1.000	-	0	ID=GTH_exon_45;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	486134	486399	1.000	-	0	ID=GTH_exon_46;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	gene	702170	705182	.	+	0	ID=GTH_gene_9;supporting_alignment=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	mRNA	702170	705182	.	+	0	ID=GTH_gene_9_AGS_1;Parent=GTH_gene_9
+scaffold00084	GTH	exon	702170	702414	1.000	+	0	ID=GTH_exon_47;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	702530	702647	1.000	+	0	ID=GTH_exon_48;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	702734	702866	1.000	+	0	ID=GTH_exon_49;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	702962	703157	1.000	+	0	ID=GTH_exon_50;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703236	703341	1.000	+	0	ID=GTH_exon_51;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703420	703560	1.000	+	0	ID=GTH_exon_52;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703655	703815	1.000	+	0	ID=GTH_exon_53;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703891	704012	1.000	+	0	ID=GTH_exon_54;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	704782	705182	1.000	+	0	ID=GTH_exon_55;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	gene	719445	723571	.	+	0	ID=GTH_gene_10;supporting_alignment=scaffold00090_371.1.1_alignment_1
+scaffold00084	GTH	mRNA	719445	723571	.	+	0	ID=GTH_gene_10_AGS_1;Parent=GTH_gene_10
+scaffold00084	GTH	exon	719445	720261	1.000	+	0	ID=GTH_exon_56;Parent=GTH_gene_10_AGS_1
+scaffold00084	GTH	exon	722757	723571	1.000	+	0	ID=GTH_exon_57;Parent=GTH_gene_10_AGS_1
+scaffold00084	GTH	gene	861155	864382	.	+	0	ID=GTH_gene_11;supporting_alignment=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	mRNA	861155	864382	.	+	0	ID=GTH_gene_11_AGS_1;Parent=GTH_gene_11
+scaffold00084	GTH	exon	861155	861390	1.000	+	0	ID=GTH_exon_58;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	861494	861620	1.000	+	0	ID=GTH_exon_59;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	861729	861815	1.000	+	0	ID=GTH_exon_60;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	861912	862015	1.000	+	0	ID=GTH_exon_61;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	862595	862763	1.000	+	0	ID=GTH_exon_62;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	863760	863870	1.000	+	0	ID=GTH_exon_63;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	864284	864382	1.000	+	0	ID=GTH_exon_64;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	gene	1491432	1493542	.	+	0	ID=GTH_gene_12;supporting_alignment=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	mRNA	1491432	1493542	.	+	0	ID=GTH_gene_12_AGS_1;Parent=GTH_gene_12
+scaffold00084	GTH	exon	1491432	1491784	1.000	+	0	ID=GTH_exon_65;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1491867	1492028	1.000	+	0	ID=GTH_exon_66;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1492688	1492867	1.000	+	0	ID=GTH_exon_67;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1493018	1493075	1.000	+	0	ID=GTH_exon_68;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1493504	1493542	1.000	+	0	ID=GTH_exon_69;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	gene	1651442	1658585	.	+	0	ID=GTH_gene_13;supporting_alignment=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	mRNA	1651442	1658585	.	+	0	ID=GTH_gene_13_AGS_1;Parent=GTH_gene_13
+scaffold00084	GTH	exon	1651442	1651974	1.000	+	0	ID=GTH_exon_70;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1652530	1655980	1.000	+	0	ID=GTH_exon_71;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656050	1656116	1.000	+	0	ID=GTH_exon_72;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656295	1656365	1.000	+	0	ID=GTH_exon_73;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656447	1656512	1.000	+	0	ID=GTH_exon_74;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656597	1656686	1.000	+	0	ID=GTH_exon_75;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1657292	1657468	1.000	+	0	ID=GTH_exon_76;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1658397	1658585	1.000	+	0	ID=GTH_exon_77;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	gene	1864777	1870499	.	+	0	ID=GTH_gene_14;supporting_alignment=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	mRNA	1864777	1870499	.	+	0	ID=GTH_gene_14_AGS_1;Parent=GTH_gene_14
+scaffold00084	GTH	exon	1864777	1865043	1.000	+	0	ID=GTH_exon_78;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1867210	1867540	1.000	+	0	ID=GTH_exon_79;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1867844	1867993	1.000	+	0	ID=GTH_exon_80;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1868074	1868340	1.000	+	0	ID=GTH_exon_81;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1869271	1869360	1.000	+	0	ID=GTH_exon_82;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1869604	1869682	1.000	+	0	ID=GTH_exon_83;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1869867	1869973	1.000	+	0	ID=GTH_exon_84;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1870049	1870176	1.000	+	0	ID=GTH_exon_85;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1870382	1870499	1.000	+	0	ID=GTH_exon_86;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	gene	1906932	1914749	.	+	0	ID=GTH_gene_15;supporting_alignment=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	mRNA	1906932	1914749	.	+	0	ID=GTH_gene_15_AGS_1;Parent=GTH_gene_15
+scaffold00084	GTH	exon	1906932	1907102	1.000	+	0	ID=GTH_exon_87;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1908241	1908339	1.000	+	0	ID=GTH_exon_88;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1909716	1909823	1.000	+	0	ID=GTH_exon_89;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1909913	1910062	1.000	+	0	ID=GTH_exon_90;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1910339	1910428	1.000	+	0	ID=GTH_exon_91;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1910736	1910787	1.000	+	0	ID=GTH_exon_92;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1910862	1910973	1.000	+	0	ID=GTH_exon_93;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1911842	1912094	1.000	+	0	ID=GTH_exon_94;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1912283	1912371	1.000	+	0	ID=GTH_exon_95;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1914388	1914430	1.000	+	0	ID=GTH_exon_96;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1914535	1914749	1.000	+	0	ID=GTH_exon_97;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	gene	1956241	1959618	.	+	0	ID=GTH_gene_16;supporting_alignment=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	mRNA	1956241	1959618	.	+	0	ID=GTH_gene_16_AGS_1;Parent=GTH_gene_16
+scaffold00084	GTH	exon	1956241	1957499	1.000	+	0	ID=GTH_exon_98;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1957585	1957734	1.000	+	0	ID=GTH_exon_99;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1957886	1958156	1.000	+	0	ID=GTH_exon_100;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1958257	1958632	1.000	+	0	ID=GTH_exon_101;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1958784	1959056	1.000	+	0	ID=GTH_exon_102;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1959136	1959330	1.000	+	0	ID=GTH_exon_103;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1959402	1959618	1.000	+	0	ID=GTH_exon_104;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	gene	1960465	1963191	.	-	0	ID=GTH_gene_17;supporting_alignment=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	mRNA	1960465	1963191	.	-	0	ID=GTH_gene_17_AGS_1;Parent=GTH_gene_17
+scaffold00084	GTH	exon	1962700	1963191	1.000	-	0	ID=GTH_exon_105;Parent=GTH_gene_17_AGS_1
+scaffold00084	GTH	exon	1961241	1961314	1.000	-	0	ID=GTH_exon_106;Parent=GTH_gene_17_AGS_1
+scaffold00084	GTH	exon	1960921	1961019	1.000	-	0	ID=GTH_exon_107;Parent=GTH_gene_17_AGS_1
+scaffold00084	GTH	exon	1960465	1960808	1.000	-	0	ID=GTH_exon_108;Parent=GTH_gene_17_AGS_1
+scaffold00299	GTH	gene	343142	343357	.	+	0	ID=GTH_gene_18;supporting_alignment=scaffold03134_21.1.1_alignment_1
+scaffold00299	GTH	mRNA	343142	343357	.	+	0	ID=GTH_gene_18_AGS_1;Parent=GTH_gene_18
+scaffold00299	GTH	exon	343142	343357	1.000	+	0	ID=GTH_exon_109;Parent=GTH_gene_18_AGS_1
+scaffold00299	GTH	gene	2771105	2786871	.	+	0	ID=GTH_gene_19;supporting_alignment=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	mRNA	2771105	2786871	.	+	0	ID=GTH_gene_19_AGS_1;Parent=GTH_gene_19
+scaffold00299	GTH	exon	2771105	2771479	1.000	+	0	ID=GTH_exon_110;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2772575	2773012	1.000	+	0	ID=GTH_exon_111;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2773165	2773257	1.000	+	0	ID=GTH_exon_112;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2783772	2783911	1.000	+	0	ID=GTH_exon_113;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2785853	2786871	1.000	+	0	ID=GTH_exon_114;Parent=GTH_gene_19_AGS_1
+##gff-version 3
+scaffold00615	GTH	match	11462	14357	1.000	-	0	ID=scaffold07246_22.1.1_alignment_1;Target=scaffold07246_22.1.1 1 390 +
+scaffold00615	GTH	match_part	14340	14357	1.000	-	0	ID=GTH_match_part_1;Target=scaffold07246_22.1.1 1 18 +;Parent=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	match_part	13683	13863	1.000	-	0	ID=GTH_match_part_2;Target=scaffold07246_22.1.1 19 199 +;Parent=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	match_part	11462	11652	1.000	-	0	ID=GTH_match_part_3;Target=scaffold07246_22.1.1 200 390 +;Parent=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	match	2756814	2757201	1.000	+	0	ID=scaffold07246_42.1.1_alignment_1;Target=scaffold07246_42.1.1 1 303 +
+scaffold00615	GTH	match_part	2756814	2756901	1.000	+	0	ID=GTH_match_part_4;Target=scaffold07246_42.1.1 1 88 +;Parent=scaffold07246_42.1.1_alignment_1
+scaffold00615	GTH	match_part	2756987	2757201	1.000	+	0	ID=GTH_match_part_5;Target=scaffold07246_42.1.1 89 303 +;Parent=scaffold07246_42.1.1_alignment_1
+scaffold01120	GTH	match	2675	5795	1.000	+	0	ID=scaffold01751_3.1.1_alignment_1;Target=scaffold01751_3.1.1 1 1755 +
+scaffold01120	GTH	match_part	2675	2989	1.000	+	0	ID=GTH_match_part_6;Target=scaffold01751_3.1.1 1 315 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	3080	3779	1.000	+	0	ID=GTH_match_part_7;Target=scaffold01751_3.1.1 316 1015 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	3832	4160	1.000	+	0	ID=GTH_match_part_8;Target=scaffold01751_3.1.1 1016 1344 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	5203	5251	1.000	+	0	ID=GTH_match_part_9;Target=scaffold01751_3.1.1 1345 1393 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	match_part	5434	5795	1.000	+	0	ID=GTH_match_part_10;Target=scaffold01751_3.1.1 1394 1755 +;Parent=scaffold01751_3.1.1_alignment_1
+scaffold00084	GTH	match	42942	44414	1.000	-	0	ID=scaffold00090_458.1.1_alignment_1;Target=scaffold00090_458.1.1 1 1473 +
+scaffold00084	GTH	match_part	42942	44414	1.000	-	0	ID=GTH_match_part_11;Target=scaffold00090_458.1.1 1 1473 +;Parent=scaffold00090_458.1.1_alignment_1
+scaffold00084	GTH	match	49687	61898	1.000	-	0	ID=scaffold00090_457.1.1_alignment_1;Target=scaffold00090_457.1.1 1 4440 +
+scaffold00084	GTH	match_part	61725	61898	1.000	-	0	ID=GTH_match_part_12;Target=scaffold00090_457.1.1 1 174 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	60641	60962	1.000	-	0	ID=GTH_match_part_13;Target=scaffold00090_457.1.1 175 496 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	60318	60509	1.000	-	0	ID=GTH_match_part_14;Target=scaffold00090_457.1.1 497 688 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	60094	60249	1.000	-	0	ID=GTH_match_part_15;Target=scaffold00090_457.1.1 689 844 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	59578	59871	1.000	-	0	ID=GTH_match_part_16;Target=scaffold00090_457.1.1 845 1138 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	59079	59296	1.000	-	0	ID=GTH_match_part_17;Target=scaffold00090_457.1.1 1139 1356 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	58900	58974	1.000	-	0	ID=GTH_match_part_18;Target=scaffold00090_457.1.1 1357 1431 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	58682	58748	1.000	-	0	ID=GTH_match_part_19;Target=scaffold00090_457.1.1 1432 1498 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	57978	58300	1.000	-	0	ID=GTH_match_part_20;Target=scaffold00090_457.1.1 1499 1821 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	56436	56669	1.000	-	0	ID=GTH_match_part_21;Target=scaffold00090_457.1.1 1822 2055 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	56148	56335	1.000	-	0	ID=GTH_match_part_22;Target=scaffold00090_457.1.1 2056 2243 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	55919	56060	1.000	-	0	ID=GTH_match_part_23;Target=scaffold00090_457.1.1 2244 2385 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	55720	55828	1.000	-	0	ID=GTH_match_part_24;Target=scaffold00090_457.1.1 2386 2494 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	54607	54709	1.000	-	0	ID=GTH_match_part_25;Target=scaffold00090_457.1.1 2495 2597 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	54347	54515	1.000	-	0	ID=GTH_match_part_26;Target=scaffold00090_457.1.1 2598 2766 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	54067	54165	1.000	-	0	ID=GTH_match_part_27;Target=scaffold00090_457.1.1 2767 2865 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	53910	53968	1.000	-	0	ID=GTH_match_part_28;Target=scaffold00090_457.1.1 2866 2924 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	52895	53000	1.000	-	0	ID=GTH_match_part_29;Target=scaffold00090_457.1.1 2925 3030 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	52504	52654	1.000	-	0	ID=GTH_match_part_30;Target=scaffold00090_457.1.1 3031 3181 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	51408	51478	1.000	-	0	ID=GTH_match_part_31;Target=scaffold00090_457.1.1 3182 3252 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match_part	49687	50874	1.000	-	0	ID=GTH_match_part_32;Target=scaffold00090_457.1.1 3253 4440 +;Parent=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	match	351601	352346	1.000	-	0	ID=scaffold00090_413.1.1_alignment_1;Target=scaffold00090_413.1.1 1 746 +
+scaffold00084	GTH	match_part	351601	352346	1.000	-	0	ID=GTH_match_part_33;Target=scaffold00090_413.1.1 1 746 +;Parent=scaffold00090_413.1.1_alignment_1
+scaffold00084	GTH	match	354364	359917	1.000	-	0	ID=scaffold00090_412.1.1_alignment_1;Target=scaffold00090_412.1.1 1 1670 +
+scaffold00084	GTH	match_part	359735	359917	1.000	-	0	ID=GTH_match_part_34;Target=scaffold00090_412.1.1 1 183 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	358896	358947	1.000	-	0	ID=GTH_match_part_35;Target=scaffold00090_412.1.1 184 235 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	358558	358638	1.000	-	0	ID=GTH_match_part_36;Target=scaffold00090_412.1.1 236 316 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	357516	357634	1.000	-	0	ID=GTH_match_part_37;Target=scaffold00090_412.1.1 317 435 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	356323	356542	1.000	-	0	ID=GTH_match_part_38;Target=scaffold00090_412.1.1 436 655 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	355616	355734	1.000	-	0	ID=GTH_match_part_39;Target=scaffold00090_412.1.1 656 774 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match_part	354364	355259	1.000	-	0	ID=GTH_match_part_40;Target=scaffold00090_412.1.1 775 1670 +;Parent=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	match	486134	488478	1.000	-	0	ID=scaffold00090_394.1.1_alignment_1;Target=scaffold00090_394.1.1 1 894 +
+scaffold00084	GTH	match_part	488326	488478	1.000	-	0	ID=GTH_match_part_41;Target=scaffold00090_394.1.1 1 153 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	487965	488173	1.000	-	0	ID=GTH_match_part_42;Target=scaffold00090_394.1.1 154 362 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	487808	487869	1.000	-	0	ID=GTH_match_part_43;Target=scaffold00090_394.1.1 363 424 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	487193	487303	1.000	-	0	ID=GTH_match_part_44;Target=scaffold00090_394.1.1 425 535 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	486954	487046	1.000	-	0	ID=GTH_match_part_45;Target=scaffold00090_394.1.1 536 628 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match_part	486134	486399	1.000	-	0	ID=GTH_match_part_46;Target=scaffold00090_394.1.1 629 894 +;Parent=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	match	702170	705182	1.000	+	0	ID=scaffold00090_374.1.1_alignment_1;Target=scaffold00090_374.1.1 1 1623 +
+scaffold00084	GTH	match_part	702170	702414	1.000	+	0	ID=GTH_match_part_47;Target=scaffold00090_374.1.1 1 245 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	702530	702647	1.000	+	0	ID=GTH_match_part_48;Target=scaffold00090_374.1.1 246 363 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	702734	702866	1.000	+	0	ID=GTH_match_part_49;Target=scaffold00090_374.1.1 364 496 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	702962	703157	1.000	+	0	ID=GTH_match_part_50;Target=scaffold00090_374.1.1 497 692 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703236	703341	1.000	+	0	ID=GTH_match_part_51;Target=scaffold00090_374.1.1 693 798 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703420	703560	1.000	+	0	ID=GTH_match_part_52;Target=scaffold00090_374.1.1 799 939 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703655	703815	1.000	+	0	ID=GTH_match_part_53;Target=scaffold00090_374.1.1 940 1100 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	703891	704012	1.000	+	0	ID=GTH_match_part_54;Target=scaffold00090_374.1.1 1101 1222 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match_part	704782	705182	1.000	+	0	ID=GTH_match_part_55;Target=scaffold00090_374.1.1 1223 1623 +;Parent=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	match	719445	723571	1.000	+	0	ID=scaffold00090_371.1.1_alignment_1;Target=scaffold00090_371.1.1 1 1632 +
+scaffold00084	GTH	match_part	719445	720261	1.000	+	0	ID=GTH_match_part_56;Target=scaffold00090_371.1.1 1 817 +;Parent=scaffold00090_371.1.1_alignment_1
+scaffold00084	GTH	match_part	722757	723571	1.000	+	0	ID=GTH_match_part_57;Target=scaffold00090_371.1.1 818 1632 +;Parent=scaffold00090_371.1.1_alignment_1
+scaffold00084	GTH	match	861155	864382	1.000	+	0	ID=scaffold00090_349.1.1_alignment_1;Target=scaffold00090_349.1.1 1 933 +
+scaffold00084	GTH	match_part	861155	861390	1.000	+	0	ID=GTH_match_part_58;Target=scaffold00090_349.1.1 1 236 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	861494	861620	1.000	+	0	ID=GTH_match_part_59;Target=scaffold00090_349.1.1 237 363 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	861729	861815	1.000	+	0	ID=GTH_match_part_60;Target=scaffold00090_349.1.1 364 450 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	861912	862015	1.000	+	0	ID=GTH_match_part_61;Target=scaffold00090_349.1.1 451 554 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	862595	862763	1.000	+	0	ID=GTH_match_part_62;Target=scaffold00090_349.1.1 555 723 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	863760	863870	1.000	+	0	ID=GTH_match_part_63;Target=scaffold00090_349.1.1 724 834 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match_part	864284	864382	1.000	+	0	ID=GTH_match_part_64;Target=scaffold00090_349.1.1 835 933 +;Parent=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	match	1491432	1493542	1.000	+	0	ID=scaffold00090_270.1.1_alignment_1;Target=scaffold00090_270.1.1 1 792 +
+scaffold00084	GTH	match_part	1491432	1491784	1.000	+	0	ID=GTH_match_part_65;Target=scaffold00090_270.1.1 1 353 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1491867	1492028	1.000	+	0	ID=GTH_match_part_66;Target=scaffold00090_270.1.1 354 515 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1492688	1492867	1.000	+	0	ID=GTH_match_part_67;Target=scaffold00090_270.1.1 516 695 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1493018	1493075	1.000	+	0	ID=GTH_match_part_68;Target=scaffold00090_270.1.1 696 753 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match_part	1493504	1493542	1.000	+	0	ID=GTH_match_part_69;Target=scaffold00090_270.1.1 754 792 +;Parent=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	match	1651442	1658585	1.000	+	0	ID=scaffold00090_247.1.1_alignment_1;Target=scaffold00090_247.1.1 1 4644 +
+scaffold00084	GTH	match_part	1651442	1651974	1.000	+	0	ID=GTH_match_part_70;Target=scaffold00090_247.1.1 1 533 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1652530	1655980	1.000	+	0	ID=GTH_match_part_71;Target=scaffold00090_247.1.1 534 3984 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656050	1656116	1.000	+	0	ID=GTH_match_part_72;Target=scaffold00090_247.1.1 3985 4051 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656295	1656365	1.000	+	0	ID=GTH_match_part_73;Target=scaffold00090_247.1.1 4052 4122 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656447	1656512	1.000	+	0	ID=GTH_match_part_74;Target=scaffold00090_247.1.1 4123 4188 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1656597	1656686	1.000	+	0	ID=GTH_match_part_75;Target=scaffold00090_247.1.1 4189 4278 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1657292	1657468	1.000	+	0	ID=GTH_match_part_76;Target=scaffold00090_247.1.1 4279 4455 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match_part	1658397	1658585	1.000	+	0	ID=GTH_match_part_77;Target=scaffold00090_247.1.1 4456 4644 +;Parent=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	match	1864777	1870499	1.000	+	0	ID=scaffold00090_218.1.1_alignment_1;Target=scaffold00090_218.1.1 1 1537 +
+scaffold00084	GTH	match_part	1864777	1865043	1.000	+	0	ID=GTH_match_part_78;Target=scaffold00090_218.1.1 1 267 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1867210	1867540	1.000	+	0	ID=GTH_match_part_79;Target=scaffold00090_218.1.1 268 598 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1867844	1867993	1.000	+	0	ID=GTH_match_part_80;Target=scaffold00090_218.1.1 599 748 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1868074	1868340	1.000	+	0	ID=GTH_match_part_81;Target=scaffold00090_218.1.1 749 1015 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1869271	1869360	1.000	+	0	ID=GTH_match_part_82;Target=scaffold00090_218.1.1 1016 1105 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1869604	1869682	1.000	+	0	ID=GTH_match_part_83;Target=scaffold00090_218.1.1 1106 1184 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1869867	1869973	1.000	+	0	ID=GTH_match_part_84;Target=scaffold00090_218.1.1 1185 1291 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1870049	1870176	1.000	+	0	ID=GTH_match_part_85;Target=scaffold00090_218.1.1 1292 1419 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match_part	1870382	1870499	1.000	+	0	ID=GTH_match_part_86;Target=scaffold00090_218.1.1 1420 1537 +;Parent=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	match	1906932	1914749	1.000	+	0	ID=scaffold00090_213.1.1_alignment_1;Target=scaffold00090_213.1.1 1 1382 +
+scaffold00084	GTH	match_part	1906932	1907102	1.000	+	0	ID=GTH_match_part_87;Target=scaffold00090_213.1.1 1 171 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1908241	1908339	1.000	+	0	ID=GTH_match_part_88;Target=scaffold00090_213.1.1 172 270 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1909716	1909823	1.000	+	0	ID=GTH_match_part_89;Target=scaffold00090_213.1.1 271 378 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1909913	1910062	1.000	+	0	ID=GTH_match_part_90;Target=scaffold00090_213.1.1 379 528 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1910339	1910428	1.000	+	0	ID=GTH_match_part_91;Target=scaffold00090_213.1.1 529 618 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1910736	1910787	1.000	+	0	ID=GTH_match_part_92;Target=scaffold00090_213.1.1 619 670 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1910862	1910973	1.000	+	0	ID=GTH_match_part_93;Target=scaffold00090_213.1.1 671 782 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1911842	1912094	1.000	+	0	ID=GTH_match_part_94;Target=scaffold00090_213.1.1 783 1035 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1912283	1912371	1.000	+	0	ID=GTH_match_part_95;Target=scaffold00090_213.1.1 1036 1124 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1914388	1914430	1.000	+	0	ID=GTH_match_part_96;Target=scaffold00090_213.1.1 1125 1167 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match_part	1914535	1914749	1.000	+	0	ID=GTH_match_part_97;Target=scaffold00090_213.1.1 1168 1382 +;Parent=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	match	1956241	1959618	1.000	+	0	ID=scaffold00090_210.1.1_alignment_1;Target=scaffold00090_210.1.1 1 2741 +
+scaffold00084	GTH	match_part	1956241	1957499	1.000	+	0	ID=GTH_match_part_98;Target=scaffold00090_210.1.1 1 1259 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1957585	1957734	1.000	+	0	ID=GTH_match_part_99;Target=scaffold00090_210.1.1 1260 1409 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1957886	1958156	1.000	+	0	ID=GTH_match_part_100;Target=scaffold00090_210.1.1 1410 1680 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1958257	1958632	1.000	+	0	ID=GTH_match_part_101;Target=scaffold00090_210.1.1 1681 2056 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1958784	1959056	1.000	+	0	ID=GTH_match_part_102;Target=scaffold00090_210.1.1 2057 2329 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1959136	1959330	1.000	+	0	ID=GTH_match_part_103;Target=scaffold00090_210.1.1 2330 2524 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match_part	1959402	1959618	1.000	+	0	ID=GTH_match_part_104;Target=scaffold00090_210.1.1 2525 2741 +;Parent=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	match	1960465	1963191	1.000	-	0	ID=scaffold00090_209.1.1_alignment_1;Target=scaffold00090_209.1.1 1 1009 +
+scaffold00084	GTH	match_part	1962700	1963191	1.000	-	0	ID=GTH_match_part_105;Target=scaffold00090_209.1.1 1 492 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	match_part	1961241	1961314	1.000	-	0	ID=GTH_match_part_106;Target=scaffold00090_209.1.1 493 566 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	match_part	1960921	1961019	1.000	-	0	ID=GTH_match_part_107;Target=scaffold00090_209.1.1 567 665 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	match_part	1960465	1960808	1.000	-	0	ID=GTH_match_part_108;Target=scaffold00090_209.1.1 666 1009 +;Parent=scaffold00090_209.1.1_alignment_1
+scaffold00299	GTH	match	343142	343357	1.000	+	0	ID=scaffold03134_21.1.1_alignment_1;Target=scaffold03134_21.1.1 1 216 +
+scaffold00299	GTH	match_part	343142	343357	1.000	+	0	ID=GTH_match_part_109;Target=scaffold03134_21.1.1 1 216 +;Parent=scaffold03134_21.1.1_alignment_1
+scaffold00299	GTH	match	2771105	2786871	1.000	+	0	ID=scaffold03134_3.1.1_alignment_1;Target=scaffold03134_3.1.1 1 2065 +
+scaffold00299	GTH	match_part	2771105	2771479	1.000	+	0	ID=GTH_match_part_110;Target=scaffold03134_3.1.1 1 375 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2772575	2773012	1.000	+	0	ID=GTH_match_part_111;Target=scaffold03134_3.1.1 376 813 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2773165	2773257	1.000	+	0	ID=GTH_match_part_112;Target=scaffold03134_3.1.1 814 906 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2783772	2783911	1.000	+	0	ID=GTH_match_part_113;Target=scaffold03134_3.1.1 907 1046 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	match_part	2785853	2786871	1.000	+	0	ID=GTH_match_part_114;Target=scaffold03134_3.1.1 1047 2065 +;Parent=scaffold03134_3.1.1_alignment_1
+scaffold00615	GTH	gene	11462	14357	.	-	0	ID=GTH_gene_1;supporting_alignment=scaffold07246_22.1.1_alignment_1
+scaffold00615	GTH	mRNA	11462	14357	.	-	0	ID=GTH_gene_1_AGS_1;Parent=GTH_gene_1
+scaffold00615	GTH	exon	14340	14357	1.000	-	0	ID=GTH_exon_1;Parent=GTH_gene_1_AGS_1
+scaffold00615	GTH	exon	13683	13863	1.000	-	0	ID=GTH_exon_2;Parent=GTH_gene_1_AGS_1
+scaffold00615	GTH	exon	11462	11652	1.000	-	0	ID=GTH_exon_3;Parent=GTH_gene_1_AGS_1
+scaffold00615	GTH	gene	2756814	2757201	.	+	0	ID=GTH_gene_2;supporting_alignment=scaffold07246_42.1.1_alignment_1
+scaffold00615	GTH	mRNA	2756814	2757201	.	+	0	ID=GTH_gene_2_AGS_1;Parent=GTH_gene_2
+scaffold00615	GTH	exon	2756814	2756901	1.000	+	0	ID=GTH_exon_4;Parent=GTH_gene_2_AGS_1
+scaffold00615	GTH	exon	2756987	2757201	1.000	+	0	ID=GTH_exon_5;Parent=GTH_gene_2_AGS_1
+scaffold01120	GTH	gene	2675	5795	.	+	0	ID=GTH_gene_3;supporting_alignment=scaffold01751_3.1.1_alignment_1
+scaffold01120	GTH	mRNA	2675	5795	.	+	0	ID=GTH_gene_3_AGS_1;Parent=GTH_gene_3
+scaffold01120	GTH	exon	2675	2989	1.000	+	0	ID=GTH_exon_6;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	3080	3779	1.000	+	0	ID=GTH_exon_7;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	3832	4160	1.000	+	0	ID=GTH_exon_8;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	5203	5251	1.000	+	0	ID=GTH_exon_9;Parent=GTH_gene_3_AGS_1
+scaffold01120	GTH	exon	5434	5795	1.000	+	0	ID=GTH_exon_10;Parent=GTH_gene_3_AGS_1
+scaffold00084	GTH	gene	42942	44414	.	-	0	ID=GTH_gene_4;supporting_alignment=scaffold00090_458.1.1_alignment_1
+scaffold00084	GTH	mRNA	42942	44414	.	-	0	ID=GTH_gene_4_AGS_1;Parent=GTH_gene_4
+scaffold00084	GTH	exon	42942	44414	1.000	-	0	ID=GTH_exon_11;Parent=GTH_gene_4_AGS_1
+scaffold00084	GTH	gene	49687	61898	.	-	0	ID=GTH_gene_5;supporting_alignment=scaffold00090_457.1.1_alignment_1
+scaffold00084	GTH	mRNA	49687	61898	.	-	0	ID=GTH_gene_5_AGS_1;Parent=GTH_gene_5
+scaffold00084	GTH	exon	61725	61898	1.000	-	0	ID=GTH_exon_12;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	60641	60962	1.000	-	0	ID=GTH_exon_13;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	60318	60509	1.000	-	0	ID=GTH_exon_14;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	60094	60249	1.000	-	0	ID=GTH_exon_15;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	59578	59871	1.000	-	0	ID=GTH_exon_16;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	59079	59296	1.000	-	0	ID=GTH_exon_17;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	58900	58974	1.000	-	0	ID=GTH_exon_18;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	58682	58748	1.000	-	0	ID=GTH_exon_19;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	57978	58300	1.000	-	0	ID=GTH_exon_20;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	56436	56669	1.000	-	0	ID=GTH_exon_21;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	56148	56335	1.000	-	0	ID=GTH_exon_22;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	55919	56060	1.000	-	0	ID=GTH_exon_23;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	55720	55828	1.000	-	0	ID=GTH_exon_24;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	54607	54709	1.000	-	0	ID=GTH_exon_25;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	54347	54515	1.000	-	0	ID=GTH_exon_26;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	54067	54165	1.000	-	0	ID=GTH_exon_27;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	53910	53968	1.000	-	0	ID=GTH_exon_28;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	52895	53000	1.000	-	0	ID=GTH_exon_29;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	52504	52654	1.000	-	0	ID=GTH_exon_30;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	51408	51478	1.000	-	0	ID=GTH_exon_31;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	exon	49687	50874	1.000	-	0	ID=GTH_exon_32;Parent=GTH_gene_5_AGS_1
+scaffold00084	GTH	gene	351601	352346	.	-	0	ID=GTH_gene_6;supporting_alignment=scaffold00090_413.1.1_alignment_1
+scaffold00084	GTH	mRNA	351601	352346	.	-	0	ID=GTH_gene_6_AGS_1;Parent=GTH_gene_6
+scaffold00084	GTH	exon	351601	352346	1.000	-	0	ID=GTH_exon_33;Parent=GTH_gene_6_AGS_1
+scaffold00084	GTH	gene	354364	359917	.	-	0	ID=GTH_gene_7;supporting_alignment=scaffold00090_412.1.1_alignment_1
+scaffold00084	GTH	mRNA	354364	359917	.	-	0	ID=GTH_gene_7_AGS_1;Parent=GTH_gene_7
+scaffold00084	GTH	exon	359735	359917	1.000	-	0	ID=GTH_exon_34;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	358896	358947	1.000	-	0	ID=GTH_exon_35;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	358558	358638	1.000	-	0	ID=GTH_exon_36;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	357516	357634	1.000	-	0	ID=GTH_exon_37;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	356323	356542	1.000	-	0	ID=GTH_exon_38;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	355616	355734	1.000	-	0	ID=GTH_exon_39;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	exon	354364	355259	1.000	-	0	ID=GTH_exon_40;Parent=GTH_gene_7_AGS_1
+scaffold00084	GTH	gene	486134	488478	.	-	0	ID=GTH_gene_8;supporting_alignment=scaffold00090_394.1.1_alignment_1
+scaffold00084	GTH	mRNA	486134	488478	.	-	0	ID=GTH_gene_8_AGS_1;Parent=GTH_gene_8
+scaffold00084	GTH	exon	488326	488478	1.000	-	0	ID=GTH_exon_41;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	487965	488173	1.000	-	0	ID=GTH_exon_42;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	487808	487869	1.000	-	0	ID=GTH_exon_43;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	487193	487303	1.000	-	0	ID=GTH_exon_44;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	486954	487046	1.000	-	0	ID=GTH_exon_45;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	exon	486134	486399	1.000	-	0	ID=GTH_exon_46;Parent=GTH_gene_8_AGS_1
+scaffold00084	GTH	gene	702170	705182	.	+	0	ID=GTH_gene_9;supporting_alignment=scaffold00090_374.1.1_alignment_1
+scaffold00084	GTH	mRNA	702170	705182	.	+	0	ID=GTH_gene_9_AGS_1;Parent=GTH_gene_9
+scaffold00084	GTH	exon	702170	702414	1.000	+	0	ID=GTH_exon_47;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	702530	702647	1.000	+	0	ID=GTH_exon_48;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	702734	702866	1.000	+	0	ID=GTH_exon_49;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	702962	703157	1.000	+	0	ID=GTH_exon_50;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703236	703341	1.000	+	0	ID=GTH_exon_51;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703420	703560	1.000	+	0	ID=GTH_exon_52;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703655	703815	1.000	+	0	ID=GTH_exon_53;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	703891	704012	1.000	+	0	ID=GTH_exon_54;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	exon	704782	705182	1.000	+	0	ID=GTH_exon_55;Parent=GTH_gene_9_AGS_1
+scaffold00084	GTH	gene	719445	723571	.	+	0	ID=GTH_gene_10;supporting_alignment=scaffold00090_371.1.1_alignment_1
+scaffold00084	GTH	mRNA	719445	723571	.	+	0	ID=GTH_gene_10_AGS_1;Parent=GTH_gene_10
+scaffold00084	GTH	exon	719445	720261	1.000	+	0	ID=GTH_exon_56;Parent=GTH_gene_10_AGS_1
+scaffold00084	GTH	exon	722757	723571	1.000	+	0	ID=GTH_exon_57;Parent=GTH_gene_10_AGS_1
+scaffold00084	GTH	gene	861155	864382	.	+	0	ID=GTH_gene_11;supporting_alignment=scaffold00090_349.1.1_alignment_1
+scaffold00084	GTH	mRNA	861155	864382	.	+	0	ID=GTH_gene_11_AGS_1;Parent=GTH_gene_11
+scaffold00084	GTH	exon	861155	861390	1.000	+	0	ID=GTH_exon_58;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	861494	861620	1.000	+	0	ID=GTH_exon_59;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	861729	861815	1.000	+	0	ID=GTH_exon_60;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	861912	862015	1.000	+	0	ID=GTH_exon_61;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	862595	862763	1.000	+	0	ID=GTH_exon_62;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	863760	863870	1.000	+	0	ID=GTH_exon_63;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	exon	864284	864382	1.000	+	0	ID=GTH_exon_64;Parent=GTH_gene_11_AGS_1
+scaffold00084	GTH	gene	1491432	1493542	.	+	0	ID=GTH_gene_12;supporting_alignment=scaffold00090_270.1.1_alignment_1
+scaffold00084	GTH	mRNA	1491432	1493542	.	+	0	ID=GTH_gene_12_AGS_1;Parent=GTH_gene_12
+scaffold00084	GTH	exon	1491432	1491784	1.000	+	0	ID=GTH_exon_65;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1491867	1492028	1.000	+	0	ID=GTH_exon_66;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1492688	1492867	1.000	+	0	ID=GTH_exon_67;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1493018	1493075	1.000	+	0	ID=GTH_exon_68;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	exon	1493504	1493542	1.000	+	0	ID=GTH_exon_69;Parent=GTH_gene_12_AGS_1
+scaffold00084	GTH	gene	1651442	1658585	.	+	0	ID=GTH_gene_13;supporting_alignment=scaffold00090_247.1.1_alignment_1
+scaffold00084	GTH	mRNA	1651442	1658585	.	+	0	ID=GTH_gene_13_AGS_1;Parent=GTH_gene_13
+scaffold00084	GTH	exon	1651442	1651974	1.000	+	0	ID=GTH_exon_70;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1652530	1655980	1.000	+	0	ID=GTH_exon_71;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656050	1656116	1.000	+	0	ID=GTH_exon_72;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656295	1656365	1.000	+	0	ID=GTH_exon_73;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656447	1656512	1.000	+	0	ID=GTH_exon_74;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1656597	1656686	1.000	+	0	ID=GTH_exon_75;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1657292	1657468	1.000	+	0	ID=GTH_exon_76;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	exon	1658397	1658585	1.000	+	0	ID=GTH_exon_77;Parent=GTH_gene_13_AGS_1
+scaffold00084	GTH	gene	1864777	1870499	.	+	0	ID=GTH_gene_14;supporting_alignment=scaffold00090_218.1.1_alignment_1
+scaffold00084	GTH	mRNA	1864777	1870499	.	+	0	ID=GTH_gene_14_AGS_1;Parent=GTH_gene_14
+scaffold00084	GTH	exon	1864777	1865043	1.000	+	0	ID=GTH_exon_78;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1867210	1867540	1.000	+	0	ID=GTH_exon_79;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1867844	1867993	1.000	+	0	ID=GTH_exon_80;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1868074	1868340	1.000	+	0	ID=GTH_exon_81;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1869271	1869360	1.000	+	0	ID=GTH_exon_82;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1869604	1869682	1.000	+	0	ID=GTH_exon_83;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1869867	1869973	1.000	+	0	ID=GTH_exon_84;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1870049	1870176	1.000	+	0	ID=GTH_exon_85;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	exon	1870382	1870499	1.000	+	0	ID=GTH_exon_86;Parent=GTH_gene_14_AGS_1
+scaffold00084	GTH	gene	1906932	1914749	.	+	0	ID=GTH_gene_15;supporting_alignment=scaffold00090_213.1.1_alignment_1
+scaffold00084	GTH	mRNA	1906932	1914749	.	+	0	ID=GTH_gene_15_AGS_1;Parent=GTH_gene_15
+scaffold00084	GTH	exon	1906932	1907102	1.000	+	0	ID=GTH_exon_87;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1908241	1908339	1.000	+	0	ID=GTH_exon_88;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1909716	1909823	1.000	+	0	ID=GTH_exon_89;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1909913	1910062	1.000	+	0	ID=GTH_exon_90;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1910339	1910428	1.000	+	0	ID=GTH_exon_91;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1910736	1910787	1.000	+	0	ID=GTH_exon_92;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1910862	1910973	1.000	+	0	ID=GTH_exon_93;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1911842	1912094	1.000	+	0	ID=GTH_exon_94;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1912283	1912371	1.000	+	0	ID=GTH_exon_95;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1914388	1914430	1.000	+	0	ID=GTH_exon_96;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	exon	1914535	1914749	1.000	+	0	ID=GTH_exon_97;Parent=GTH_gene_15_AGS_1
+scaffold00084	GTH	gene	1956241	1959618	.	+	0	ID=GTH_gene_16;supporting_alignment=scaffold00090_210.1.1_alignment_1
+scaffold00084	GTH	mRNA	1956241	1959618	.	+	0	ID=GTH_gene_16_AGS_1;Parent=GTH_gene_16
+scaffold00084	GTH	exon	1956241	1957499	1.000	+	0	ID=GTH_exon_98;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1957585	1957734	1.000	+	0	ID=GTH_exon_99;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1957886	1958156	1.000	+	0	ID=GTH_exon_100;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1958257	1958632	1.000	+	0	ID=GTH_exon_101;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1958784	1959056	1.000	+	0	ID=GTH_exon_102;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1959136	1959330	1.000	+	0	ID=GTH_exon_103;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	exon	1959402	1959618	1.000	+	0	ID=GTH_exon_104;Parent=GTH_gene_16_AGS_1
+scaffold00084	GTH	gene	1960465	1963191	.	-	0	ID=GTH_gene_17;supporting_alignment=scaffold00090_209.1.1_alignment_1
+scaffold00084	GTH	mRNA	1960465	1963191	.	-	0	ID=GTH_gene_17_AGS_1;Parent=GTH_gene_17
+scaffold00084	GTH	exon	1962700	1963191	1.000	-	0	ID=GTH_exon_105;Parent=GTH_gene_17_AGS_1
+scaffold00084	GTH	exon	1961241	1961314	1.000	-	0	ID=GTH_exon_106;Parent=GTH_gene_17_AGS_1
+scaffold00084	GTH	exon	1960921	1961019	1.000	-	0	ID=GTH_exon_107;Parent=GTH_gene_17_AGS_1
+scaffold00084	GTH	exon	1960465	1960808	1.000	-	0	ID=GTH_exon_108;Parent=GTH_gene_17_AGS_1
+scaffold00299	GTH	gene	343142	343357	.	+	0	ID=GTH_gene_18;supporting_alignment=scaffold03134_21.1.1_alignment_1
+scaffold00299	GTH	mRNA	343142	343357	.	+	0	ID=GTH_gene_18_AGS_1;Parent=GTH_gene_18
+scaffold00299	GTH	exon	343142	343357	1.000	+	0	ID=GTH_exon_109;Parent=GTH_gene_18_AGS_1
+scaffold00299	GTH	gene	2771105	2786871	.	+	0	ID=GTH_gene_19;supporting_alignment=scaffold03134_3.1.1_alignment_1
+scaffold00299	GTH	mRNA	2771105	2786871	.	+	0	ID=GTH_gene_19_AGS_1;Parent=GTH_gene_19
+scaffold00299	GTH	exon	2771105	2771479	1.000	+	0	ID=GTH_exon_110;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2772575	2773012	1.000	+	0	ID=GTH_exon_111;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2773165	2773257	1.000	+	0	ID=GTH_exon_112;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2783772	2783911	1.000	+	0	ID=GTH_exon_113;Parent=GTH_gene_19_AGS_1
+scaffold00299	GTH	exon	2785853	2786871	1.000	+	0	ID=GTH_exon_114;Parent=GTH_gene_19_AGS_1

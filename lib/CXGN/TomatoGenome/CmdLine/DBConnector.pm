@@ -1,34 +1,64 @@
 package CXGN::TomatoGenome::CmdLine::DBConnector;
-use Moose::Role;
+use MooseX::Role::Parameterized;
 use DBIx::Connector;
 
-has 'db_dsn' => (
-    documentation => 'DBI Data Source Name (DSN) for the database to connect to',
-    traits        => [qw(Getopt)],
-    isa           => 'Str',
-    is            => 'ro',
-    required      => 1,
-    cmd_aliases   => 'd',
-);
-has 'db_user' => (
-    documentation => 'root directory of BACs ftp site',
-    traits        => [qw(Getopt)],
-    isa           => 'Str',
-    is            => 'ro',
-    cmd_aliases   => 'u',
-);
-has 'db_password' => (
-    documentation => 'root directory of BACs ftp site',
-    traits        => [qw(Getopt)],
-    isa           => 'Str',
-    is            => 'ro',
-    cmd_aliases   => 'p',
-);
+parameter 'connection_name' => qw(
+    is        ro
+    isa       Str
+    default   db
+   );
 
-sub dbc {
-    my ($self) = @_;
-    $self->{dbc} ||= DBIx::Connector->new( $self->db_dsn, $self->db_user, $self->db_password );
-}
+parameter 'connection_description' => (
+    is => 'ro',
+    isa => 'Str',
+    lazy_build => 1,
+   ); __PACKAGE__->meta->parameters_metaclass->add_method(
+   '_build_connection_description' => sub {
+       my $n = shift->connection_name;
+       $n =~ s/_/ /g;
+       return $n;
+   });
+
+
+role {
+
+    my $p    = shift;
+    my $conn = $p->connection_name;
+    my $desc = $p->connection_description;
+
+    has $conn.'_dsn' => (
+        documentation => "DBI dsn for connecting to the $desc",
+        traits        => [qw(Getopt)],
+        isa           => 'Str',
+        is            => 'ro',
+        required      => 1,
+       );
+    has $conn.'_user' => (
+        documentation => "username for connecting to the $desc",
+        traits        => [qw(Getopt)],
+        isa           => 'Str',
+        is            => 'ro',
+       );
+    has $conn.'_password' => (
+        documentation => "password for connecting to the $desc",
+        traits        => [qw(Getopt)],
+        isa           => 'Str',
+        is            => 'ro',
+       );
+
+
+    method $conn.'_conn' => sub {
+        my ($self) = @_;
+        $SIG{__DIE__} = \&Carp::confess;
+
+        no strict 'refs';
+        $self->{$conn.'_dbc'} ||= DBIx::Connector->new( $self->{"${conn}_dsn"},
+                                                        $self->{"${conn}_user"},
+                                                        $self->{"${conn}_password"},
+                                                      );
+    };
+
+};
 
 # requires 'validate_args';
 # requires 'usage_error';
