@@ -1,16 +1,9 @@
 package CXGN::DB::GFF::Versioned;
-use strict;
-use warnings;
-use English;
+use Moose;
+use namespace::autoclean;
 use Carp;
 
-use Data::Dumper;
-
-use Hash::Util qw/lock_keys/;
-
 use Bio::DB::GFF;
-
-use CXGN::DB::Connection;
 
 =head1 NAME
 
@@ -22,12 +15,12 @@ databases
 
   # open a handle on the versioned series of databases
   # named my_db_base_name.1, my_db_base_name.2, ...
-  my $db = CXGN::DB::GFF::Versioned->new( -db => 'my_db_base_name' );
+  my $db = CXGN::DB::GFF::Versioned->new( dsn => $dsn, user => $user, password => $password );
 
   # load a new version of this DB with the given seq and gff3 file
   # will make my_db_base_name.(n+1) where n is the largest version of
   # my_db_base_name currently present.
-  $db->load_new($seq_file,$gff3_file);
+  $db->load_new( $seq_file, $gff3_file );
 
   # get a Bio::DB::GFF object opened to this most recent db
   my $bdb = $db->bdb;
@@ -37,50 +30,73 @@ databases
   my $bdb = $db->bdb(2);
 
 
-=head1 FUNCTIONS
+=head1 ATTRIBUTES
+
+dsn - database DSN, required
+
+user - database user, required
+
+password - database password, required
 
 =cut
+
+for (qw( dsn user password )) {
+    has $_ => (
+        is  => 'ro',
+        isa => 'Str',
+       );
+}
+has '+dsn' => (required => 1);
+
+=head1 METHODS
 
 =head2 new
 
-  Usage: my $dbgff = CXGN::DB::GFF::Versioned->new( -db => 'bio_db_gff' );
-  Desc : opens the most recent version of the given database
+  Usage: my $dbgff = CXGN::DB::GFF::Versioned->new(
+               dsn => $dsn,
+               user => $user,
+               password => $password
+         );
+  Desc : opens the most recent version of the given database name
   Args : hash-style list as:
-           -db   => base name of database,
-           -user => (optional) username to connect as, defaults to
-                    whatever CXGN::DB::Connection defaults to,
-           -pass => (optional) password to use for connecting, defaults to null
+           dsn      => DBI connection string for the database,
+           user     => (optional) username to connect as, defaults to blank,
+           password => (optional) password to use for connecting, defaults to null
   Ret  : new object
-  Side Effects:
-  Example:
 
 =cut
 
-sub new {
-  my ($class,%args) = @_;
-  my $self = bless {}, $class;
+around BUILDARGS => sub {
+    my $orig = shift;
+    my $class = shift;
+    my %args = @_;
 
-  $args{-db} or croak "-db argument required for new()";
+    # did we get a -db arg?
+    my $compat_dbname = delete $args{-db};
 
-  $self->{control_dbh} = CXGN::DB::Connection->new
-    ({ defined $args{-user} ? (dbuser => $args{-user}) : (),
-       defined $args{-pass} ? (dbpass => $args{-pass}) : (),
-       dbargs => {AutoCommit => 1}
-     });
+    # if it's the new interface, this is all we do
+    return $class->$orig(@_) unless $compat_dbname;
 
-  if($args{-db} =~ /^cxgn_conf:(.+)$/) {
-    $self->{dbname_root} = CXGN::VHost->new->get_conf($1)
-      or die "CXGN configuration var '$1' not set\n";
-  } else {
-    $self->{dbname_root} = $args{-db};
-  }
+    #### otherwise, if we got -db, have to do some things for compat
+    warn "WARNING: -db option to CXGN::DB::GFF::Versioned is deprecated, pass dsn, user, and password instead";
 
-  $self->{version} = $self->_highest_db_version();
+    die "cannot specify both -db and other args for CXGN::DB::GFF::Versioned"
+        if %args;
 
-  lock_keys(%$self);
+    require CXGN::DB::Connection;
+    my ($dsn, $user, $pass) = CXGN::DB::Connection->new_no_connect
+                                                  ->get_connection_parameters;
 
-  return $self;
-}
+    if( $compat_dbname =~ /^cxgn_conf:(.+)$/ ) {
+        require SGN::Config;
+        $compat_dbname = SGN::Config->load_locked->{$1};
+    }
+
+    $dsn = $class->_replace_dbname( $dsn, $compat_dbname );
+
+    return $class->$orig( dsn => $dsn, user => $user, password => $pass );
+
+};
 
 
 =head2 dbname
@@ -105,9 +121,31 @@ sub dbname {
   $version ||= $self->_highest_db_version
     or return;
   $version =~ /\D/ && $version ne 'tmp' and confess "invalid version '$version'";
-  $self->{dbname_root} or confess "no dbname_root defined";
-  return "$self->{dbname_root}.$version";
+  $self->dbname_root or confess "no dbname_root defined";
+  return $self->dbname_root.".$version";
 }
+
+has 'dbname_root' => ( is => 'ro',
+                       lazy_build => 1,
+                      ); sub _build_dbname_root {
+                          my $d = shift->dsn;
+                          my ($n) = $d =~ /dbname=([^;]+)/
+                              or die "could not parse dbname from dsn $d";
+                          $n =~ s/\.\d+$//;
+                          return $n;
+                      };
+
+# dbh to use for creating databases, etc.  defaults to highest
+# existing version of the db, or postgres if there is none
+has 'control_dbh' => ( is => 'ro',
+                       lazy_build => 1,
+                      ); sub _build_control_dbh {
+                          my $self = shift;
+                          return DBI->connect( $self->_replace_dbname( $self->dsn, 'postgres' ),
+                                               $self->user,
+                                               $self->password,
+                                              );
+                      }
 
 =head2 bdb
 
@@ -130,20 +168,31 @@ sub bdb {
   return $self->_open_bdb($version);
 }
 
+sub _versioned_dsn {
+    my ($self, $version) = @_;
+    my $dbname = $self->dbname($version);
+    return $self->_replace_dbname( $self->dsn, $dbname );
+}
+sub _replace_dbname {
+    my ( $self, $dsn, $dbname ) = @_;
+    $dsn =~ s/dbname=[^;]+/dbname=$dbname/i
+        or confess "cannot parse dbname from dsn '$dsn'";
+    return $dsn;
+}
+
 #open a bdb with the given database name, and possibly make it writable
 sub _open_bdb {
-  my ($self,$version,$new) = @_;
+  my ($self,$version,$new_flag) = @_;
 
   my $dbname = $self->dbname($version);
 
-  my ($dsn,$user,$pass,$dbargs) = $self->{control_dbh}->get_connection_parameters;
-  $dsn =~ s/dbname=[^;]+/dbname=$dbname/i;
+  my $dsn = $self->_versioned_dsn( $version );
 
-  my $bdb= Bio::DB::GFF->new(-adaptor=> 'dbi::pg',
-			     -dsn => $dsn,
-			     $new ? (-write =>1,-create => 1) : (),
-			     -user => $user,
-			     -pass => $pass,
+  my $bdb= Bio::DB::GFF->new( -adaptor => 'dbi::pg',
+			      -dsn     => $dsn,
+                              $new_flag ? (-write => 1,-create => 1) : (),
+                              -user    => $self->user,
+                              -pass    => $self->password,
 			    )
     or die "Can't open Bio::DB::GFF $dbname database: ",Bio::DB::GFF->error,"\n";
 
@@ -168,6 +217,8 @@ sub _open_bdb {
 sub load_new {
   my ($self,$seqs,$gff3) = @_;
 
+  $seqs ||= [];
+  $gff3 ||= [];
   $seqs = [$seqs] unless ref $seqs;
   $gff3 = [$gff3] unless ref $gff3;
 
@@ -176,8 +227,8 @@ sub load_new {
   $self->_make_db($tmp_db) unless $self->_db_exists($tmp_db);
 
   #open the gff and fasta files at the same time, so they don't get moved out from under us
-  my @gff3_fh  = map { open my $f, $_ or die("$! opening $_ for reading\n"); $f } @$gff3;
-  my @fasta_fh = map { open my $f, $_ or die("$! opening $_ for reading\n"); $f } @$seqs;
+  my @gff3_fh  = map { open my $f, $_ or die("$! opening '$_' for reading\n"); $f } @$gff3;
+  my @fasta_fh = map { open my $f, $_ or die("$! opening '$_' for reading\n"); $f } @$seqs;
 
   # open our filehandles to /dev/null to shut up the idiotic warnings
   # and status messages spewed by this bioperl code
@@ -210,7 +261,7 @@ sub load_new {
 select tablename from pg_catalog.pg_tables where schemaname = 'public'
 EOSQL
   foreach (@$tables) {
-    $bdb_dbh->do(qq|grant select on "$_->[0]" to web_usr|);
+    $bdb_dbh->do(qq|grant select on "$_->[0]" to public|);
   }
 
   #find the new version number
@@ -235,7 +286,7 @@ EOSQL
 sub _db_exists {
   my ($self,$dbname) = @_;
 
-  my ($exists) = $self->{control_dbh}->selectrow_array(<<EOSQL,undef,$dbname);
+  my ($exists) = $self->control_dbh->selectrow_array(<<EOSQL,undef,$dbname);
 select datname from pg_catalog.pg_database where datname = ? limit 1
 EOSQL
 
@@ -245,7 +296,7 @@ EOSQL
 
 sub _make_db {
   my ($self,$dbname) = @_;
-  $self->{control_dbh}->do(<<EOSQL);
+  $self->control_dbh->do(<<EOSQL);
 create database "$dbname"
 EOSQL
 }
@@ -253,29 +304,29 @@ EOSQL
 sub _rename_db {
   my ($self, $old_name, $new_name) = @_;
 
-  my $conns = $self->{control_dbh}->selectall_arrayref('select * from pg_stat_activity where datname like ?',undef,$self->{dbname_root}.'%');
+  my $conns = $self->control_dbh->selectall_arrayref('select * from pg_stat_activity where datname like ?',undef,$self->dbname_root.'%');
   #print "CURRENT CONNECTIONS:\n";
   #print Dumper $conns;
   my $retry_count = my $retries = 5;
   my $success = 0;
   while($retry_count--) {
     my $result = eval {
-      $self->{control_dbh}->do(<<EOSQL);
+      $self->control_dbh->do(<<EOSQL);
 alter database "$old_name" rename to "$new_name"
 EOSQL
     };
-    unless($EVAL_ERROR) {
+    unless( $@ ) {
       $success = 1;
       last;
     } else {
-      warn $EVAL_ERROR;
-      die unless $EVAL_ERROR =~ /other users/;
+      warn $@;
+      die unless $@ =~ /other users/;
       warn "waiting 5 minutes for $old_name to become free up...\n";
       sleep 300; #< wait 5 minutes for autovacuum to finish
     }
   }
-  unless($success) {
-    die "db rename $old_name -> $new_name failed, even after $retries tries:\n$EVAL_ERROR\n";
+  unless( $success ) {
+    die "db rename $old_name -> $new_name failed, even after $retries tries:\n$@\n";
   }
 }
 
@@ -291,15 +342,18 @@ sub _next_db_version {
 sub _clean_up_older_databases {
   my ($self,$num_to_keep) = @_;
 
-  $num_to_keep ||= 3; #< by default, keep 3 db versions around
+  my $highest = $self->_highest_db_version
+      or return;
 
-  for( my $del = $self->_highest_db_version() - $num_to_keep;
-       $self->_db_exists($self->{dbname_root}.'.'.$del);
+  $num_to_keep = 3 unless defined $num_to_keep; #< by default, keep 3 db versions around
+
+  for( my $del = $highest - $num_to_keep;
+       $self->_db_exists($self->dbname_root.'.'.$del);
        $del--
      ) {
 
     eval { #don't care if the drop fails
-      $self->{control_dbh}->do(qq|drop database "$self->{dbname_root}.$del"|);
+      $self->control_dbh->do(qq|drop database "|.$self->dbname_root.qq|.$del"|);
     }
   }
 }
@@ -307,9 +361,9 @@ sub _clean_up_older_databases {
 sub _highest_db_version {
   my ($self) = @_;
 
-  my $r = $self->{dbname_root};
+  my $r = $self->dbname_root;
   $r =~ s!([\.\$\^])!\\$1!g;
-  my ($d) = $self->{control_dbh}->selectrow_array(<<EOSQL,undef,$r,'^'.$r.'\.\d+$');
+  my ($d) = $self->control_dbh->selectrow_array(<<EOSQL,undef,$r,'^'.$r.'\.\d+$');
 select regexp_replace(datname, '^' || ? || '\.','')::int as version
 from pg_catalog.pg_database
 where datname ~ ?
@@ -328,6 +382,5 @@ Robert Buels
 
 =cut
 
-###
-1;#do not remove
-###
+__PACKAGE__->meta->make_immutable;
+1;
