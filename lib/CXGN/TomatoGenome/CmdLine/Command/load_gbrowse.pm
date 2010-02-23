@@ -6,6 +6,7 @@ sub abstract {
 use Moose;
 use namespace::autoclean;
 
+use CXGN::DB::GFF::Versioned;
 use CXGN::TomatoGenome::BACPublish qw/ aggregate_filename publisher /;
 use CXGN::TomatoGenome::Config;
 use CXGN::IndexedLog;
