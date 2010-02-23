@@ -43,7 +43,7 @@ password - database password, required
 for (qw( dsn user password )) {
     has $_ => (
         is  => 'ro',
-        isa => 'Str',
+        isa => 'Maybe[Str]',
        );
 }
 has '+dsn' => (required => 1);
@@ -232,14 +232,13 @@ sub load_new {
 
   # open our filehandles to /dev/null to shut up the idiotic warnings
   # and status messages spewed by this bioperl code
-  local *STDOUT_SAVE;
-  local *STDERR_SAVE;
-  open STDOUT_SAVE, ">&STDOUT" or die "$! saving STDOUT";
-  open STDERR_SAVE, ">&STDERR" or die "$! saving STDERR";
-  open STDOUT, '>/dev/null' or die "$! opening STDOUT to /dev/null";
-  open STDERR, '>/dev/null' or die "$! opening STDERR to /dev/null";
-
   my $bdb = $self->_open_bdb( 'tmp', 'new' );
+
+  # filter out some idiotic warnings from the db
+  local $SIG{__WARN__} = sub {
+      warn @_ unless $_[0] =~ /CREATE TABLE | table "\w+" does not exist/;
+  };
+
   $bdb->initialize( -erase=>1 );
 
   foreach my $f ( @gff3_fh ) { #< non-verbose
@@ -250,10 +249,6 @@ sub load_new {
     $bdb->load_fasta($f,0);
     close $f;
   }
-
-  #now that we're done with bioperl, we can restore normal error reporting
-  open STDERR, ">&STDERR_SAVE" or die "$! restoring STDERR";
-  open STDOUT, ">&STDOUT_SAVE" or die "$! restoring STDOUT";
 
   #now grant web_usr select permissions
   my $bdb_dbh = $bdb->features_db();
