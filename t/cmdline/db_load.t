@@ -30,7 +30,7 @@ copy( "$test_file", "$dest_file" );
 
 my $result = test_app( CmdLine, [ 'db_load',
 				  '--debug',
-				  '--ftpsite_root' => "$tempdir",
+				  '--bac_repository_root' => "$tempdir",
 				  '--db_dsn' => $ENV{TOMATO_GENOME_TEST_DSN},
 				]);
 
