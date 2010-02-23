@@ -1,4 +1,7 @@
 package CXGN::TomatoGenome::CmdLine::Command::roe_sync;
+sub abstract {
+    'get Roe Lab BACs from GenBank and create .tar.gz BAC submissions for them' }
+
 use Moose;
 use namespace::autoclean;
 use autodie qw/ :all /;
@@ -16,7 +19,6 @@ use Bio::SeqIO;
 use CXGN::TomatoGenome::BACPublish qw/ sequencing_files parse_filename /;
 
 extends qw(CXGN::TomatoGenome::CmdLine::Command);
-
 
 has 'table_url' => (
     documentation => 'the URL for the Roe table page',
@@ -44,10 +46,6 @@ has 'submission_destination' => (
     default       => '/data/shared/tomato_genome/country_uploads/manual/upload',
     cmd_aliases   => 's',
 );
-
-sub abstract {
-    'get Roe Lab BACs from GenBank and create .tar.gz BAC submissions for them'
-}
 
 sub execute {
     my ( $self, $opt, $args ) = @_;
