@@ -347,9 +347,11 @@ sub _clean_up_older_databases {
        $del--
      ) {
 
-    eval { #don't care if the drop fails
-      $self->control_dbh->do(qq|drop database "|.$self->dbname_root.qq|.$del"|);
-    }
+      {   #don't care if the drop fails
+	  local $self->control_dbh->{PrintError} = 0;
+	  local $self->control_dbh->{RaiseError} = 0;
+	  $self->control_dbh->do(qq|drop database "|.$self->dbname_root.qq|.$del"|);
+      }
   }
 }
 
