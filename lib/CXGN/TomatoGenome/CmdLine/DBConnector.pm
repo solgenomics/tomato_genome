@@ -49,7 +49,6 @@ role {
 
     method $conn.'_conn' => sub {
         my ($self) = @_;
-        $SIG{__DIE__} = \&Carp::confess;
 
         no strict 'refs';
         $self->{$conn.'_dbc'} ||= DBIx::Connector->new( $self->{"${conn}_dsn"},
