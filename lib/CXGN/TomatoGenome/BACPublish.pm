@@ -857,7 +857,7 @@ sub contig_file {
 
 sub genbank_acc_to_seq_name {
   my ($acc,$dbh) = @_;
-  $dbh or croak "dbh param required";
+  $dbh or croak "genbank_acc_to_seq_name now requires a database handle as its second argument";
 
   my $like;
   unless($acc =~ /\.\d+$/) {
