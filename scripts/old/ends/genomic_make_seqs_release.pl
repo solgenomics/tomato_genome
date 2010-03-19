@@ -9,7 +9,7 @@ use Getopt::Std;
 use File::Basename;
 use File::Temp;
 
-use CXGN::Genomic;
+use CXGN::Genomic::Library;
 
 sub usage {
   my $message = shift || '';

@@ -22,8 +22,9 @@ use CXGN::DB::Connection;
 use CXGN::VHost;
 
 #Genomic framework
-use CXGN::Genomic;
-use CXGN::Genomic::Search;
+use CXGN::Genomic::Library;
+use CXGN::Genomic::GSS;
+use CXGN::Genomic::Search::GSS;
 
 #custom CXGN BioPerl
 use Bio::SeqIO::xform;

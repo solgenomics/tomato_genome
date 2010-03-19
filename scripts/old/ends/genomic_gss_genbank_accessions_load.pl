@@ -5,7 +5,7 @@ use warnings;
 #use Data::Dumper;
 
 use CXGN::CDBI::Class::DBI { dbargs => {AutoCommit => 0}}; #this is one xtn
-use CXGN::Genomic;
+use CXGN::Genomic::GSS;
 
 ###### CONFIGURATION ######
 

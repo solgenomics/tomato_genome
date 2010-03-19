@@ -14,8 +14,9 @@ CXGN::DB::Connection->verbose(0);
 
 use CXGN::Page::FormattingHelpers qw/html_break_string/;
 
-use CXGN::Genomic;
-use CXGN::Genomic::Search;
+use CXGN::Genomic::Library;
+use CXGN::Genomic::GenbankSubmission;
+use CXGN::Genomic::Search::GSS;
 
 ################ CONFIGURATION VARS ################
 
