@@ -47,6 +47,13 @@ has 'submission_destination' => (
     cmd_aliases   => 's',
 );
 
+has '_metadata' => (
+    documentation => 'CXGN::Metadata object used for updating BAC metadata',
+    isa           => 'CXGN::Metadata',
+    lazy_build    => 1,
+   ); sub _build__metadata_object { CXGN::Metadata->new }
+
+
 sub execute {
     my ( $self, $opt, $args ) = @_;
 
@@ -71,13 +78,40 @@ sub execute {
 					    table_rec => $table_rec,
 					  );
 
-	# make sure it has a chromosome assignment
-	unless( defined $gb_rec->clone->chromosome_num ) {
-	    warn $gb_rec->clone->clone_name." has no chromosome assignment\n";
-	    next;
+	# if it does not have a chromosome assignment, give it one
+        my $clone_reg_info = $gb_rec->clone->reg_info_hashref;
+	unless( defined $clone_reg_info->{seq_proj}->{val} ) {
+            unless( defined $gb_rec->chromosome_num ) {
+                warn $gb_rec->clone->clone_name." has no chromosome assignment in BAC registry, and cannot deduce it from its GenBank record.  Please manually set a chromosome number.\n";
+                next;
+            }
+
+            my ($proj_id) = $self->_metadata->selectrow_array( <<EOQ, undef, 'Tomato Chromosome '.$gb_rec->chromosome_num.' %' );
+select project_id from sp_project where name like ?
+EOQ
+            unless( $proj_id ) {
+                warn "cannot find project ID for 'Tomato Chromosome ".$gb_rec->chromosome_num."'";
+                next;
+            }
+            $self->_metadata->attribute_bac_to_project(
+                $gb_rec->clone->clone_id,
+                $proj_id
+               );
 	}
 
-	# TODO: check if we have the sequence on our ftp site, and that it is up to date
+        # if it has a chromosome assignment, but not a sequencing status, set it as 'complete'
+        if( defined $clone_reg_info->{seq_proj}->{val} && ! $clone_reg_info->{seq_status}->{val} ) {
+            my $current_proj = $self->_metadata->get_project_associated_with_bac( $gb_rec->clone->clone_id )
+                or die "no current project??  this should not happen";
+
+            $self->_bac_status_log
+                 ->change_status( bac        => $gb_rec->clone->clone_id,
+                                  person     => 290, #< Robert Buels
+                                  seq_status => 'complete',
+                                 );
+        }
+
+	# check if we have the sequence on our ftp site, and that it is up to date
 	my %files = sequencing_files( $gb_rec->clone, $self->ftpsite_root );
 	next if $gb_rec->matches_seq_file( $files{seq} );
 	
@@ -221,6 +255,16 @@ sub _build_clone_name {
 
     return;
 }
+
+
+has 'chromosome_num' => (
+    is => 'ro',
+    lazy_build => 1,
+   ); sub _build_chromosome_num {
+       shift->gb_richseq->desc =~ /chromosome (\d+)/i
+           and return $1;
+       return;
+   }
 
 # check whether this genbank record matches the sequence in the given file
 sub matches_seq_file {
