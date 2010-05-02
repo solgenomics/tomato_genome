@@ -54,6 +54,15 @@ has '_metadata' => (
     lazy_build    => 1,
    ); sub _build__metadata { CXGN::Metadata->new }
 
+has '_bac_status_log' => (
+    documentation => 'CXGN::People::BACStatusLog object used for updating BAC metadata',
+    is            => 'ro',
+    isa           => 'CXGN::People::BACStatusLog',
+    lazy_build    => 1,
+   ); sub _build__bac_status_log {
+       CXGN::People::BACStatusLog->new( shift->_metadata );
+   }
+
 sub execute {
     my ( $self, $opt, $args ) = @_;
 
@@ -88,6 +97,7 @@ sub execute {
 
 	    $self->vprint( 'Assigning '.$gb_rec->clone->clone_name.' to chromosome '.$gb_rec->chromosome_num."\n" );
 
+            # look up the proper project id to use
             my ($proj_id) = $self->_metadata->selectrow_array( <<EOQ, undef, 'Tomato Chromosome '.$gb_rec->chromosome_num.' %' );
 select sp_project_id from sp_project where name like ?
 EOQ
@@ -95,15 +105,19 @@ EOQ
                 warn "cannot find project ID for 'Tomato Chromosome ".$gb_rec->chromosome_num."'";
                 next;
             }
+
             $self->_metadata->attribute_bac_to_project(
                 $gb_rec->clone->clone_id,
                 $proj_id
                );
             $self->_metadata->commit;
+
+            # refresh the clone reg info
+            $clone_reg_info = $gb_rec->clone->reg_info_hashref;
 	}
 
         # if it has a chromosome assignment, but not a sequencing status, set it as 'complete'
-        if( defined $clone_reg_info->{seq_proj}->{val} && ! $clone_reg_info->{seq_status}->{val} ) {
+        if( defined $clone_reg_info->{seq_proj}->{val} && $clone_reg_info->{seq_status}->{val} eq 'none' ) {
             my $current_proj = $self->_metadata->get_project_associated_with_bac( $gb_rec->clone->clone_id )
                 or die "no current project??  this should not happen";
 
@@ -114,7 +128,7 @@ EOQ
                                   person     => 290, #< Robert Buels
                                   seq_status => 'complete',
                                  );
-            $self->_bac_status_log->commit;
+            $self->_bac_status_log->get_dbh->commit;
         }
 
 	# check if we have the sequence on our ftp site, and that it is up to date
@@ -202,6 +216,7 @@ sub parse_roe_table {
         push @recs, \%p;
     }
 
+    return [ reverse @recs ];
     return \@recs;
 }
 
