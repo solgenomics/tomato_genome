@@ -49,10 +49,10 @@ has 'submission_destination' => (
 
 has '_metadata' => (
     documentation => 'CXGN::Metadata object used for updating BAC metadata',
+    is            => 'ro',
     isa           => 'CXGN::Metadata',
     lazy_build    => 1,
-   ); sub _build__metadata_object { CXGN::Metadata->new }
-
+   ); sub _build__metadata { CXGN::Metadata->new }
 
 sub execute {
     my ( $self, $opt, $args ) = @_;
@@ -82,12 +82,14 @@ sub execute {
         my $clone_reg_info = $gb_rec->clone->reg_info_hashref;
 	unless( defined $clone_reg_info->{seq_proj}->{val} ) {
             unless( defined $gb_rec->chromosome_num ) {
-                warn $gb_rec->clone->clone_name." has no chromosome assignment in BAC registry, and cannot deduce it from its GenBank record.  Please manually set a chromosome number.\n";
+                $self->vprint( $gb_rec->clone->clone_name." has no chromosome assignment in BAC registry, and cannot deduce it from its GenBank record.  Please manually set a chromosome number.\n" );
                 next;
             }
 
+	    $self->vprint( 'Assigning '.$gb_rec->clone->clone_name.' to chromosome '.$gb_rec->chromosome_num."\n" );
+
             my ($proj_id) = $self->_metadata->selectrow_array( <<EOQ, undef, 'Tomato Chromosome '.$gb_rec->chromosome_num.' %' );
-select project_id from sp_project where name like ?
+select sp_project_id from sp_project where name like ?
 EOQ
             unless( $proj_id ) {
                 warn "cannot find project ID for 'Tomato Chromosome ".$gb_rec->chromosome_num."'";
@@ -97,6 +99,7 @@ EOQ
                 $gb_rec->clone->clone_id,
                 $proj_id
                );
+            $self->_metadata->commit;
 	}
 
         # if it has a chromosome assignment, but not a sequencing status, set it as 'complete'
@@ -104,11 +107,14 @@ EOQ
             my $current_proj = $self->_metadata->get_project_associated_with_bac( $gb_rec->clone->clone_id )
                 or die "no current project??  this should not happen";
 
+	    $self->vprint( 'Setting '.$gb_rec->clone->clone_name." sequencing status to 'complete'\n" );
+
             $self->_bac_status_log
                  ->change_status( bac        => $gb_rec->clone->clone_id,
                                   person     => 290, #< Robert Buels
                                   seq_status => 'complete',
                                  );
+            $self->_bac_status_log->commit;
         }
 
 	# check if we have the sequence on our ftp site, and that it is up to date
@@ -130,7 +136,8 @@ sub make_bac_submission {
     my ( $self, $gb_rec ) = @_;
 
     # make a BAC submission tarball for it
-    my $clone_name_with_chrom = $gb_rec->clone->clone_name_with_chromosome;
+    my $clone_name_with_chrom = $gb_rec->clone->clone_name_with_chromosome
+	or die $gb_rec->clone->clone_name." has no chromosome assignment!\n";
 
     my $tempdir = tempdir( CLEANUP => 1 ); #< will last until program exit
     my $bac_dir = dir( $tempdir, $clone_name_with_chrom );

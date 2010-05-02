@@ -46,6 +46,7 @@ my $build = Module::Build->new(
         'MooseX::App::Cmd'            => 0,
         'MooseX::App::Cmd::Command'   => 0,
         'MooseX::Role::Parameterized' => 0,
+	'IPC::System::Simple'         => 0,
         'namespace::autoclean'        => 0,
         'Path::Class'                 => 0,
         'Storable'                    => 0,
