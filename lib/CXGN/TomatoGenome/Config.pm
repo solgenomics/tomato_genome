@@ -58,11 +58,11 @@ my $defaults =
    bac_contacts_chr_7       => ['Mohamed Zouine <mohamed.zouine@ensat.fr>',
                                 'Tomato Team <tomatok7@ensat.fr>',
                                ],
-   bac_contacts_chr_8       => 'Shusei Sato <ssato@kazusa.or.jp>',
-   bac_contacts_chr_9       => 'Francisco Camara <FCamara@imim.es>',
-   bac_contacts_chr_10      => 'Robert Buels <rmb32@cornell.edu>',
-   bac_contacts_chr_11      => 'Zhonghua Zhang <zhangzhonghua.caas@gmail.com>',
-   bac_contacts_chr_12      => 'Alessandro Vezzi <sandrin@cribi.unipd.it>',
+   bac_contacts_chr_8       => ['Shusei Sato <ssato@kazusa.or.jp>'],
+   bac_contacts_chr_9       => ['Francisco Camara <FCamara@imim.es>'],
+   bac_contacts_chr_10      => ['Robert Buels <rmb32@cornell.edu>'],
+   bac_contacts_chr_11      => ['Zhonghua Zhang <zhangzhonghua.caas@gmail.com>'],
+   bac_contacts_chr_12      => ['Alessandro Vezzi <sandrin@cribi.unipd.it>'],
    # unmapped chromosome
    bac_contacts_chr_0       => 'Robert Buels <rmb32@cornell.edu>',
 
