@@ -283,7 +283,8 @@ sub load_potato_bacs_into_chado {
                 or die "error parsing genbank accession $current_accession";
 
             if ( $upstream_version > $our_version ) {
-                vsay $clone->clone_name.": current stored version $current_accession, loading new genbank seq version $upstream_accession.$upstream_version";
+                my $current_seq_name = $clone->latest_sequence_name;
+                vsay $clone->clone_name.": current stored version $current_seq_name / $current_accession, loading new genbank seq version $upstream_accession.$upstream_version";
             } else {
                 vsay $clone->clone_name.": current stored version $current_accession is >= upstream version $upstream_accession.$upstream_version, skipping";
                 next;
@@ -502,10 +503,12 @@ sub infer_project_from_gb_richseq {
                 return $project_name if $sig->($seq);
             }
             elsif( ref $sig eq 'Regexp' ) {
-                my ($ref) = $seq->annotation->get_Annotations('reference');
-                my $text = join "\n",
-                    map "$_: ".($ref->$_ || '<none>'),
-                    qw| title authors location consortium |;
+                my @refs = $seq->annotation->get_Annotations('reference');
+                my $text = join "\n", map {
+		    my $ref = $_;
+		    map "$_: ".($ref->$_ || '<none>'),
+		        qw| title authors location consortium |
+		  } @refs;
                 return $project_name if $text =~ $sig;
             }
             else {
