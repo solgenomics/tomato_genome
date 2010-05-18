@@ -1,8 +1,4 @@
 #!/usr/bin/env perl
-
-eval 'exec /usr/bin/perl -w -S $0 ${1+"$@"}'
-    if 0; # not running under some shell
-
 use strict;
 use warnings;
 #use autodie ':all';
@@ -52,7 +48,7 @@ Bio::Chado::Schema->load_classes('MyCloneFeature');
 # log in with the name of the user running this unless another one has been specified
 $ENV{DBUSER} = '' unless defined $ENV{DBUSER};
 my $chado = CXGN::DB::DBICFactory->open_schema('Bio::Chado::Schema', config => $cfg, search_path => ['genomic','public'], );
-$chado->storage->dbh_do(sub { my ($sp) = $_[1]->selectrow_array('SHOW search_path'); warn "search path is $sp\n"} );
+#$chado->storage->dbh_do(sub { my ($sp) = $_[1]->selectrow_array('SHOW search_path'); warn "search path is $sp\n"} );
 
 load_potato_bacs_into_chado( $chado );
 update_potato_bacs_ftp_repos( $chado, $opt{R} );
@@ -271,7 +267,8 @@ sub load_potato_bacs_into_chado {
             next;
         }
 
-        my $project = infer_project_from_gb_richseq( $seq );
+        my $project = infer_project_from_gb_richseq( $seq )
+	    or next;
         my $chromosome = infer_chromosome_from_gb_richseq( $seq );
         my $phase   = infer_htgs_phase_from_gb_richseq( $seq );
 
@@ -279,7 +276,7 @@ sub load_potato_bacs_into_chado {
         my $upstream_version = $seq->version;
 
         # find most recent accession for this BAC
-        if ( my $current_accession = $clone->genbank_accession ) {
+        if ( my $current_accession = $clone->genbank_accession( $chado ) ) {
 
             # compare to this one.  if up to date, next.
             my ($our_version) = $current_accession =~ /\.(\d+)$/
@@ -519,7 +516,8 @@ sub infer_project_from_gb_richseq {
     }
 
     require Data::Dumper;
-    die "could not infer project name for sequence:\n".Data::Dumper::Dumper $seq;
+    warn "WARNING: could not infer project name for sequence:\n".Data::Dumper::Dumper $seq;
+    return;
 }
 
 
