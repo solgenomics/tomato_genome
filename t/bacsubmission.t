@@ -143,14 +143,7 @@ for my $test (@test_tarballs) {
       'analysis packages all have names'
     );
 
-  my @errors;
-  if( $test->{has_qual_file} ) {
-    @errors = $submission->validation_errors;
-  } else {
-    warning_like {
-      @errors = $submission->validation_errors;
-    } qr/No .qual file found in/, 'validation_errors warns about absence of qual file';
-  }
+  my @errors = $submission->validation_errors;
 
 #  print "Got validation errors:\n",(map {"  . $_\n"} @errors) if @errors;
   is( scalar(@errors),

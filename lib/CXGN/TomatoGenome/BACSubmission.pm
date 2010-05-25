@@ -1342,11 +1342,6 @@ sub validation_errors {
   my $have_sequence_file = -r $self->sequences_file
     or push @errors,E_NO_MAIN_SEQ;#"no sequence file '$bacname/$bacname.seq' found";
 
-  #check for qual file
-  unless(-r $self->qual_file or $self->{_warned_about_qual_file}) {
-    warn "WARNING: No .qual file found in ".$self->_tarfile.", please consider providing one.\n";
-    $self->{_warned_about_qual_file} = 1;
-  }
   #TODO: when quals are made mandatory, comment out the warning above
   # and replace it with the push below
   #or push @errors,E_NO_MAIN_QUAL;
