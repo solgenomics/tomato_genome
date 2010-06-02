@@ -21,6 +21,7 @@ use HTML::Entities;
 use CXGN::TomatoGenome::BACPublish qw/tpf_agp_files/;
 use CXGN::Tools::List qw/max str_in/;
 use CXGN::Tools::Identifiers qw/link_identifier/;
+use CXGN::VHost;
 
 sub modtime_string {
   my ($filename) = @_;
