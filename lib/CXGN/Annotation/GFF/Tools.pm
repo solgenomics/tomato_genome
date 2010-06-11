@@ -33,9 +33,9 @@ use base qw/Exporter/;
 sub clean_gff_file {
   my( $infile, $outfile ) = @_;
 
-  open my $in, $infile
+  open my $in, '<', $infile
     or die "Could not open $infile for reading: $!";
-  open my $out, ">$outfile"
+  open my $out, '>', $outfile
     or die "Could not open $outfile for writing: $!";
   while(<$in>) {
     print $out clean_gff_line($_);

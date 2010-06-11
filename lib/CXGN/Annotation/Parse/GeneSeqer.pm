@@ -49,7 +49,7 @@ sub loadfile {
   my $exons_ref = $_[2];
   my $agsexon_ref = $_[3];
 
-  open (FILEIN, $infile) or die "Cannot open file: '$infile': $!\n";
+  open (FILEIN, '<', $infile) or die "Cannot open file: '$infile': $!\n";
 
   my ($gene, $exon, $agsexon);
   $gene = (__PACKAGE__.'::gene')->new;

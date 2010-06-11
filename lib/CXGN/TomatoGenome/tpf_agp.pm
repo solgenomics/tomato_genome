@@ -109,7 +109,7 @@ sub tabdelim_to_array {
 
   die "1MB file size limit exceeded" if -s $filename > 1_000_000;
 
-  open my $fh,$filename
+  open my $fh, '<', $filename
     or die "Could not open '$filename' for reading: $!";
 
   my @array;

@@ -68,7 +68,7 @@ sub combine_game_xml_files {
 #      $doc2->dispose();
     }
 
-    open OUT, ">$outfile"
+    open OUT, ">", $outfile
       or die "Could not open '$outfile' for writing: $!";
     print OUT $doc->toString;
     close OUT;

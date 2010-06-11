@@ -84,7 +84,7 @@ sub geneseqer_to_game_xml {
   # transform the parse results into XML
   my $XML = CXGN::Annotation::GAMEXML::Generate::GenerateXML($seq_id, $seq_string, \@genes, \@exons, \@agsexons);
 
-  open FILEOUT, ">$outfile"
+  open FILEOUT, ">", $outfile
     or die "Could not open GAME XML output file '$outfile': $!";
   print FILEOUT $XML;
   close FILEOUT;
@@ -152,7 +152,7 @@ sub gff_to_game_xml {
 				       );
   clean_gff_file($gff_file,$clean_gff_file);
 
-  open my $gff_fh, "$clean_gff_file"
+  open my $gff_fh, "<", $clean_gff_file
     or die "Could not open GFF file $clean_gff_file for reading: $!";
 
   #choose a parser to use based on which gff version we've got
@@ -357,7 +357,7 @@ sub _get_fasta_seq {
   my $seq_id;
   my $sequence;
 
-  open FILEIN, $FASTAFile
+  open FILEIN, '<', $FASTAFile
     or die "Cannot open '$FASTAFile': $!";
 
   while (my $line = <FILEIN>) {

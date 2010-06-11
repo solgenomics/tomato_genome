@@ -227,8 +227,8 @@ sub load_new {
   $self->_make_db($tmp_db) unless $self->_db_exists($tmp_db);
 
   #open the gff and fasta files at the same time, so they don't get moved out from under us
-  my @gff3_fh  = map { open my $f, $_ or die("$! opening '$_' for reading\n"); $f } @$gff3;
-  my @fasta_fh = map { open my $f, $_ or die("$! opening '$_' for reading\n"); $f } @$seqs;
+  my @gff3_fh  = map { open my $f, '<', $_ or die("$! opening '$_' for reading\n"); $f } @$gff3;
+  my @fasta_fh = map { open my $f, '<', $_ or die("$! opening '$_' for reading\n"); $f } @$seqs;
 
   # open our filehandles to /dev/null to shut up the idiotic warnings
   # and status messages spewed by this bioperl code
