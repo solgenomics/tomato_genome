@@ -1,18 +1,12 @@
 use strict;
 use warnings;
 use Carp;
-
 use Test::More tests => 11;
 use Test::Output qw/ output_from /;
-use App::Cmd::Tester;
-
 use FindBin;
 use Path::Class;
-
 use Data::Dumper;
-
 use File::Temp;
-
 use Bio::SeqIO;
 
 use_ok('CXGN::TomatoGenome::CmdLine');
@@ -24,7 +18,7 @@ my $test_tomato_html_file = $data_dir->file( 'tomato_table.html' );
 my $test_gb_file = $data_dir->file('roe_bac.gbwithparts');
 
 my $table = RoeTable->new( scalar $test_tomato_html_file->slurp );
-my $test_rec = $table->records->[1];
+my $test_rec = $table->records->[0];
 is_deeply( $test_rec,
            {
                'htgs_phase' => '2',
@@ -60,8 +54,8 @@ ok( -f $file, 'bac submission file exists')
 my $list = `tar -tzf $file`;
 is( $list, <<EOF, 'new submission tarball contains the right stuff' );
 C01HBa0034P21/
-C01HBa0034P21/C01HBa0034P21.seq
 C01HBa0034P21/gbacc.txt
+C01HBa0034P21/C01HBa0034P21.seq
 EOF
 
 # now run integration tests
