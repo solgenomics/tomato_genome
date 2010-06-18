@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Test::More;
+use Test::More tests => 7;
 use Test::Warn;
 
 use FindBin;
@@ -20,7 +20,7 @@ use_ok('CXGN::DB::GFF::Versioned');
 
 SKIP: {
     my $test_dsn = $ENV{TOMATO_GENOME_TEST_DSN};
-    skip 'set TOMATO_GENOME_TEST_DSN to enable database tests'
+    skip 'set TOMATO_GENOME_TEST_DSN to enable database tests', 4
         unless $test_dsn;
 
     $test_dsn =~ s/dbname=[^;]+/dbname=db_gff_versioned_test/
