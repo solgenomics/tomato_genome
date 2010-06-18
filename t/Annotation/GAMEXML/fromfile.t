@@ -1,14 +1,11 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use English;
 
 use FindBin;
 use IO::String;
 use File::Spec;
 use File::Temp qw/tempfile/;
-
-use Tie::Function;
 
 use Bio::Tools::RepeatMasker;
 use Bio::FeatureIO;
@@ -24,20 +21,17 @@ sub here($) { File::Spec->catfile($FindBin::Bin,shift) };
 
 diag "using temp file $tempfile";
 
-geneseqer_to_game_xml( here 'C01HBa0088L02.seq' , here 'C01HBa0088L02.geneseqer.est', $tempfile,
-#		       render_as_annotation => 1,
-		     );
+geneseqer_to_game_xml( here 'C01HBa0088L02.seq' , here 'C01HBa0088L02.geneseqer.est', $tempfile,);
 
 my $test_gxml = here 'C01HBa0088L02.geneseqer.xml';
 ok( file_contents($tempfile) eq file_contents( $test_gxml), 'geneseqer_to_game_xml' )
-  or print file_contents($tempfile);
+  or diag file_contents($tempfile);
 
-#gff_to_game_xml( here 'volvox.fa', here 'volvox6.gff', $tempfile);
-gff_to_game_xml( here 'C01HBa0088L02.seq', here 'C01HBa0088L02.seq.out.gff', $tempfile,
-		 program_name => 'RepeatMasker',
-		 database_name => 'SGN Repeats',
-#		 render_as_annotation => 1,
-	       );
+gff_to_game_xml(
+    here 'C01HBa0088L02.seq', here 'C01HBa0088L02.seq.out.gff', $tempfile,
+    program_name => 'RepeatMasker',
+    database_name => 'SGN Repeats',
+);
 
 diag "used temp file $tempfile";
 
@@ -64,22 +58,20 @@ my ($tempfh,$tempfile2) = tempfile(CLEANUP=>1);
   }
 }
 
-#print file_contents($tempfile2);
 #now convert that gff3 to gamexml
-gff_to_game_xml( here 'C01HBa0088L02.seq', $tempfile2, $tempfile,
-		 program_name => 'RepeatMasker',
-		 database_name => 'SGN Repeats',
-		 gff_version => 3,
-#		 render_as_annotation => 1,
-	       );
-gff_to_game_xml( here 'C06HBa0002C17.1.v1.seq',
-		 here 'C06HBa0002C17.1.v2.repeatmasker.gff',
-		 $tempfile,
-		 program_name => 'RepeatMasker',
-		 database_name => 'SGN Repeats',
-	       );
 
-#print file_contents($tempfile);
+gff_to_game_xml(
+    here 'C01HBa0088L02.seq', $tempfile2, $tempfile,
+    program_name => 'RepeatMasker',
+    database_name => 'SGN Repeats',
+    gff_version => 3,
+);
+gff_to_game_xml(
+    here 'C06HBa0002C17.1.v1.seq',
+    here 'C06HBa0002C17.1.v2.repeatmasker.gff',
+    $tempfile,
+    program_name => 'RepeatMasker',
+    database_name => 'SGN Repeats',
+);
 
 #TODO: these tests suck.  they really need to be more rigorous
-
