@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use English;
 use FindBin;
 
 use Data::Dumper;
@@ -1129,10 +1128,9 @@ my %contigs = named_contigs(4, agp_file => "$FindBin::RealBin/data/chr04.v3.agp"
 is_deeply( \%contigs, \%parsed_contigs, 'contigs parsed OK')
   or diag Dumper \%contigs;
 
-
 my @features = contig_features( named_contigs(4, agp_file => "$FindBin::RealBin/data/chr04.v3.agp" ) );
 isa_ok( $features[0], 'Bio::SeqFeatureI' );
 
 my $g = Bio::FeatureIO->new( -format => 'gff', -version => 3, -fh => \*STDOUT );
-$g->write_feature($_) foreach @features;
+$g->write_feature($_) for @features;
 
