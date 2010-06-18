@@ -1,7 +1,6 @@
 #!/usr/bin/perl
 use strict;
 use warnings;
-use UNIVERSAL qw/ isa /;
 use Data::Dumper;
 
 use CXGN::DB::Connection;
@@ -95,7 +94,7 @@ BEGIN {
 
 		       );
   $_->{file} = catfile($testfiles_path,$_->{file})
-    foreach @test_tarballs;
+    for @test_tarballs;
 }
 our @test_tarballs;
 use Test::More tests => 1+scalar(@test_tarballs)*39 + scalar( grep !$_->{has_qual_file},@test_tarballs )*1;
@@ -131,11 +130,10 @@ my $all_seq_orgs = do {
   $s->execute;
   [_hashall($s)];
 };
-#print "all seq orgs ".Dumper $all_seq_orgs;
 
-foreach my $test (@test_tarballs) {
+for my $test (@test_tarballs) {
   my $submission = CXGN::TomatoGenome::BACSubmission->open( $test->{file} );
-  ok( isa($submission,'CXGN::TomatoGenome::BACSubmission'), "CXGN::TomatoGenome::BACSubmission constructor works" );
+  isa_ok( $submission,'CXGN::TomatoGenome::BACSubmission' );
   is( $submission->tar_file, $test->{file}, 'tar_file() accessor works');
   is( $submission->bac_name, $test->{bacname}, "inferred correct BAC name");
 
@@ -231,8 +229,7 @@ unless (my $return = do $file) {
     ok( -r $newtar,
 	'newly made tar file is readable' );
     my $newsub = CXGN::TomatoGenome::BACSubmission->open($newtar);
-    ok( isa($newsub,'CXGN::TomatoGenome::BACSubmission'),
-	"new tar $newtar is an openable submission file");
+    isa_ok( $newsub,'CXGN::TomatoGenome::BACSubmission', "new tar $newtar is an openable submission file");
     my $new_vecscreen_file = catfile( $newsub->_tempdir, $submission->bac_name, $submission->bac_name.'.seq.screen');
     ok( -f $new_vecscreen_file,
 	"vector screened seqs file $new_vecscreen_file inside the new tar file"),
