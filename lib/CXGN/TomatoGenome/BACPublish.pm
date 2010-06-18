@@ -1,7 +1,6 @@
 package CXGN::TomatoGenome::BACPublish;
 use strict;
 use warnings;
-use English;
 use Carp;
 
 use File::Basename;
@@ -471,10 +470,10 @@ sub publishing_locations {
   my @args;
   $parsedname->{version} ||= 1;
   my $current_chr = defined $parsedname->{chr} ? $parsedname->{chr} : -1;
-  foreach my $chromosome ($current_chr, grep $_ != $current_chr, 0..12) {
-    foreach my $finished ($is_finished, !$is_finished) {
-      foreach my $version ( reverse( 1..$parsedname->{version} ), undef ) {
-	push @args, [$finished,$version,$chromosome];
+  for my $chromosome ($current_chr, grep $_ != $current_chr, 0..12) {
+    for my $finished ($is_finished, !$is_finished) {
+      for my $version ( reverse( 1..$parsedname->{version} ), undef ) {
+        push @args, [$finished,$version,$chromosome];
       }
     }
   }
@@ -489,9 +488,9 @@ sub publishing_locations {
 
   #now fill its obsolete entry with all possible other versions
   #that this one would supersede
-  foreach my $argset (@args) {
+  for my $argset (@args) {
     my $files = _files($pubdir,$parsedname, @$argset);
-    foreach my $fileset (keys %$files) {
+    for my $fileset (keys %$files) {
       $primary->{obsolete}->{$fileset} ||= [];
       push @{$primary->{obsolete}->{$fileset}}, flatten $files->{$fileset};
     }
@@ -653,7 +652,7 @@ specially for BACs.  Same usage as that function.
 sub bac_publish {
   my $pub = publisher();
   eval {$pub->publish(@_)};
-  croak $EVAL_ERROR if $EVAL_ERROR;
+  croak $@ if $@;
 }
 
 
@@ -1070,11 +1069,11 @@ sub sequencing_files {
 
   #now use the publishing object to resolve the publishing locations
   #to real versioned files.  recall: the iterator variable in a
-  #foreach loop is an lvalue, so you can assign to it to modify the
+  #for loop is an lvalue, so you can assign to it to modify the
   #contents of the array
-  foreach my $pubrecord (values %pubfiles) {
+  for my $pubrecord (values %pubfiles) {
     if( ref($pubrecord) eq 'ARRAY' ) {
-      foreach (@$pubrecord) {
+      for (@$pubrecord) {
 	#resolve
 #	warn "looking for annot file $_\n";
 	my $p = $bacpublisher->published_as($_);
@@ -1095,7 +1094,7 @@ sub sequencing_files {
   #now transform this hash to have the structure specified in the docs
   #for this function
   my %analysis_names_map = (merged => '');
-  foreach my $name ( keys %pubfiles ) {
+  for my $name ( keys %pubfiles ) {
     my $newname = $name;
     if( $newname =~ s/^annot_// ) { #get rid of the annot_ prefix
       #change the name of this analysis if necessary
