@@ -917,11 +917,11 @@ sub find_expected_error {
 # arg: spec string passed as -p arg
 # return: list of ( 5 => primer name, 3 => primer name )
 sub parse_cmdline_primer_spec {
-    my $spec = shift;
+    my $spec = shift || '';
 
     my @f = split /,/,$spec;
     @f = map [split /=/,$_], @f;
-    usage('invalid primer spec') unless
+    pod2usage('invalid primer spec') unless
         @f == 2
             && all( map @$_==2,@f )
                 && all( map $_->[0] =~ /^\d+$/, @f );
