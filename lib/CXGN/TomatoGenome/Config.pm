@@ -50,7 +50,7 @@ my $defaults =
                                 'Jianfeng Ren <renjianfeng@genetics.ac.cn>',
                                 'Li Chuanyou <cyli@genetics.ac.cn>',
                                ],
-   bac_contacts_chr_4       => 'James Abbott <j.abbott@imperial.ac.uk>',
+   bac_contacts_chr_4       => ['James Abbott <j.abbott@imperial.ac.uk>'],
    bac_contacts_chr_5       => ['Saloni Mathur <saloni@genomeindia.org>',
                                 'Ajay Kumar Mahato <ajay@nrcpb.org>',
                                ],
@@ -64,7 +64,7 @@ my $defaults =
    bac_contacts_chr_11      => ['Zhonghua Zhang <zhangzhonghua.caas@gmail.com>'],
    bac_contacts_chr_12      => ['Alessandro Vezzi <sandrin@cribi.unipd.it>'],
    # unmapped chromosome
-   bac_contacts_chr_0       => 'Robert Buels <rmb32@cornell.edu>',
+   bac_contacts_chr_0       => ['Robert Buels <rmb32@cornell.edu>'],
 
    # agp_publish_subdir is relative to ftpsite_root
    agp_publish_subdir       => 'tomato_genome/agp',
