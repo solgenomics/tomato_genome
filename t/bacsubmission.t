@@ -97,7 +97,7 @@ BEGIN {
     for @test_tarballs;
 }
 our @test_tarballs;
-use Test::More tests => 1+scalar(@test_tarballs)*39 + scalar( grep !$_->{has_qual_file},@test_tarballs )*1;
+use Test::More;
 use Test::Warn;
 
 BEGIN {
@@ -342,3 +342,4 @@ EOF
 
 $dbh->disconnect(42);
 
+done_testing;
