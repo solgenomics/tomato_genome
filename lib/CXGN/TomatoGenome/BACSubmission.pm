@@ -29,7 +29,6 @@ use XML::LibXML;
 
 use Bio::SeqIO;
 use Bio::SeqUtils;
-use Bio::Tools::RepeatMasker;
 use Bio::FeatureIO;
 
 use CXGN::Annotation::GAMEXML::Combine qw/combine_game_xml_files/;
