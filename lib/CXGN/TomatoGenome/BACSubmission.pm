@@ -1391,10 +1391,10 @@ sub validation_errors {
       my @vs_seqs = $self->vector_screened_sequences;
       my $all = join '', map $_->seq, @vs_seqs;
       #do not tolerate any vector matches in the first or last 1000 bases
-      # but allow up to 50 bases of vector match in the internal parts of the sequence
+      # but allow up to 100 bases of vector match in the internal parts of the sequence
       my $ends = substr($all,0,1000).substr($all,length($all)-1000,1000);
       my $all_count = ($all =~ tr/X//);
-      push @errors, E_VEC if $ends =~ /X/i || $all_count > 50;
+      push @errors, E_VEC if $ends =~ /X/i || $all_count > 100;
     }
   }
 
