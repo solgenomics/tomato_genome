@@ -51,11 +51,11 @@ my $file = CXGN::TomatoGenome::CmdLine::Command::roe_sync::make_bac_submission( 
 isa_ok( $file, 'Path::Class::File' );
 ok( -f $file, 'bac submission file exists')
     or diag $file;
-my $list = `tar -tzf $file`;
+my $list = `tar -tzf $file | sort`;
 is( $list, <<EOF, 'new submission tarball contains the right stuff' );
 C01HBa0034P21/
-C01HBa0034P21/gbacc.txt
 C01HBa0034P21/C01HBa0034P21.seq
+C01HBa0034P21/gbacc.txt
 EOF
 
 # now run integration tests
