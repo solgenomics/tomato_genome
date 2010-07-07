@@ -28,7 +28,7 @@ while( my $line = <$roe_f> ) {
 
     #fetch the page on SGN and check that its sequence and genbank accession are linked
     my $detail_url = "http://solgenomics.net/search/quick_search.pl?term=$bac";
-    my $detail_page = get($detail_url)
+    my $detail_page = get($detail_url);
     like( $detail_page, qr!>\[Download fasta\]</a>!, "detail page for $bac has sequence available ($detail_url)" );
 }
 
