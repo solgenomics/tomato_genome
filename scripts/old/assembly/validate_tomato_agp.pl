@@ -44,22 +44,28 @@ Usage:
      minimum percent identity for overlapping regions
      default: $default_identity_threshold
 
-  -m <length>
-    minimum overlap length for checking to be performed
-    default: $default_min_overlap_length
+   -m <length>
+     minimum overlap length for checking to be performed
+     default: $default_min_overlap_length
 
+   -v be verbose about what is being done
 EOU
 }
 sub HELP_MESSAGE {usage()}
 
 
 our %opt;
-getopts('i',\%opt) or usage();
+getopts('i:m:v',\%opt) or usage();
+sub vprint(@) {
+    print @_ if $opt{v};
+}
 
 my $identity_threshold = defined $opt{i} ? $opt{i} : $default_identity_threshold;
 my $min_overlap_length = defined $opt{m} ? $opt{m} : $default_min_overlap_length;
 
 foreach my $file (@ARGV) {
+
+  vprint "validating $file ...\n";
 
   my $bn = basename($file);
 
@@ -74,6 +80,8 @@ foreach my $file (@ARGV) {
     next;
   }
 
+  vprint "  syntax and identifiers ok\n";
+
   # now go through the lines two at a time, and do bl2seq on each
   # overlap, and warning if any regions have percent identity less
   # than the threshold
@@ -87,8 +95,13 @@ foreach my $file (@ARGV) {
 
       # validate the lengths of this component
       my $seqlen = $seq->length;
-      $current_line->{cend} <= $seqlen
-	or $error->("$current_line->{linenum}: component end $current_line->{cend} is beyond end of sequence ($seqlen bases)");
+      my $comp_length = $current_line->{cend} - $current_line->{cstart} + 1;
+      if( $comp_length <= $seqlen ) {
+          vprint "  $current_line->{ident} component length $comp_length validated, is <= seq length $seqlen\n";
+      } else {
+          $error->("$current_line->{linenum}: component end $current_line->{cend} is beyond end of sequence ($seqlen bases)");
+      }
+
 
       # see if it overlaps with the previous component.  if so,
       # validate the overlapping sequence
@@ -105,8 +118,11 @@ foreach my $file (@ARGV) {
 
 	$overlap_length = min( $overlap_length, $current_line->{seq}->length, $previous_line->{seq}->length );
 
+
 	# now compare the overlapping sequences
 	if( $overlap_length >= $min_overlap_length ) {
+          vprint "  checking overlap of $overlap_length bp with previous line ($previous_line->{ident}) ...\n";
+
 	  # extract each sequence
 	  my $prev_ov_seq = $previous_line->{seq}->trunc( $previous_line->{seq}->length - $overlap_length + 1,
 							  $previous_line->{seq}->length );
@@ -115,13 +131,18 @@ foreach my $file (@ARGV) {
 
 	  my $id_pct = find_id_pct( $prev_ov_seq, $curr_ov_seq );
 	  #warn "$current_line->{linenum}: $previous_line->{ident} to $current_line->{ident} : $overlap_length bases, $id_pct% identical\n";
+          vprint  "    $overlap_length bp overlap between $current_line->{ident} and $previous_line->{ident} is $id_pct% identical\n";
 	  unless( $id_pct >= $identity_threshold ) {
 	    my $id1 = $previous_line->{ident};
 	    my $id2 = $current_line->{ident};
 	    $error->("$current_line->{linenum}: overlapping sequences ($id1 and $id2, $overlap_length bases of overlap) are only $id_pct% identical");
-	  }
+	  } else {
+              vprint "    identity is sufficient\n";
+          }
 
-	}
+	} else {
+            vprint "    overlap length $overlap_length is less than minimum length $min_overlap_length, skipping check.\n"
+        }
       }
     }
 
@@ -134,12 +155,12 @@ foreach my $file (@ARGV) {
 # given a sequence identifier, return a Bio::PrimarySeqI containing
 # its sequence, or die if fetch failed
 
-
+my $dbh;
 sub fetch_seq {
   my ($seqname) = @_;
 
   # look up the sequence
-  our $dbh ||= CXGN::DB::Connection->new;
+  $dbh ||= CXGN::DB::Connection->new;
   my $seqs = $dbh->selectall_arrayref(<<EOQ,undef,$seqname);
 select name,residues from public.feature where name = ?
 EOQ
@@ -159,7 +180,7 @@ sub find_id_pct {
   my ($seq1, $seq2) = @_;
 
   my ($t1_fh,$t1_f) = tempfile( File::Spec->catfile( File::Spec->tmpdir, 'validate-tomato-agp-seq1-XXXXXX'), UNLINK => 0 );
-  my ($t2_fh,$t2_f) = tempfile( File::Spec->catfile( File::Spec->tmpdir, 'validate-tomato-agp-seq1-XXXXXX'), UNLINK => 0 );
+  my ($t2_fh,$t2_f) = tempfile( File::Spec->catfile( File::Spec->tmpdir, 'validate-tomato-agp-seq2-XXXXXX'), UNLINK => 0 );
 
   print $t1_fh '>'.$seq1->id."\n".$seq1->seq."\n";
   print $t2_fh '>'.$seq2->id."\n".$seq2->seq."\n";
@@ -171,6 +192,7 @@ sub find_id_pct {
   close $t2_fh;
 
   #warn "running bl2seq...\n";
+  vprint "    running bl2seq of ".$seq1->id." vs ".$seq2->id."\n";
   my $bl2 = CXGN::Tools::Run->run( 'bl2seq',
 				   -i => $t1_f,
 				   -j => $t2_f,
@@ -184,6 +206,8 @@ sub find_id_pct {
   my $max_pct_id = 0;
   while( my $l = <$o> ) {
     next if $l =~ /^\s*#/;
+    chomp $l;
+    vprint "    bl2seq: $l\n";
     my (undef,undef,$pct) = split /\s+/,$l;
     $max_pct_id = $pct if $pct > $max_pct_id;
   }
