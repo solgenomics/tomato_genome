@@ -16,7 +16,6 @@ use Bio::PrimarySeq;
 
 use CXGN::BioTools::AGP qw/agp_parse/;
 use CXGN::DB::Connection;
-CXGN::DB::Connection->verbose(0); #< shut up
 use CXGN::Tools::Run;
 
 ######## DEFAULTS ############
