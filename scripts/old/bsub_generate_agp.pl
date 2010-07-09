@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use English;
 use Carp;
+$SIG{__DIE__} = \&Carp::confess;
 use FindBin;
 use Getopt::Std;
 
