@@ -218,6 +218,8 @@ publish(@agp_publish_cmds);
 
 unlock_script();
 
+$dbh->disconnect(42);
+
 # system 'cat', map $_->{agp_file},values %chrdata;
 # system 'validate_agp.pl', $_->{agp_file} foreach values %chrdata;
 
