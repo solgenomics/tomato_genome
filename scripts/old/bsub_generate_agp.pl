@@ -110,6 +110,12 @@ die "invalid chromosome numbers expression\n" if $EVAL_ERROR;
 #get our cview physical map version
 $cview_physical_map_version = $opt{m} if $opt{m};
 
+# init the map data model
+my $dbh = CXGN::DB::Connection->new({ config => $cfg });
+my $mf =  CXGN::Cview::MapFactory->new( $dbh, $cfg );
+my $physical_map = $mf->create( { map_version_id => $cview_physical_map_version } )
+    or die "failed to create physical map object for map version $cview_physical_map_version\n";
+
 lock_script() or die "Do not run more than one $FindBin::Script at the same time.\n";
 
 my %chrdata; #< big hash of all the data about a given chromosome
@@ -170,10 +176,6 @@ END { $_->{job} && $_->{job}->cleanup foreach values %chrdata }
 #while the mummer jobs are running on the cluster, let's fetch all
 #the known map positions of BACs.  to include a BAC cluster in our AGP, we
 #have to know its location on the physical map
-my $dbh = CXGN::DB::Connection->new({ config => $cfg });
-my $mf =  CXGN::Cview::MapFactory->new( $dbh, $cfg );
-my $physical_map = $mf->create( { map_version_id => $cview_physical_map_version } )
-    or die "failed to create physical map object for map version $cview_physical_map_version\n";
 while( my ($chrnum,$chr_rec) = each %chrdata ) {
 
   next unless $chrnum > 0;
