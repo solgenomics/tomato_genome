@@ -322,17 +322,21 @@ sub generate_agp_file {
 
 	my $overlap_with_previous_member = $previous_contig_end - $member_contig_start + 1;
 
-	my $member_local_end   = $member_contig_end-$member_contig_start + 1;
-	my $member_local_start = 1+$overlap_with_previous_member;
+	my $member_reverse = $strand == -1;
+        my ($member_local_start, $member_local_end) =
+            $member_reverse ? ( 1,                               $member_length-$overlap_with_previous_member )
+                            : ( 1+$overlap_with_previous_member, $member_contig_end-$member_contig_start + 1  );
 
 	# if it is completely contained in another member, just skip it
-	next if $member_local_start > $member_local_end;
+        if( $member_local_start > $member_local_end ) {
+            $agp_fh->print("# skipped contig member $name, since it is completely overlapped by other members\n");
+            next;
+        }
 
 	$member_contig_start  += $overlap_with_previous_member;
 
 	my $member_global_start = $base + $member_contig_start - 1;
 	my $member_global_end   = $base + $member_contig_end   - 1;
-	my $reverse = $strand == -1;
 
 # 	if( $member_global_start < $previous_global_end+1) {
 # 	  my $difference = $previous_global_end + 1 - $member_global_start;
@@ -342,7 +346,7 @@ sub generate_agp_file {
 	
 	$printline->( $member_global_start, $member_global_end, 'F',
 		      $name, $member_local_start, $member_local_end,
-		      $reverse ? '-' : '+',
+		      $member_reverse ? '-' : '+',
 		    );
 	$previous_global_end = $member_global_end;
 	$previous_contig_end = $member_contig_end;
