@@ -2,12 +2,10 @@
 use strict;
 use warnings;
 use English;
-use Carp;
-$SIG{__DIE__} = \&Carp::confess;
+use Carp;  $SIG{__DIE__} = \&Carp::confess;
+use Data::Dumper;
 use FindBin;
 use Getopt::Std;
-
-use Data::Dumper;
 use POSIX;
 
 use File::Temp qw/tempfile/;
@@ -284,7 +282,9 @@ sub generate_agp_file {
     }
 
     my $contig_count = 0;
-    foreach my $contig ($cluster->get_contig_coords($seqs_index)) {
+    my @consensus_segments = $cluster->get_consensus_base_segments($seqs_index);
+
+    foreach my $contig ( @consensus_segments ) {
       my $previous_contig_end = 0; #< the contig end of the previous line
 
       #put in a 20kb clone gap if necessary, if we have members in a
@@ -298,58 +298,29 @@ sub generate_agp_file {
       }
 
       foreach my $member (@$contig) {
-	my ($name, $member_contig_start, $member_contig_end, $strand) = @$member;
-	#warn "processing member '$name'...\n";
-	my $seq = $seqs_index->fetch($name)
-	  or die "could not get seq for '$name'";
-	my $seqlength = $seq->length
-	  or die "no seq length returned for '$name' seq";
+          my ( $member_contig_start, $member_contig_end, $name, $member_local_start, $member_local_end, $member_reverse ) = @$member;
 
-	my $member_length = $member_contig_end-$member_contig_start+1;
+          my $seq = $seqs_index->fetch($name)
+              or die "could not get seq for '$name'";
+          my $seqlength = $seq->length
+              or die "no seq length returned for '$name' seq";
 
-	# sometimes phrap shortens or lengthens runs of repetitive
-	# nucleotides in order to build better consensus sequences.
-	# this is usually only a few nt per 100kb, so for the sake of
-	# building an AGP, just undo it and ignore it
-	unless( $member_length == $seqlength ) {
-	  $member_contig_end = $member_contig_start+$seqlength-1;
-	  $member_length = $seqlength;
-	}
-	die "invalid member length $member_length for $name ($seqlength bases)"
-	  unless $member_length == $seqlength;
+          # AGP has a slightly different meaning for components being reve
+          if( $member_reverse ) {
+              ( $member_local_start, $member_local_end ) =
+                   ( $seqlength - $member_local_end   + 1, $seqlength - $member_local_start + 1 );
+          }
 
-	#warn join(' ',@$member)."\n";
+          my $member_global_start = $base + $member_contig_start - 1;
+          my $member_global_end   = $base + $member_contig_end   - 1;
 
-	my $overlap_with_previous_member = $previous_contig_end - $member_contig_start + 1;
 
-	my $member_reverse = $strand == -1;
-        my ($member_local_start, $member_local_end) =
-            $member_reverse ? ( 1,                               $member_length-$overlap_with_previous_member )
-                            : ( 1+$overlap_with_previous_member, $member_contig_end-$member_contig_start + 1  );
-
-	# if it is completely contained in another member, just skip it
-        if( $member_local_start > $member_local_end ) {
-            $agp_fh->print("# skipped contig member $name, since it is completely overlapped by other members\n");
-            next;
-        }
-
-	$member_contig_start  += $overlap_with_previous_member;
-
-	my $member_global_start = $base + $member_contig_start - 1;
-	my $member_global_end   = $base + $member_contig_end   - 1;
-
-# 	if( $member_global_start < $previous_global_end+1) {
-# 	  my $difference = $previous_global_end + 1 - $member_global_start;
-# 	  $member_global_start += $difference;
-# 	  $member_global_end   += $difference;
-# 	}
-	
-	$printline->( $member_global_start, $member_global_end, 'F',
-		      $name, $member_local_start, $member_local_end,
-		      $member_reverse ? '-' : '+',
-		    );
-	$previous_global_end = $member_global_end;
-	$previous_contig_end = $member_contig_end;
+          $printline->( $member_global_start, $member_global_end, 'F',
+                        $name, $member_local_start, $member_local_end,
+                        $member_reverse ? '-' : '+',
+                       );
+          $previous_global_end = $member_global_end;
+          $previous_contig_end = $member_contig_end;
       }
     }
   }
