@@ -327,6 +327,21 @@ sub generate_agp_file {
           my $member_global_end   = $base + $member_contig_end   - 1;
 
 
+          # sometimes phrap shortens or lengthens runs of repetitive
+          # nucleotides in order to build better consensus sequences.
+          # this is usually only a few nt per 100kb.  these edits are
+          # very difficult to represent in an AGP, so for now, just
+          # ignore edits, fixing up coordinates if they go beyond the
+          # end of the sequence.
+          #
+          # this inability to represent the phrap sequence edits is
+          # going to lower the quality of some contigs
+          if( $member_local_end > $seqlength ) {
+              my $difference = $member_local_end - $seqlength;
+              warn "WARNING: shortening consensus segment $name ( $member_local_start, $member_local_end ) to cope with phrap sequence edit\n";
+              $_ -= $difference for $member_local_end, $member_global_end;
+          }
+
           $printline->( $member_global_start, $member_global_end, 'F',
                         $name, $member_local_start, $member_local_end,
                         $member_reverse ? '-' : '+',
