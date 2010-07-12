@@ -131,19 +131,24 @@ my @chromosomes_to_generate = grep {
 #warn  "regenerate agp files for chromosomes ".join(',',@chromosomes_to_generate).", please wait.\n";
 #@chromosomes_to_generate = (5,10);
 
-#find all the BAC sequences to use, each chromosome has a published
-#fasta file of all its sequences
-foreach my $chr (@chromosomes_to_generate) {
-  my $seqsfile = aggregate_filename("chr${chr}_finished_seqs",$publish_path);
-  unless(-r $seqsfile) {
-    $seqsfile = published_as($seqsfile);
-    $seqsfile &&= $seqsfile->{fullpath};
-  }
-  $seqsfile ||= '';
-  -r $seqsfile or die "chromosome $chr sequences file '$seqsfile' not found or not readable\n";
-#  index_sequence_lengths($seqsfile);
-  $chrdata{$chr} = {seqfile => $seqsfile, chrnum => $chr };
+# find all the BAC sequences to use, and make per-chromosome sequence
+# files to use as input to mummer
+my $bacs_file = published_as( aggregate_filename("all_seqs",$publish_path) )
+    or die "cannot find bacs file at ".aggregate_filename( 'all_seqs', $publish_path );
+$bacs_file = Bio::SeqIO->new( -file => $bacs_file->{fullpath}, -format => 'fasta' );
+
+$chrdata{$_} = { seqfile => File::Temp->new( UNLINK => 1 ), chrnum => $_ } for @chromosomes_to_generate;
+while( my $seq = $bacs_file->next_seq ) {
+    my $p = parse_clone_ident( $seq->id, 'versioned_bac_seq' )
+        or die "could not parse seq id ".$seq->id;
+    $p->{chr} = 0 if $p->{chr} eq 'unmapped';
+    if( my $chr_rec = $chrdata{ $p->{chr} } ) {
+        $chr_rec->{seqfile}->print( ">", $seq->id, "\n", $seq->seq, "\n" );
+    } else {
+        warn "skipping seq ".$seq->id." (chr $p->{chr})\n";
+    }
 }
+$_->{seqfile}->close for values %chrdata;
 
 #dispatch mummer jobs for each of them
 my $runfunc = do {
