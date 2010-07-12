@@ -315,7 +315,9 @@ sub generate_agp_file {
           my $seqlength = $seq->length
               or die "no seq length returned for '$name' seq";
 
-          # AGP has a slightly different meaning for components being reve
+          # AGP has a slightly different meaning for components being
+          # reversed.  the member coordinates are relative to the
+          # *uncomplimented* sequence
           if( $member_reverse ) {
               ( $member_local_start, $member_local_end ) =
                    ( $seqlength - $member_local_end   + 1, $seqlength - $member_local_start + 1 );
