@@ -8,8 +8,11 @@ use FindBin;
 use Getopt::Std;
 use POSIX;
 
+use File::Spec;
+use File::Path qw/ rmtree /;
 use File::Temp qw/tempfile/;
-use List::Util qw/sum/;
+use List::Util qw/ sum min max /;
+use List::MoreUtils qw/ uniq any /;
 
 use Bio::Index::Fasta;
 
@@ -21,7 +24,6 @@ use CXGN::Publish qw/published_as publish/;
 use CXGN::Cluster;
 use CXGN::Cview::MapFactory;
 
-use CXGN::Tools::List qw/any max/;
 use CXGN::Tools::Run;
 use CXGN::Tools::Script qw/lock_script unlock_script/;
 
@@ -79,12 +81,18 @@ Usage:
     -c <list>
        list of chromosome numbers to process.  Default 0..12
 
+    -A <dir>
+       if passed, will save assembly files for each non-singleton
+       AGP component in <dir>/<chr>.<index>/ where <chr> is the
+       chromosome number and <index> is a sequential index number
+       (with the count including singletons)
+
 EOU
 }
 sub HELP_MESSAGE {usage()}
 
 our %opt;
-getopts('Cp:a:m:c:',\%opt) or usage();
+getopts('Cp:a:m:c:A:',\%opt) or usage();
 @ARGV and usage(); #< there should be no non-option arguments
 
 #get our publishing path
@@ -212,7 +220,7 @@ do {
       $rec->{agp_file} = generate_agp_file( $rec->{chrnum}, \@clusters );
     }
   }
-} while( any map $_->{job}->alive, values %chrdata );
+} while( any { $_->{job}->alive } values %chrdata );
 
 #now publish all the agp files we've generated
 my @agp_publish_cmds = map {
@@ -252,17 +260,19 @@ sub generate_agp_file {
   my $correspondence = 100_000;
 #  warn "Writing agp information to $agp_file...\n";
 
-  our $line_count = 0;
+  my $line_count = 0;
   my $previous_global_end = 0; #< the global end of the previous line
   my $printline = sub(@) {
     my ($s,$e,@other) = @_;
     push @other,'' unless @other == 5;
     ++$line_count;
     #warn join("\t", 'S.lycopersicum-chr'.$chrnum,$s,$e,$line_count,@other)."\n";
-    print $agp_fh join("\t", 'S.lycopersicum-chr'.$chrnum,$s,$e,$line_count,@other)."\n";
+    print $agp_fh join("\t", 'S.lycopersicum-chr'.$chrnum, $s, $e, $line_count, @other )."\n";
   };
   my $printed_unmapped_divider = 0; #<flag of whether we have printed the comment about unmapped sequences already
-  foreach my $mapped_contig (@$contigs) {
+  my $contig_number = 0;
+  for( my $precluster_number = 1; $precluster_number <= @$contigs; $precluster_number++ ) {
+    my $mapped_contig = $contigs->[$precluster_number-1];
     my $offset = $mapped_contig->{offset};
     if( ! $printed_unmapped_divider && $offset > 500 ) {
       print $agp_fh "# END OF DRAFT CHROMOSOME BUILD.  THE LINES BELOW CONTAIN SEQUENCES THAT COULD NOT BE LOCATED ON THE PHYSICAL MAP\n";
@@ -291,15 +301,21 @@ sub generate_agp_file {
       $base = $previous_global_end+1;
     }
 
-    my $contig_count = 0;
-    my @consensus_segments = $cluster->get_consensus_base_segments($seqs_index);
+    if( $opt{A} ) {
+        my $dir = File::Spec->catdir( $opt{A}, "chr${chrnum}_precluster${precluster_number}" );
+        rmtree($dir);
+        $cluster->set_assembly_dir( $dir );
+    }
 
-    foreach my $contig ( @consensus_segments ) {
+
+    my $contigs_in_precluster = 0;
+    foreach my $contig (  $cluster->get_consensus_base_segments( $seqs_index, gaussian_simplify => 2000 ) ) {
       my $previous_contig_end = 0; #< the contig end of the previous line
+      ++$contig_number;
 
       #put in a 20kb clone gap if necessary, if we have members in a
       #cluster that did not assemble into one contig
-      if( ++$contig_count > 1 ) {
+      if( ++$contigs_in_precluster > 1 ) {
 	my $gap_start = max($base,$previous_global_end+1);
 	my $gap_end = $gap_start + 50_000 - 1;
 	$printline->( $gap_start, $gap_end, 'N', 50_000, 'clone', 'yes' );
@@ -307,7 +323,7 @@ sub generate_agp_file {
 	$previous_global_end = $gap_end;
       }
 
-      foreach my $member (@$contig) {
+      foreach my $member ( @$contig ) {
           my ( $member_contig_start, $member_contig_end, $name, $member_local_start, $member_local_end, $member_reverse ) = @$member;
 
           my $seq = $seqs_index->fetch($name)
@@ -325,7 +341,6 @@ sub generate_agp_file {
 
           my $member_global_start = $base + $member_contig_start - 1;
           my $member_global_end   = $base + $member_contig_end   - 1;
-
 
           # sometimes phrap shortens or lengthens runs of repetitive
           # nucleotides in order to build better consensus sequences.
@@ -423,6 +438,7 @@ sub mummer_to_clusterset {
 
   return $cluster_set;
 }
+
 
 # our %seqlens;
 # sub sequence_length {
