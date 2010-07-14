@@ -309,7 +309,7 @@ sub generate_agp_file {
 
 
     my $contigs_in_precluster = 0;
-    foreach my $contig (  $cluster->get_consensus_base_segments( $seqs_index, simplification_passes => 2, simplification_window => 50 ) ) {
+    foreach my $contig (  $cluster->get_consensus_base_segments( $seqs_index, min_segment_size => 2000 ) ) {
       my $previous_contig_end = 0; #< the contig end of the previous line
       ++$contig_number;
 
