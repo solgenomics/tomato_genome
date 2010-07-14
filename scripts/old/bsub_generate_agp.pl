@@ -353,8 +353,19 @@ sub generate_agp_file {
           # going to lower the quality of some contigs
           if( $member_local_end > $seqlength ) {
               my $difference = $member_local_end - $seqlength;
-              warn "WARNING: shortening consensus segment $name ( $member_local_start, $member_local_end ) to cope with phrap sequence edit\n";
-              $_ -= $difference for $member_local_end, $member_global_end;
+              warn "WARNING: artificially shortening consensus segment $name ( $member_local_start, $member_local_end ) by $difference bases to cope with phrap sequence edit. This will make a slight error in chr $chrnum contig $contig_number (precluster $precluster_number).\n";
+              $member_local_end -= $difference;
+              unless( $member_reverse ) {
+                  $member_global_end -= $difference;
+              }
+          }
+          elsif( $member_local_start < 1 ) {
+              my $difference = 1 - $member_local_start;
+              warn "WARNING: artificially shortening consensus segment $name ( $member_local_start, $member_local_end ) by $difference bases to cope with phrap sequence edit. This will make a slight error in chr $chrnum contig $contig_number (precluster $precluster_number).\n";
+              $member_local_start += $difference;
+              if( $member_reverse ) {
+                  $member_global_end  -= $difference;
+              }
           }
 
           $printline->( $member_global_start, $member_global_end, 'F',
