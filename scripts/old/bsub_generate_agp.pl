@@ -120,6 +120,11 @@ die "invalid chromosome numbers expression\n" if $EVAL_ERROR;
 #get our cview physical map version
 $cview_physical_map_version = $opt{m} if $opt{m};
 
+# if we got -A, check that the target directory is empty
+if( $opt{A} && -e $opt{A} ) {
+    glob "$opt{A}/*" and die "target directory -A '$opt{A}' must be empty!\n";
+}
+
 # init the map data model
 my $dbh = CXGN::DB::Connection->new({ config => $cfg });
 my $mf =  CXGN::Cview::MapFactory->new( $dbh, $cfg );
@@ -270,6 +275,15 @@ sub generate_agp_file {
     #warn join("\t", 'S.lycopersicum-chr'.$chrnum,$s,$e,$line_count,@other)."\n";
     print $agp_fh join("\t", 'S.lycopersicum-chr'.$chrnum, $s, $e, $line_count, @other )."\n";
   };
+
+
+  my $members_fh;
+  if( $opt{A} ) {
+      # dump the cluster's member list also
+      my $members_file = _members_filename( $opt{A} );
+      open $members_fh, '>>', $members_file or die "$! writing $members_file";
+  }
+
   my $printed_unmapped_divider = 0; #<flag of whether we have printed the comment about unmapped sequences already
   my $contig_number = 0;
   for( my $precluster_number = 1; $precluster_number <= @$contigs; $precluster_number++ ) {
@@ -304,14 +318,9 @@ sub generate_agp_file {
 
 
     # if we are producing an assembly results dir, do stuff for that.
-    my $members_fh;
     if( $opt{A} ) {
         my $dir = _precluster_dir( $opt{A}, "chr$chrnum", $precluster_number );
         $cluster->set_assembly_dir( $dir );
-
-        # dump the cluster's member list also
-        my $members_file = _precluster_members_file( $opt{A}, "chr${chrnum}", $precluster_number );
-        open $members_fh, '>', $members_file or die "$! writing $members_file";
     }
 
     my $contigs_in_precluster = 0;
@@ -329,7 +338,7 @@ sub generate_agp_file {
 	$previous_global_end = $gap_end;
       }
 
-      $members_fh->print(  _contig_name( "chr$chrnum", $contig_number ) ) if $members_fh;
+      $members_fh->print( _precluster_name( "chr$chrnum", $precluster_number), "\t", _contig_name( "chr$chrnum", $contig_number ) ) if $members_fh;
 
       foreach my $member ( @$contig ) {
           my ( $member_contig_start, $member_contig_end, $name, $member_local_start, $member_local_end, $member_reverse ) = @$member;
@@ -492,59 +501,42 @@ sub mummer_to_clusterset {
 sub make_assembly_dir_contig_files {
     my ($assembly_dir,$seqs_index) = @_;
 
-    my %contig_sets;
-    # this is:  (  tag => { precluster_member_files => [ list of member files ],
-    #                       seq_io => Bio::SeqIO for writing this sequence set,
-    #                     },
-    #            )
-
-
-    # all contig member files
-    my @member_files = grep -f, glob _precluster_members_file($assembly_dir, '*','*' );
-    for my $member_file ( @member_files ) {
-        my $bn = basename( $member_file );
-        my ($tag) = $bn =~ /^(\w+)_precluster/;
-        push @{$contig_sets{$tag}{precluster_member_files}}, $member_file;
-    }
-
-
     my $all_gz = _gzip_fh( $assembly_dir, 'contigs_all.fa.gz' );
     my $all_contigs_seqio = Bio::SeqIO->new(
         -format => 'fasta',
         -fh => $all_gz,
        );
 
+    my $members_filename = _members_filename( $assembly_dir );
+    my %set_seqio;
+    foreach my $contig_line ( _slurp_chomp( $members_filename ) ) {
+        my ($precluster_name,$contig_name,@members) = split /\t/,$contig_line;
+        my $precluster_number = _extract_precluster_number( $precluster_name );
+        my ($tag) = $precluster_name =~ /^(\w+)_precluster/;
 
-    # now dump each of the preclusters, in sorted order by tag
-    # (i.e. chromosome), then precluster number
-    foreach my $tag ( sort { _first_number($a) <=> _first_number($b) } keys %contig_sets ) {
-        my $set = $contig_sets{$tag};
         # also open a sequence output for each of the sequence sets
-        my $set_gz = _gzip_fh( $assembly_dir, "contigs_$tag.fa.gz" );
-        $set->{seq_io} = Bio::SeqIO->new(
-            -format => 'fasta',
-            -fh => $set_gz,
-           );
-        my $contig_number = 0;
-        foreach my $precluster_member_file ( sort { _precluster_number($a) <=> _precluster_number($b) } @{$set->{precluster_member_files}} ) {
-            my $precluster_number = _precluster_number( basename $precluster_member_file );
-            my $precluster_contigs_filename = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.contigs' );
+        my $set_contigs_seqio =
+            $set_seqio{$tag} ||= #< lazily build seqios for each contig set (per chromosome)
+                Bio::SeqIO->new(
+                    -format => 'fasta',
+                    -fh => _gzip_fh( $assembly_dir, "contigs_$tag.fa.gz" ),
+                   );
 
-            if( -f $precluster_contigs_filename ) {
-                my $contigs_in = Bio::SeqIO->new( -format => 'fasta', -file => $precluster_contigs_filename );
-                while( my $s = $contigs_in->next_seq ) {
-                    $s->id( _contig_name( $tag, ++$contig_number ) );
-                    $_->write_seq( $s ) for $all_contigs_seqio, $set->{seq_io};
-                }
-            } else {
-                # it's a single sequence in the precluster, just get it from the index
-                my @members = map { my (undef,@m) = split; @m } _slurp_chomp( $precluster_member_file );
-                @members > 1 and die "multiple members found in precluster membership file $precluster_member_file, something is wrong";
-                my $member = $members[0];
-                my $s = $seqs_index->fetch( $member ) or die "what, no $member?";
-                $s->id( _contig_name( $tag, ++$contig_number ) );
-                $_->write_seq( $s ) for $all_contigs_seqio, $set->{seq_io};
+        my $precluster_contigs_filename = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.contigs' );
+
+        if( -f $precluster_contigs_filename ) {
+            my $contigs_in = Bio::SeqIO->new( -format => 'fasta', -file => $precluster_contigs_filename );
+            while ( my $s = $contigs_in->next_seq ) {
+                $s->id( $contig_name );
+                $_->write_seq( $s ) for $all_contigs_seqio, $set_contigs_seqio;
             }
+        } else {
+            # it's a single sequence in the precluster, just get it from the index
+            @members > 1 and die "no phrap .contigs file, but multiple members for precluster $precluster_name, something is wrong";
+            my $member = $members[0];
+            my $s = $seqs_index->fetch( $member ) or die "what, no $member?";
+            $s->id( $contig_name );
+            $_->write_seq( $s ) for $all_contigs_seqio, $set_contigs_seqio;
         }
     }
 }
@@ -576,19 +568,24 @@ sub _first_number {
     $_[0] =~ /(\d+)/ or die "no number in '$_[0]'";
     return $1;
 }
-sub _precluster_number {
+sub _extract_precluster_number {
     $_[0] =~ /precluster\D?(\d+)/ or die "cannot parse '$_[0]'";
     return $1;
 }
 
-sub _precluster_dir {
-    my ($assembly_dir,$tag,$precluster_number,@additional) = @_;
-    return File::Spec->catdir( $assembly_dir, "${tag}_precluster${precluster_number}", @additional );
+sub _precluster_name {
+    my ($tag,$precluster_number) = @_;
+    return "${tag}_precluster${precluster_number}";
 }
 
-sub _precluster_members_file {
-    my ($assembly_dir,$tag,$precluster_number) = @_;
-    return File::Spec->catfile( $assembly_dir, "${tag}_precluster${precluster_number}.membership.tab" );
+sub _precluster_dir {
+    my ($assembly_dir,$tag,$precluster_number,@additional) = @_;
+    return File::Spec->catdir( $assembly_dir, _precluster_name( $tag, $precluster_number ), @additional );
+}
+
+sub _members_filename {
+    my ( $assembly_dir ) = @_;
+    return File::Spec->catfile( $assembly_dir, "membership.tab" );
 }
 
 # our %seqlens;
