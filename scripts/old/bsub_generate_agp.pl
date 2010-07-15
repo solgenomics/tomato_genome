@@ -192,7 +192,8 @@ my $runfunc = do {
     'run'
   }
 };
-foreach my $chr_rec ( values %chrdata ) {
+foreach my $chr_num ( sort {$a <=> $b} keys %chrdata ) {
+    my $chr_rec = $chrdata{$chr_num};
     local $CWD = File::Spec->tmpdir;
 
     $chr_rec->{job} =
