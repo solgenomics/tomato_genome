@@ -224,6 +224,12 @@ foreach my $chr_num ( sort {$a <=> $b} keys %chrdata ) {
               or die "failed to run mummer on $chr_rec->{seqfile}!";
 
 }
+
+
+if( $opt{A} ) {
+    make_assembly_dir_contig_files( $opt{A}, $seqs_index );
+}
+
 #when the script ends, clean up all the cluster job tempfiles
 END { $_->{job} && $_->{job}->cleanup foreach values %chrdata }
 
@@ -400,10 +406,6 @@ sub generate_agp_file {
   }
 
   close $agp_fh; #< gotta close it to flush the buffers
-
-  if( $opt{A} ) {
-      make_assembly_dir_contig_files( $opt{A}, $seqs_index );
-  }
 
   return $agp_file;
 }
