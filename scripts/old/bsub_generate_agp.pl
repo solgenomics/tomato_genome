@@ -8,8 +8,9 @@ use FindBin;
 use Getopt::Std;
 use POSIX;
 
+use File::Basename qw/ basename /;
 use File::Spec;
-use File::Path qw/ rmtree /;
+use File::Path qw/ rmtree mkpath /;
 use File::Temp qw/tempfile/;
 use List::Util qw/ sum min max /;
 use List::MoreUtils qw/ uniq any /;
@@ -82,10 +83,12 @@ Usage:
        list of chromosome numbers to process.  Default 0..12
 
     -A <dir>
-       if passed, will save assembly files for each non-singleton
-       AGP component in <dir>/<chr>.<index>/ where <chr> is the
-       chromosome number and <index> is a sequential index number
-       (with the count including singletons)
+       if passed, will save assembly files for each non-singleton AGP
+       component in <dir>/<chr>.<index>/ where <chr> is the chromosome
+       number and <index> is a sequential index number (with the count
+       including singletons).  Will also make several contigs_*.fa.gz
+       files in that directory containing the consensus sequences
+       found by phrap for each contig.
 
 EOU
 }
@@ -301,12 +304,18 @@ sub generate_agp_file {
       $base = $previous_global_end+1;
     }
 
-    if( $opt{A} ) {
-        my $dir = File::Spec->catdir( $opt{A}, "chr${chrnum}_precluster${precluster_number}" );
-        rmtree($dir);
-        $cluster->set_assembly_dir( $dir );
-    }
 
+    # if we are producing an assembly results dir, do stuff for that.
+    if( $opt{A} ) {
+        mkpath( $opt{A} );
+        my $dir = _precluster_dir( $opt{A}, "chr$chrnum", $precluster_number );
+        rmtree( $dir );
+        $cluster->set_assembly_dir( $dir );
+        # dump the cluster's member list also
+        my $members_file = File::Spec->catfile( $opt{A}, "chr${chrnum}_precluster${precluster_number}.members.tab" );
+        open my $m, '>', $members_file or die "$! writing $members_file";
+        $m->print( "$_\n" ) for $cluster->get_members;
+    }
 
     my $contigs_in_precluster = 0;
     foreach my $contig (  $cluster->get_consensus_base_segments( $seqs_index, min_segment_size => 2000 ) ) {
@@ -331,9 +340,9 @@ sub generate_agp_file {
           my $seqlength = $seq->length
               or die "no seq length returned for '$name' seq";
 
-          # AGP has a slightly different meaning for components being
-          # reversed.  the member coordinates are relative to the
-          # *uncomplimented* sequence
+          # for AGP, the member coordinates are relative to the
+          # *uncomplimented* sequence.  so, for complemented component
+          # seqs, switch those around.
           if( $member_reverse ) {
               ( $member_local_start, $member_local_end ) =
                    ( $seqlength - $member_local_end   + 1, $seqlength - $member_local_start + 1 );
@@ -378,6 +387,11 @@ sub generate_agp_file {
     }
   }
   close $agp_fh; #< gotta close it to flush the buffers
+
+  if( $opt{A} ) {
+      make_assembly_dir_contig_files( $opt{A}, $seqs_index );
+  }
+
   return $agp_file;
 }
 
@@ -450,6 +464,103 @@ sub mummer_to_clusterset {
   return $cluster_set;
 }
 
+
+sub make_assembly_dir_contig_files {
+    my ($assembly_dir,$seqs_index) = @_;
+
+    my %contig_sets;
+    # this is:  (  tag => { precluster_member_files => [ list of member files ],
+    #                       seq_io => Bio::SeqIO for writing this sequence set,
+    #                     },
+    #            )
+
+
+    # all contig member files
+    my @member_files = grep -f, glob "$assembly_dir/*_precluster*.members.tab";
+    for my $member_file ( @member_files ) {
+        my $bn = basename( $member_file );
+        my ($tag) = $bn =~ /^(\w+)_precluster/;
+        push @{$contig_sets{$tag}{precluster_member_files}}, $member_file;
+    }
+
+
+    my $all_gz = _gzip_fh( $assembly_dir, 'contigs_all.fa.gz' );
+    my $all_contigs_seqio = Bio::SeqIO->new(
+        -format => 'fasta',
+        -fh => $all_gz,
+       );
+
+
+    # now dump each of the preclusters, in sorted order by tag
+    # (i.e. chromosome), then precluster number
+    foreach my $tag ( sort { _first_number($a) <=> _first_number($b) } keys %contig_sets ) {
+        my $set = $contig_sets{$tag};
+        # also open a sequence output for each of the sequence sets
+        my $set_gz = _gzip_fh( $assembly_dir, "contigs_$tag.fa.gz" );
+        $set->{seq_io} = Bio::SeqIO->new(
+            -format => 'fasta',
+            -fh => $set_gz,
+           );
+        my $contig_number = 0;
+        foreach my $precluster_member_file ( sort { _precluster_number($a) <=> _precluster_number($b) } @{$set->{precluster_member_files}} ) {
+            my $precluster_number = _precluster_number( basename $precluster_member_file );
+            my $precluster_contigs_filename = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.contigs' );
+
+            if( -f $precluster_contigs_filename ) {
+                my $contigs_in = Bio::SeqIO->new( -format => 'fasta', -file => $precluster_contigs_filename );
+                while( my $s = $contigs_in->next_seq ) {
+                    $s->id( _contig_name( $tag, ++$contig_number ) );
+                    $_->write_seq( $s ) for $all_contigs_seqio, $set->{seq_io};
+                }
+            } else {
+                # it's a single sequence in the precluster, just get it from the index
+                my @members = _slurp_chomp( $precluster_member_file );
+                @members > 1 and die "multiple members found in precluster membership file $precluster_member_file, something is wrong";
+                my $member = $members[0];
+                my $s = $seqs_index->fetch( $member ) or die "what, no $member?";
+                $s->id( _contig_name( $tag, ++$contig_number ) );
+                $_->write_seq( $s ) for $all_contigs_seqio, $set->{seq_io};
+            }
+        }
+    }
+}
+
+sub _gzip_fh {
+    # not using IO::Compress::Gzip here because it silently produces
+    # corrupt output in some cases (for certain combinations of
+    # libraries, I think).  was having this problem with a local-lib
+    # running on pipelines.
+    my $filename = File::Spec->catfile( @_ );
+    open my $fh, "| gzip -nc > '$filename'" or die "$! running gzip";
+    return $fh;
+}
+
+# slurp a file's lines into an array, chomping each line
+sub _slurp_chomp {
+    my $file = shift;
+    open my $f, $file or die "$! reading $file";
+    my @data = <$f>;
+    chomp @data;
+    return @data;
+}
+
+sub _contig_name {
+    my ($tag, $ctg_num) = @_;
+    return "${tag}_contig$ctg_num";
+}
+sub _first_number {
+    $_[0] =~ /(\d+)/ or die "no number in '$_[0]'";
+    return $1;
+}
+sub _precluster_number {
+    $_[0] =~ /precluster\D?(\d+)/ or die "cannot parse '$_[0]'";
+    return $1;
+}
+
+sub _precluster_dir {
+    my ($assembly_dir,$tag,$precluster_number,@additional) = @_;
+    return File::Spec->catdir( $assembly_dir, "${tag}_precluster${precluster_number}", @additional );
+}
 
 # our %seqlens;
 # sub sequence_length {
