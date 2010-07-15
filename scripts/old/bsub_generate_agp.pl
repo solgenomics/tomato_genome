@@ -15,22 +15,22 @@ use File::Path qw/ rmtree mkpath /;
 use File::Temp qw/tempfile/;
 use List::Util qw/ sum min max /;
 use List::MoreUtils qw/ uniq any /;
+use YAML::Any;
 
 use Bio::Index::Fasta;
 
-use CXGN::DB::Connection;
-
-use CXGN::TomatoGenome::BACPublish qw/aggregate_filename agp_file/;
-use CXGN::Publish qw/published_as publish/;
-
 use CXGN::Cluster;
 use CXGN::Cview::MapFactory;
+use CXGN::DB::Connection;
+
+use CXGN::Genomic::CloneIdentifiers qw/parse_clone_ident assemble_clone_ident/;
+
+use CXGN::Publish qw/published_as publish/;
 
 use CXGN::Tools::Run;
 use CXGN::Tools::Script qw/lock_script unlock_script/;
 
-use CXGN::Genomic::CloneIdentifiers qw/parse_clone_ident assemble_clone_ident/;
-
+use CXGN::TomatoGenome::BACPublish qw/aggregate_filename agp_file/;
 use CXGN::TomatoGenome::Config;
 
 ########### CONFIGURATION/DEFAULTS ################
@@ -95,6 +95,7 @@ EOU
 }
 sub HELP_MESSAGE {usage()}
 
+my @command_line_args = @ARGV; #< save argv for the metadata file
 our %opt;
 getopts('Cp:a:m:c:A:',\%opt) or usage();
 @ARGV and usage(); #< there should be no non-option arguments
@@ -111,6 +112,13 @@ $agp_path = $opt{a} if defined $opt{a};
 $mummer_min_overlap = $opt{l} if defined $opt{l};
 $mummer_min_overlap =~ /^\d+$/ && $mummer_min_overlap > 0
   or die "invalid -l min overlap '$mummer_min_overlap', must be a positive integer\n";
+my @mummer_options = (
+            '-mum',
+            '-b',
+            '-n',
+            -l => $mummer_min_overlap,
+);
+
 
 #get our chromosome numbers
 my @chromosome_nums = (0..12);
@@ -154,7 +162,6 @@ my $bacs_file = published_as( aggregate_filename("all_seqs",$publish_path) )
     or die "cannot find bacs file at ".aggregate_filename( 'all_seqs', $publish_path );
 my $bacs_seqio = Bio::SeqIO->new( -file => $bacs_file->{fullpath}, -format => 'fasta' );
 
-
 for (@chromosomes_to_generate) {
     my ( $fh,$file ) = tempfile( UNLINK => 1 );
     $chrdata{$_} = { seqfile => $file, seqfile_fh => $fh,  chrnum => $_ };
@@ -192,6 +199,7 @@ my $runfunc = do {
     'run'
   }
 };
+
 foreach my $chr_num ( sort {$a <=> $b} keys %chrdata ) {
     my $chr_rec = $chrdata{$chr_num};
     local $CWD = File::Spec->tmpdir;
@@ -200,11 +208,8 @@ foreach my $chr_num ( sort {$a <=> $b} keys %chrdata ) {
         CXGN::Tools::Run->$runfunc(
 
             'mummer',
-            '-mum',
-            '-b',
-            '-n',
 
-            -l => $mummer_min_overlap,
+            @mummer_options,
 
             -F => $chr_rec->{seqfile},
 
@@ -228,6 +233,12 @@ foreach my $chr_num ( sort {$a <=> $b} keys %chrdata ) {
 
 if( $opt{A} ) {
     make_assembly_dir_contig_files( $opt{A}, $seqs_index );
+    write_assembly_metadata( $opt{A},
+        'BAC sequence set'       => $bacs_file->{fullpath},
+        'chromosomes included'   => join( ', ', \@chromosomes_to_generate ),
+        'mummer options'         => join( ' ', @mummer_options ),
+        'phrap options'          => join( ' ', CXGN::Cluster::Precluster->phrap_options ),
+    );
 }
 
 #when the script ends, clean up all the cluster job tempfiles
@@ -500,6 +511,15 @@ sub mummer_to_clusterset {
   return $cluster_set;
 }
 
+
+sub write_assembly_metadata {
+    my ($assembly_dir, %metadata) = @_;
+
+    mkpath( $assembly_dir );
+    YAML::Any::DumpFile( File::Spec->catfile( $assembly_dir, 'assembly_metadata.yml' ),
+                         \%metadata,
+                        );
+}
 
 sub make_assembly_dir_contig_files {
     my ($assembly_dir,$seqs_index) = @_;
