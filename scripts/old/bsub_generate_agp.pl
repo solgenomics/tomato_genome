@@ -683,7 +683,7 @@ phrap_consensus_all.fasta
   sequences.
 
 phrap_consensus_<tag>.fasta
-  Phrap consensus sequences for the subset indicated by <tag>.
+  Phrap consensus sequences and single BAC sequences for each chromosome
 
 precluster_assemblies/
   Contains full phrap assembly results for each assembled precluster.
