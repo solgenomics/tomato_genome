@@ -637,7 +637,7 @@ sub _slurp_chomp {
 
 sub _contig_name {
     my ($tag, $ctg_num) = @_;
-    return sprintf( $tag.'_contig%3d',$ctg_num );
+    return sprintf( $tag.'_contig%03d',$ctg_num );
 }
 sub _first_number {
     $_[0] =~ /(\d+)/ or die "no number in '$_[0]'";
@@ -650,7 +650,7 @@ sub _extract_precluster_number {
 
 sub _precluster_name {
     my ( $tag, $precluster_number ) = @_;
-    return sprintf( $tag.'_precluster%3d', $precluster_number );
+    return sprintf( $tag.'_precluster%03d', $precluster_number );
 }
 
 sub _precluster_dir {
