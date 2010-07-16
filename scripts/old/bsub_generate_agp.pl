@@ -637,24 +637,24 @@ sub _slurp_chomp {
 
 sub _contig_name {
     my ($tag, $ctg_num) = @_;
-    return "${tag}_contig$ctg_num";
+    return sprintf( $tag.'_contig%3d',$ctg_num );
 }
 sub _first_number {
     $_[0] =~ /(\d+)/ or die "no number in '$_[0]'";
     return $1;
 }
 sub _extract_precluster_number {
-    $_[0] =~ /precluster\D?(\d+)/ or die "cannot parse '$_[0]'";
+    $_[0] =~ /precluster\D?0*(\d+)/ or die "cannot parse '$_[0]'";
     return $1;
 }
 
 sub _precluster_name {
-    my ($tag,$precluster_number) = @_;
-    return "${tag}_precluster${precluster_number}";
+    my ( $tag, $precluster_number ) = @_;
+    return sprintf( $tag.'_precluster%3d', $precluster_number );
 }
 
 sub _precluster_dir {
-    my ($assembly_dir,$tag,$precluster_number,@additional) = @_;
+    my ( $assembly_dir, $tag, $precluster_number, @additional ) = @_;
     return File::Spec->catdir( $assembly_dir, 'precluster_assemblies', _precluster_name( $tag, $precluster_number ), @additional );
 }
 
