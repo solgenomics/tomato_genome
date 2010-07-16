@@ -560,6 +560,7 @@ sub make_assembly_dir_contig_files {
 
     my $members_filename = _members_filename( $assembly_dir );
     my %set_seqio;
+    my %contigs_seqio;
     foreach my $contig_line ( _slurp_chomp( $members_filename ) ) {
         my ($precluster_name,$contig_name,@members) = split /\t/,$contig_line;
         my $precluster_number = _extract_precluster_number( $precluster_name );
@@ -573,19 +574,32 @@ sub make_assembly_dir_contig_files {
                     -file   => '>'.File::Spec->catfile( $assembly_dir, "contigs_$tag.fasta" ),
                    );
 
-        my $precluster_contigs_filename = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.contigs' );
+        if( -d _precluster_dir( $assembly_dir, $tag, $precluster_number ) ) {
+            my $precluster_singlets_filename = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.singlets' );
+            -s $precluster_singlets_filename
+                and die "precluster $precluster_name has nonempty singlets file $precluster_singlets_filename, this should not have anything in it!";
 
-        if( -f $precluster_contigs_filename ) {
-            my $contigs_in = Bio::SeqIO->new( -format => 'fasta', -file => $precluster_contigs_filename );
-            while ( my $s = $contigs_in->next_seq ) {
-                $s->id( $contig_name );
-                $_->write_seq( $s ) for $all_contigs_seqio, $set_contigs_seqio;
-            }
+            my $precluster_contigs_filename  = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.contigs' );
+
+            # cache the seqio for each precluster .contigs file, so
+            # that as we go through the members file, we will
+            # sequentially get the contig seqs out of the contigs
+            # file, which should be in the same order as the .members
+            # file.  this is a little dangerous
+            my $contigs_in = $contigs_seqio{$precluster_contigs_filename}
+                ||= Bio::SeqIO->new( -format => 'fasta', -file => $precluster_contigs_filename );
+
+            my $s = $contigs_in->next_seq;
+            $s->desc('original_id:'.$s->id);
+            $s->id( $contig_name );
+            $_->write_seq( $s ) for $all_contigs_seqio, $set_contigs_seqio;
+
         } else {
             # it's a single sequence in the precluster, just get it from the index
             @members > 1 and die "no phrap .contigs file, but multiple members for precluster $precluster_name, something is wrong";
             my $member = $members[0];
             my $s = $seqs_index->fetch( $member ) or die "what, no $member?";
+            $s->desc('original_id:'.$s->id);
             $s->id( $contig_name );
             $_->write_seq( $s ) for $all_contigs_seqio, $set_contigs_seqio;
         }
