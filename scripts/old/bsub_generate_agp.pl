@@ -555,7 +555,7 @@ sub make_assembly_dir_contig_files {
 
     my $all_contigs_seqio = Bio::SeqIO->new(
         -format => 'fasta',
-        -file   => '>'.File::Spec->catfile( $assembly_dir, 'contigs_all.fasta' ),
+        -file   => '>'.File::Spec->catfile( $assembly_dir, 'phrap_consensus_all.fasta' ),
        );
 
     my $members_filename = _members_filename( $assembly_dir );
@@ -571,7 +571,7 @@ sub make_assembly_dir_contig_files {
             $set_seqio{$tag} ||= #< lazily build seqios for each contig set (per chromosome)
                 Bio::SeqIO->new(
                     -format => 'fasta',
-                    -file   => '>'.File::Spec->catfile( $assembly_dir, "contigs_$tag.fasta" ),
+                    -file   => '>'.File::Spec->catfile( $assembly_dir, "phrap_consensus_$tag.fasta" ),
                    );
 
         if( -d _precluster_dir( $assembly_dir, $tag, $precluster_number ) ) {
