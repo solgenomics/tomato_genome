@@ -553,7 +553,6 @@ sub write_assembly_metadata {
 sub make_assembly_dir_contig_files {
     my ($assembly_dir,$seqs_index) = @_;
 
-    my $all_gz = 
     my $all_contigs_seqio = Bio::SeqIO->new(
         -format => 'fasta',
         -file   => '>'.File::Spec->catfile( $assembly_dir, 'contigs_all.fasta' ),
