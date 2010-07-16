@@ -10,9 +10,10 @@ use POSIX;
 
 use File::Basename qw/ basename /;
 use File::chdir;
+use File::Copy;
 use File::Spec;
 use File::Path qw/ rmtree mkpath /;
-use File::Temp qw/tempfile/;
+use File::Temp qw/ tempfile tempdir /;
 use List::Util qw/ sum min max /;
 use List::MoreUtils qw/ uniq any /;
 use YAML::Any;
@@ -83,13 +84,9 @@ Usage:
     -c <list>
        list of chromosome numbers to process.  Default 0..12
 
-    -A <dir>
-       if passed, will save assembly files for each non-singleton AGP
-       component in <dir>/<chr>.<index>/ where <chr> is the chromosome
-       number and <index> is a sequential index number (with the count
-       including singletons).  Will also make several contigs_*.fa.gz
-       files in that directory containing the consensus sequences
-       found by phrap for each contig.
+    -A if passed, will also publish a complete_assembly.tar.gz file
+       containing all phrap output, .ace files, contig membership
+       listings, phrap consensus sequences, and generated AGP filesa
 
 EOU
 }
@@ -97,7 +94,7 @@ sub HELP_MESSAGE {usage()}
 
 my @command_line_args = @ARGV; #< save argv for the metadata file
 our %opt;
-getopts('Cp:a:m:c:A:',\%opt) or usage();
+getopts('Cp:a:m:c:A',\%opt) or usage();
 @ARGV and usage(); #< there should be no non-option arguments
 
 #get our publishing path
@@ -113,10 +110,10 @@ $mummer_min_overlap = $opt{l} if defined $opt{l};
 $mummer_min_overlap =~ /^\d+$/ && $mummer_min_overlap > 0
   or die "invalid -l min overlap '$mummer_min_overlap', must be a positive integer\n";
 my @mummer_options = (
-            '-mum',
-            '-b',
-            '-n',
-            -l => $mummer_min_overlap,
+    '-mum',
+    '-b',
+    '-n',
+    -l => $mummer_min_overlap,
 );
 
 
@@ -128,10 +125,7 @@ die "invalid chromosome numbers expression\n" if $EVAL_ERROR;
 #get our cview physical map version
 $cview_physical_map_version = $opt{m} if $opt{m};
 
-# if we got -A, check that the target directory is empty
-if( $opt{A} && -e $opt{A} ) {
-    glob "$opt{A}/*" and die "target directory -A '$opt{A}' must be empty!\n";
-}
+$opt{A} &&= File::Spec->catdir( tempdir( CLEANUP => 1 ), 'complete_assembly' );
 
 # init the map data model
 my $dbh = CXGN::DB::Connection->new({ config => $cfg });
@@ -222,7 +216,9 @@ foreach my $chr_num ( sort {$a <=> $b} keys %chrdata ) {
                   my $cluster_set  = mummer_to_clusterset( $job->out_file );
                   my @clusters      = map_clusters( $cluster_set, $chr_rec->{mapped_bacs} );
                   #warn "got ".scalar(@clusters)." mapped clusters\n";
-                  $chr_rec->{agp_file} = generate_agp_file( $chr_rec->{chrnum}, \@clusters );
+                  my $agp_results = generate_agp_file( $chr_rec->{chrnum}, \@clusters );
+                  $chr_rec->{agp_file} = $agp_results->{file};
+                  $chr_rec->{metadata} = $agp_results->{metadata};
               },
           }
            )
@@ -230,22 +226,41 @@ foreach my $chr_num ( sort {$a <=> $b} keys %chrdata ) {
 
 }
 
-
-if( $opt{A} ) {
-    make_assembly_dir_contig_files( $opt{A}, $seqs_index );
-    write_assembly_metadata( $opt{A},
-        'BAC sequence set'       => $bacs_file->{fullpath},
-        'chromosomes included'   => join( ', ', \@chromosomes_to_generate ),
-        'mummer options'         => join( ' ', @mummer_options ),
-        'phrap options'          => join( ' ', CXGN::Cluster::Precluster->phrap_options ),
-    );
-}
-
 #when the script ends, clean up all the cluster job tempfiles
 END { $_->{job} && $_->{job}->cleanup foreach values %chrdata }
 
+my @agp_publish_cmds;
+
+if( $opt{A} ) {
+
+    # write the assembled-contig sequence sets
+    make_assembly_dir_contig_files( $opt{A}, $seqs_index );
+
+    # also make a subdir in the assembly dir with the AGP files we generated
+    copy_agp_files_to_assembly_dir( $opt{A}, \%chrdata );
+
+    my %build_metadata = map {
+        my $v = $chrdata{$_}{'metadata'};
+        "chromosome $_ AGP" => $v
+    } keys %chrdata;
+
+    write_assembly_metadata( $opt{A},
+        'BAC sequence set'       => $bacs_file->{fullpath},
+        'chromosomes included in this assembly'
+                                 => join( ', ', @chromosomes_to_generate ),
+        'mummer options'         => join( ' ', @mummer_options ),
+        'phrap options'          => join( ' ', CXGN::Cluster::Precluster->phrap_options ),
+        'chromosome AGP builds'  => \%build_metadata,
+    );
+
+    my $assembly_tar = File::Temp->new;
+    make_complete_assembly_tar( $opt{A}, $assembly_tar );
+    push @agp_publish_cmds,
+        ['cp', $assembly_tar, File::Spec->catfile( $agp_path, 'complete_assembly.tar.gz' ) ];
+}
+
 #now publish all the agp files we've generated
-my @agp_publish_cmds = map {
+push @agp_publish_cmds, map {
   -f $_->{agp_file} or warn "$_->{agp_file} is not where I left it!\n";
   ['cp',$_->{agp_file},agp_file($_->{chrnum},1,$agp_path)]
 } values %chrdata;
@@ -278,11 +293,11 @@ sub generate_agp_file {
       rmtree( $_ ) for glob "$opt{A}/chr${chrnum}_*";
   }
 
+  my %metadata; #< keep some statistics and metadata about this AGP generation
 
   # we assume that 1cM is on average about 750kB of sequence (Wing, Zhang, and Tanksley, 1994).
   #
   my $correspondence = 100_000;
-#  warn "Writing agp information to $agp_file...\n";
 
   my $line_count = 0;
   my $previous_global_end = 0; #< the global end of the previous line
@@ -290,7 +305,6 @@ sub generate_agp_file {
     my ($s,$e,@other) = @_;
     push @other,'' unless @other == 5;
     ++$line_count;
-    #warn join("\t", 'S.lycopersicum-chr'.$chrnum,$s,$e,$line_count,@other)."\n";
     print $agp_fh join("\t", 'S.lycopersicum-chr'.$chrnum, $s, $e, $line_count, @other )."\n";
   };
 
@@ -390,6 +404,7 @@ sub generate_agp_file {
           # going to lower the quality of some contigs
           if( $member_local_end > $seqlength ) {
               my $difference = $member_local_end - $seqlength;
+              push @{$metadata{'reads with edits introduced by phrap'}}, { $name => "$difference additional bp" };
               warn "WARNING: artificially shortening consensus segment $name ( $member_local_start, $member_local_end ) by $difference bases to cope with phrap sequence edit. This will make a slight error in chr $chrnum contig $contig_number (precluster $precluster_number).\n";
               $member_local_end -= $difference;
               unless( $member_reverse ) {
@@ -398,6 +413,7 @@ sub generate_agp_file {
           }
           elsif( $member_local_start < 1 ) {
               my $difference = 1 - $member_local_start;
+              push @{$metadata{'reads with edits introduced by phrap'}}, { $name => "$difference additional bp" };
               warn "WARNING: artificially shortening consensus segment $name ( $member_local_start, $member_local_end ) by $difference bases to cope with phrap sequence edit. This will make a slight error in chr $chrnum contig $contig_number (precluster $precluster_number).\n";
               $member_local_start += $difference;
               if( $member_reverse ) {
@@ -418,7 +434,7 @@ sub generate_agp_file {
 
   close $agp_fh; #< gotta close it to flush the buffers
 
-  return $agp_file;
+  return { file => $agp_file, metadata => \%metadata };
 }
 
 # fetches the mapping data from Cview
@@ -478,6 +494,20 @@ sub seqname_to_bacname($) {
 		      )
 }
 
+
+sub copy_agp_files_to_assembly_dir {
+    my ($dir, $chrdata) = @_;
+
+    # copy the AGP files into the complete assembly dir also
+    for my $chr_rec (values %$chrdata) {
+        my $agp_subdir = File::Spec->catdir( $dir, 'generated_agp' );
+        mkpath( $agp_subdir );
+        my $agp_target = agp_file( $chr_rec->{chrnum}, 1, $agp_subdir );
+        copy( $chr_rec->{agp_file}, $agp_target )
+            or die "$! copying $chr_rec->{agp_file} -> $agp_target";
+    }
+}
+
 #given a mummer output file, build a CXGN::Cluster::ClusterSet out of
 #it
 sub mummer_to_clusterset {
@@ -524,10 +554,10 @@ sub write_assembly_metadata {
 sub make_assembly_dir_contig_files {
     my ($assembly_dir,$seqs_index) = @_;
 
-    my $all_gz = _gzip_fh( $assembly_dir, 'contigs_all.fa.gz' );
+    my $all_gz = 
     my $all_contigs_seqio = Bio::SeqIO->new(
         -format => 'fasta',
-        -fh => $all_gz,
+        -file   => '>'.File::Spec->catfile( $assembly_dir, 'contigs_all.fasta' ),
        );
 
     my $members_filename = _members_filename( $assembly_dir );
@@ -542,7 +572,7 @@ sub make_assembly_dir_contig_files {
             $set_seqio{$tag} ||= #< lazily build seqios for each contig set (per chromosome)
                 Bio::SeqIO->new(
                     -format => 'fasta',
-                    -fh => _gzip_fh( $assembly_dir, "contigs_$tag.fa.gz" ),
+                    -file   => '>'.File::Spec->catfile( $assembly_dir, "contigs_$tag.fasta" ),
                    );
 
         my $precluster_contigs_filename = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.contigs' );
@@ -562,6 +592,16 @@ sub make_assembly_dir_contig_files {
             $_->write_seq( $s ) for $all_contigs_seqio, $set_contigs_seqio;
         }
     }
+}
+
+sub make_complete_assembly_tar {
+    my ( $dir, $tarfile ) = @_;
+
+    my $bn = basename( $dir );
+    local $CWD = File::Spec->catdir( $dir, File::Spec->updir );
+    my $cmd = "tar -cf - $bn | gzip -n > $tarfile";
+    system $cmd;
+    $? and die "$! running '$cmd'\n";
 }
 
 sub _gzip_fh {
