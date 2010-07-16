@@ -125,7 +125,7 @@ die "invalid chromosome numbers expression\n" if $EVAL_ERROR;
 #get our cview physical map version
 $cview_physical_map_version = $opt{m} if $opt{m};
 
-$opt{A} &&= File::Spec->catdir( tempdir( CLEANUP => 1 ), 'complete_assembly' );
+$opt{A} &&= File::Spec->catdir( tempdir( CLEANUP => 1 ), 'bac_assembly' );
 
 # init the map data model
 my $dbh = CXGN::DB::Connection->new({ config => $cfg });
@@ -643,7 +643,7 @@ sub _precluster_name {
 
 sub _precluster_dir {
     my ($assembly_dir,$tag,$precluster_number,@additional) = @_;
-    return File::Spec->catdir( $assembly_dir, _precluster_name( $tag, $precluster_number ), @additional );
+    return File::Spec->catdir( $assembly_dir, 'precluster_assemblies', _precluster_name( $tag, $precluster_number ), @additional );
 }
 
 sub _members_filename {
