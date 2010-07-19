@@ -88,13 +88,15 @@ Usage:
        containing all phrap output, .ace files, contig membership
        listings, phrap consensus sequences, and generated AGP filesa
 
+    -k keep assembly tempdir, do not clean it up. will print its path.
+
 EOU
 }
 sub HELP_MESSAGE {usage()}
 
 my @command_line_args = @ARGV; #< save argv for the metadata file
 our %opt;
-getopts('Cp:a:m:c:A',\%opt) or usage();
+getopts('Cp:a:m:c:Ak',\%opt) or usage();
 @ARGV and usage(); #< there should be no non-option arguments
 
 #get our publishing path
@@ -125,7 +127,8 @@ die "invalid chromosome numbers expression\n" if $EVAL_ERROR;
 #get our cview physical map version
 $cview_physical_map_version = $opt{m} if $opt{m};
 
-$opt{A} &&= File::Spec->catdir( tempdir( CLEANUP => 1 ), 'bac_assembly' );
+$opt{A} &&= File::Spec->catdir( tempdir( CLEANUP => ($opt{k} ? 0 : 1) ), 'bac_assembly' );
+warn "using bac assembly tempdir $opt{A}\n" if $opt{k};
 
 # init the map data model
 my $dbh = CXGN::DB::Connection->new({ config => $cfg });
