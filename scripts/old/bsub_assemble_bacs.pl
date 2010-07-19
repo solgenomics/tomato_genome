@@ -578,12 +578,17 @@ sub make_assembly_dir_contig_files {
                     -file   => '>'.File::Spec->catfile( $assembly_dir, "phrap_consensus_$tag.fasta" ),
                    );
 
-        if( -d _precluster_dir( $assembly_dir, $tag, $precluster_number ) ) {
+
+        # for multi-member contigs, get them from the phrap .contigs
+        # file (which will be in the same order as they are listed in
+        # the membership file
+        if( @members > 1 ) {
+
+            my $precluster_contigs_filename  = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.contigs' );
+            -f $precluster_contigs_filename or die "contig line '$contig_line' has multiple members, but .contigs file $precluster_contigs_filename is not present";
             my $precluster_singlets_filename = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.singlets' );
             -s $precluster_singlets_filename
                 and die "precluster $precluster_name has nonempty singlets file $precluster_singlets_filename, this should not have anything in it!";
-
-            my $precluster_contigs_filename  = _precluster_dir( $assembly_dir, $tag, $precluster_number, 'precluster_members.seq.contigs' );
 
             # cache the seqio for each precluster .contigs file, so
             # that as we go through the members file, we will
@@ -593,14 +598,15 @@ sub make_assembly_dir_contig_files {
             my $contigs_in = $contigs_seqio{$precluster_contigs_filename}
                 ||= Bio::SeqIO->new( -format => 'fasta', -file => $precluster_contigs_filename );
 
-            my $s = $contigs_in->next_seq;
+            my $s = $contigs_in->next_seq
+                or die "no more seqs in contigs file for precluster $precluster_name";
             $s->desc('original_id:'.$s->id);
             $s->id( $contig_name );
             $_->write_seq( $s ) for $all_contigs_seqio, $set_contigs_seqio;
-
-        } else {
-            # it's a single sequence in the precluster, just get it from the index
-            @members > 1 and die "no phrap .contigs file, but multiple members for precluster $precluster_name, something is wrong";
+        }
+        # for singletons (whether non-assembled, or did not assemble
+        # cleanly with others), get them from the bac seq index
+        else {
             my $member = $members[0];
             my $s = $seqs_index->fetch( $member ) or die "what, no $member?";
             $s->desc('original_id:'.$s->id);
