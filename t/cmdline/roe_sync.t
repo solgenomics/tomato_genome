@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Carp;
-use Test::More tests => 11;
+use Test::More tests => 15;
 use Test::Output qw/ output_from /;
 use FindBin;
 use Path::Class;
@@ -46,17 +46,26 @@ ok( $gbrec->matches_seq_file( "$test_seq_file" ), 'matches_seq_file method works
 $gbrec->gb_richseq->seq('ACTCGTACGA');
 ok( ! $gbrec->matches_seq_file( "$test_seq_file" ), 'matches_seq_file method works 2' );
 
-# test make_bac_submission
-my $file = CXGN::TomatoGenome::CmdLine::Command::roe_sync::make_bac_submission( undef, $gbrec );
-isa_ok( $file, 'Path::Class::File' );
-ok( -f $file, 'bac submission file exists')
-    or diag $file;
-my $list = `tar -tzf $file | sort`;
-is( $list, <<EOF, 'new submission tarball contains the right stuff' );
+# test make_bac_submission twice
+my @files = map {
+    sleep 1 if $_ == 2; #< make sure modtimes differ
+    my $file = CXGN::TomatoGenome::CmdLine::Command::roe_sync::make_bac_submission( undef, $gbrec );
+    isa_ok( $file, 'Path::Class::File' );
+    ok( -f $file, 'bac submission file exists')
+        or diag $file;
+    my $list = `tar -tzf $file | sort`;
+    is( $list, <<EOF, 'new submission tarball contains the right stuff' );
 C01HBa0034P21/
 C01HBa0034P21/C01HBa0034P21.seq
 C01HBa0034P21/gbacc.txt
 EOF
+    $file
+} 1,2;
+
+system 'cmp',  $files[0], $files[1];
+is( $?, 0, 'bac submission tarballs do not change with date')
+    or system "cp $files[0] /tmp/one; cp $files[1] /tmp/two";
+my ($file) = @files;
 
 # now run integration tests
 SKIP: {
@@ -71,7 +80,7 @@ SKIP: {
 
     local @ARGV = ( 'roe_sync',
 		    '--table_url'    => 'file://'.$test_tomato_html_file,
-		      '--ftpsite_root' => "$tempdir",
+                    '--ftpsite_root' => "$tempdir",
 		    '--submission_destination' => "$destination",
 		   );
     my ($output,$err) = output_from( sub{ $cmd->run } );

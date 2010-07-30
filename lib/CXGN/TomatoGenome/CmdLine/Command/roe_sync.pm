@@ -170,7 +170,8 @@ sub make_bac_submission {
 		    )
 	      ->write_seq( $seq );
     my $tarball = file($tempdir, "$clone_name_with_chrom.tar.gz");
-    system 'tar', -C => $tempdir, -czf => $tarball, "$clone_name_with_chrom/";
+    utime 0, 0, $bac_dir, $bac_dir->children; #< set the file
+    system "tar -C $tempdir -m -cf - $clone_name_with_chrom | gzip -c -n --rsyncable > $tarball";
 
     $bac_dir->rmtree; #< clean up some of the temp files
 
