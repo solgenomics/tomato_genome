@@ -8,7 +8,6 @@ use Getopt::Std;
 
 use Hash::Util qw/lock_hash/;
 
-#use Data::Dumper;
 use File::Basename;
 use File::Spec;
 use List::Util qw/sum/;
@@ -27,7 +26,7 @@ use CXGN::TomatoGenome::BACSubmission ':errors';
 use CXGN::TomatoGenome::BACPublish qw/publisher parse_filename/;
 use CXGN::TomatoGenome::Config;
 
-use CXGN::Tools::File qw/file_contents/;
+use File::Slurp qw/slurp/;
 
 ##### DEFAULTS #######
 
@@ -392,7 +391,7 @@ sub preprocess {
 sub vector_trim {
   my ($sub) = @_;
   #skip unless there's some vector sequence in it
-  return unless file_contents($sub->vector_screened_sequences_file) =~ /X+/i;
+  return unless slurp($sub->vector_screened_sequences_file) =~ /X+/i;
 
   my (undef,$vector_gff3) = $sub->analyze_with('Cross_match_vector');
 

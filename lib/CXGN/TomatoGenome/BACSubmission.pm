@@ -40,7 +40,7 @@ use CXGN::Genomic::CloneIdentifiers qw/parse_clone_ident assemble_clone_ident cl
 use CXGN::Publish qw/parse_versioned_filepath/;
 
 use CXGN::Tools::Run;
-use CXGN::Tools::File qw/file_contents/;
+use File::Slurp qw/slurp/;
 use CXGN::Tools::List qw/str_in/;
 
 use CXGN::TomatoGenome::BACSubmission::Analysis;
@@ -1506,7 +1506,7 @@ sub _check_genbank_record {
 
   #get our submitted sequence
   if(-r $self->sequences_file) {
-    my $seq = file_contents($self->sequences_file);
+    my $seq = slurp($self->sequences_file);
     $seq =~ s/>.+\n//g; #remove all deflines
     $seq =~ s/\s//g;    #remove all whitespace
 
@@ -1854,7 +1854,7 @@ sub genbank_accession {
 
   return unless -f $gbfile;
 
-  my $gbacc = file_contents($gbfile);
+  my $gbacc = slurp($gbfile);
   $gbacc =~ s/\s//g;
 
   croak "'$gbacc' does not look like a valid genbank accession to me"

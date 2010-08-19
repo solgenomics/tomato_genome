@@ -15,7 +15,7 @@ use File::Spec::Functions qw/ catdir catfile/;
 use File::Basename;
 use File::Find;
 
-use CXGN::Tools::File qw/ file_contents /;
+use File::Slurp qw/ slurp /;
 use CXGN::Tools::List qw/ str_in /;
 
 use CXGN::Genomic::CloneIdentifiers qw/ parse_clone_ident /;
@@ -243,7 +243,7 @@ unless (my $return = do $file) {
   #is_deeply(\@expected_orgs, 
 
   #check contents of sequencer_info.txt file
-  is( file_contents( $submission->_seqinfo_filename), <<EOF, 'correct contents of sequencing info file');
+  is( slurp( $submission->_seqinfo_filename), <<EOF, 'correct contents of sequencing info file');
 org_shortname	inra
 org_name	French National Institute for Agriculture Research (INRA)
 org_upload_account_name	france

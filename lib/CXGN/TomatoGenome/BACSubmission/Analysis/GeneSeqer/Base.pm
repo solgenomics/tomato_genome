@@ -1,11 +1,10 @@
 package CXGN::TomatoGenome::BACSubmission::Analysis::GeneSeqer::Base;
 use base qw/CXGN::TomatoGenome::BACSubmission::Analysis/;
 use Carp;
-use English;
 use File::Spec;
 use File::Temp;
 
-use CXGN::Tools::File qw/ executable_is_in_path file_contents /;
+use CXGN::Tools::File qw/ executable_is_in_path /;
 use CXGN::Annotation::GAMEXML::FromFile qw/geneseqer_to_game_xml/;
 use CXGN::Annotation::GAMEXML::Combine qw/combine_game_xml_files/;
 

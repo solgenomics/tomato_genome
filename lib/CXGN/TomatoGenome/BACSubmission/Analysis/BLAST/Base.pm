@@ -1,14 +1,13 @@
 package CXGN::TomatoGenome::BACSubmission::Analysis::BLAST::Base;
 use base qw/CXGN::TomatoGenome::BACSubmission::Analysis/;
 use Carp;
-use English;
 use File::Spec;
 use File::Basename;
 use POSIX;
 
 use CXGN::BlastDB;
 
-use CXGN::Tools::File qw/ executable_is_in_path file_contents /;
+use CXGN::Tools::File qw/ executable_is_in_path /;
 use CXGN::Annotation::GAMEXML::FromFile qw/gff_to_game_xml/;
 
 

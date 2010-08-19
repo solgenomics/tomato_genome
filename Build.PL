@@ -18,7 +18,7 @@ my $build = Module::Build->new(
     # and now the list of perl module dependencies
 
     requires => {
-        perl    => '5.10',
+        perl    => '5.10.0',
         'autodie'            => 0,
         #'Bio::Root::Version' => '==1.005002',
         'Bio::Chado::Schema' => '0.05',

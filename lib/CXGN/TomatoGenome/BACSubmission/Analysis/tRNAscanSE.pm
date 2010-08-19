@@ -1,3 +1,4 @@
+package CXGN::TomatoGenome::BACSubmission::Analysis::tRNAscanSE;
 =head2 tRNAscanSE
 
   Secondary input parameters:
@@ -5,10 +6,8 @@
 
 =cut
 
-package CXGN::TomatoGenome::BACSubmission::Analysis::tRNAscanSE;
 use base qw/CXGN::TomatoGenome::BACSubmission::Analysis/;
 use Carp;
-use English;
 use File::Spec;
 use File::Basename;
 
@@ -16,7 +15,7 @@ use POSIX;
 
 use Bio::Tools::tRNAscanSE;
 
-use CXGN::Tools::File qw/ executable_is_in_path file_contents /;
+use CXGN::Tools::File qw/ executable_is_in_path /;
 use CXGN::Annotation::GAMEXML::FromFile qw/gff_to_game_xml/;
 
 

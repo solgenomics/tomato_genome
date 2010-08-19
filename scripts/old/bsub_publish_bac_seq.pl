@@ -20,7 +20,7 @@ use Memoize;
 
 use Bio::Index::Fasta;
 
-use CXGN::Tools::File qw/ file_contents size_changing /;
+use CXGN::Tools::File qw/ size_changing /;
 use CXGN::Publish qw/publish published_as move_or_print orig_basename/;
 
 use Getopt::Std;

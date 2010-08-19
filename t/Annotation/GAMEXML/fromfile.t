@@ -11,7 +11,7 @@ use Bio::Tools::RepeatMasker;
 use Bio::FeatureIO;
 
 use Test::More qw(no_plan);
-use CXGN::Tools::File qw/file_contents/;
+use File::Slurp qw/slurp/;
 
 use CXGN::Annotation::GAMEXML::FromFile qw/gff_to_game_xml geneseqer_to_game_xml/;
 
@@ -24,8 +24,8 @@ diag "using temp file $tempfile";
 geneseqer_to_game_xml( here 'C01HBa0088L02.seq' , here 'C01HBa0088L02.geneseqer.est', $tempfile,);
 
 my $test_gxml = here 'C01HBa0088L02.geneseqer.xml';
-ok( file_contents($tempfile) eq file_contents( $test_gxml), 'geneseqer_to_game_xml' )
-  or diag file_contents($tempfile);
+ok( slurp($tempfile) eq slurp( $test_gxml), 'geneseqer_to_game_xml' )
+  or diag slurp($tempfile);
 
 gff_to_game_xml(
     here 'C01HBa0088L02.seq', here 'C01HBa0088L02.seq.out.gff', $tempfile,
