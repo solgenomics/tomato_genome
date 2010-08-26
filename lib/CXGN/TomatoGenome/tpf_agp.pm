@@ -21,7 +21,8 @@ use HTML::Entities;
 use CXGN::TomatoGenome::BACPublish qw/tpf_agp_files/;
 use CXGN::Tools::List qw/max str_in/;
 use CXGN::Tools::Identifiers qw/link_identifier/;
-use CXGN::VHost;
+use CXGN::TomatoGenome::Config;
+our $cfg = CXGN::TomatoGenome::Config->load_locked;
 
 sub modtime_string {
   my ($filename) = @_;
@@ -37,9 +38,8 @@ sub format_validation_report {
 
 sub filename {
   my ($chr,$type) = @_;
-  our $vhost ||= CXGN::VHost->new;
   $chr = sprintf("chr%02d",$chr);
-  return File::Spec->catfile( $vhost->get_conf('ftpsite_root') || die('no ftpsite_root set'),
+  return File::Spec->catfile( $cfg->{ftpsite_root} || die('no ftpsite_root set'),
 			      'tomato_genome',
 			      $type,
 			      "$chr.$type",
@@ -47,9 +47,8 @@ sub filename {
 }
 sub published_ftp_download_links {
   my ($chr) = @_;
-  our $vhost ||= CXGN::VHost->new;
-  my $ftp_root = $vhost->get_conf('ftpsite_root');
-  my $ftp_url = $vhost->get_conf('ftpsite_url');
+  my $ftp_root = $cfg->{ftpsite_root};
+  my $ftp_url = $cfg->{ftpsite_url};
   my @files = tpf_agp_files($chr);
   $_ =~ s/^$ftp_root/$ftp_url/e foreach @files;
   return map {$_ ? qq|<a href="$_">[download]</a>| : undef} @files;
