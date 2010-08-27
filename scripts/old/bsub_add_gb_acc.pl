@@ -18,7 +18,7 @@ use CXGN::Tools::Identifiers qw/identifier_namespace clean_identifier/;
 
 ############### CONFIGURATION VARIABLES ##################
 
-our $vhost = CXGN::VHost->new;
+our $vhost = CXGN::TomatoGenome::Config->new;
 our $country_uploads_path = $vhost->get_conf('country_uploads_path');
 our $publish_path = File::Spec->catdir($vhost->get_conf('ftpsite_root'),$vhost->get_conf('bac_publish_subdir'));
 our $logfile = File::Spec->catdir('/data/shared/tomato_genome/bacpipeline/processing_log');

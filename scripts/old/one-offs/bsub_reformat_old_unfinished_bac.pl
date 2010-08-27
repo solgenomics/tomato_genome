@@ -11,12 +11,12 @@ use Getopt::Std;
 use Bio::SeqIO;
 use Bio::Seq::Quality;
 
-use CXGN::VHost;
+use CXGN::TomatoGenome::Config;
 use CXGN::TomatoGenome::BACSubmission qw/E_MULT_SEQS E_GB_ACC E_GB_REC E_GB_SEQ/;
 use CXGN::Tools::List qw/str_in list_join flatten/;
 use CXGN::Tools::Run;
 
-our $vhost = CXGN::VHost->new;
+our $vhost = CXGN::TomatoGenome::Config->new;
 
 sub usage {
   my $message = shift || '';

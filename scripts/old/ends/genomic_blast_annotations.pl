@@ -19,7 +19,7 @@ use Bio::SearchIO::FastHitEventBuilder;
 use CXGN::DB::Connection;
 
 #CXGN configuration system
-use CXGN::VHost;
+use CXGN::TomatoGenome::Config;
 
 #Genomic framework
 use CXGN::Genomic::Library;
@@ -39,7 +39,7 @@ CXGN::CDBI::Class::DBI->db_Main->dbh_param( AutoCommit => 1 ); #using localized 
 
 
 ########## CONFIGURATION VARS ###############
-my $cxgn_conf = CXGN::VHost->new;
+my $cxgn_conf = CXGN::TomatoGenome::Config->new;
 
 my $default_databases_root = $cxgn_conf->get_conf('blast_db_path') || '/data/shared/blast/databases/current';
 my $default_temp_directory = '/data/local';

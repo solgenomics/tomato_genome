@@ -22,7 +22,7 @@ use Chart::Lines;
 
 use CXGN::TomatoGenome::BACPublish qw/ parse_filename /;
 use CXGN::Tools::List qw/ flatten /;
-use CXGN::VHost;
+use CXGN::TomatoGenome::Config;
 
 use Data::Dumper;
 
@@ -34,7 +34,7 @@ my $listing_source = do {
         $opt{l}
     } else {
         my $remote_ssh = $opt{r} ? "ssh $opt{r}" : '';
-        my $pubdir = dir( map CXGN::VHost->new->get_conf($_), 'ftpsite_root', 'bac_publish_subdir' );
+        my $pubdir = dir( map CXGN::TomatoGenome::Config->new->get_conf($_), 'ftpsite_root', 'bac_publish_subdir' );
         unless( $remote_ssh || $opt{l} ) {
             -d $pubdir or die "Cannot find bac publishing dir '$pubdir'.  Please check ftpsite_root and bac_publish_subdir config variables";
             -r $pubdir or die "Cannot read from dir '$pubdir'";
