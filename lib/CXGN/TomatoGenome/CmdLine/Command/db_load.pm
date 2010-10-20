@@ -89,9 +89,9 @@ sub load_bac_seq {
                    ->create_related('features',
                                     { name => $seq->id,
                                       uniquename => $seq->id,
-                                      type  => $self->bac_cvterm,
-                                      residues => $seq->seq,
-                                      seqlen => $seq->length,
+                                      type_id    => $self->bac_cvterm->cvterm_id,
+                                      residues   => $seq->seq,
+                                      seqlen     => $seq->length,
                                     },
                                    );
         $new_feature->create_featureprops({ %$dl_info,
@@ -179,9 +179,10 @@ sub tomato_organism {
 sub bac_cvterm {
     shift
 	->chado
-        ->resultset('Cv::Cv')
-        ->search({'me.name' => 'sequence'})
-        ->search_related(cvterms => {'cvterms.name' => 'BAC_clone'})
+        ->resultset('General::Db')
+        ->search({'me.name' => 'SO'})
+        ->search_related( dbxrefs => { accession => '0000764' })
+        ->search_related( 'cvterm' )
         ->first;
 }
 
