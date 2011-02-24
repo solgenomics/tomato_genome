@@ -948,7 +948,8 @@ genomic_load_end_seqs.pl - load clone-end sequences
       <SOL-style clone_name>_<primer name>_<num>
 
       Note that <num> in the above it not used by this loading script,
-      the chromat_id will be chosen automatically.
+      the chromat_id will be chosen automatically.  You can just make
+      it 0.  Example: C<SL_EcoRI0123A12_SP6_0>
 
   Options:
 
