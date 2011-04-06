@@ -87,6 +87,12 @@ sub execute {
 					    table_rec => $table_rec,
 					  );
 
+	# if it has no clone, warn about it and skip
+	unless( $gb_rec->clone ) {
+	    warn "WARNING: could not find clone for accession ".$gb_rec->gb_richseq->accession.", skipping!\n";
+	    next;
+	}
+
 	# if it does not have a chromosome assignment, give it one
         my $clone_reg_info = $gb_rec->clone->reg_info_hashref;
 	unless( defined $clone_reg_info->{seq_proj}->{val} ) {
