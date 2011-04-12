@@ -411,7 +411,7 @@ sub bac_cvterm {
     shift()
         ->resultset('Cv::Cv')
         ->search({'me.name' => 'sequence'})
-        ->search_related(cvterms => {'cvterms.name' => 'BAC_clone'})
+        ->search_related(cvterms => {'cvterms.name' => { -like => 'BAC_clone%'}})
         ->first;
 }
 
