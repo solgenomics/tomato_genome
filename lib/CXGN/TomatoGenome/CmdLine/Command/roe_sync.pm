@@ -97,7 +97,7 @@ sub execute {
         my $clone_reg_info = $gb_rec->clone->reg_info_hashref;
 	unless( defined $clone_reg_info->{seq_proj}->{val} ) {
             unless( defined $gb_rec->chromosome_num ) {
-                $self->vprint( $gb_rec->clone->clone_name." has no chromosome assignment in BAC registry, and cannot deduce it from its GenBank record.  Please manually set a chromosome number.\n" );
+                warn( $gb_rec->clone->clone_name." has no chromosome assignment in BAC registry, and cannot deduce it from its GenBank record.  Please manually set a chromosome number. Skipping.\n" );
                 next;
             }
 
