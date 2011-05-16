@@ -768,7 +768,8 @@ sub tpf_file {
   return $fname if $unpublished;
 
   my $published = CXGN::Publish::published_as($fname);
-  return $published && -f $published->{fullpath} ? $published->{fullpath} : undef
+  return $published->{fullpath} if $published && -f $published->{fullpath};
+  return;
 }
 
 =head2 agp_file
@@ -801,7 +802,8 @@ sub agp_file {
   return $fname if $unpublished;
 
   my $published = CXGN::Publish::published_as($fname);
-  return $published && -f $published->{fullpath} ? $published->{fullpath} : undef
+  return $published->{fullpath} if $published && -f $published->{fullpath};
+  return;
 }
 
 =head2 contig_file
