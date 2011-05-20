@@ -68,7 +68,6 @@ my $build = Module::Build->new(
         'Test::More'        => 0,
         'Test::Output'      => 0,
         'Test::Warn'        => 0,
-        'Test::XML::Simple' => 0,
         'Tie::Function'     => 0,
     },
 
