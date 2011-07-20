@@ -84,6 +84,7 @@ sub usage {
    -G   accept submissions with missing or malformed GenBank accessions or entries
    -M   accept submissions with multiple sequences (disallowed by current guidelines)
    -V   accept submissions with vector sequence content
+   -F   (force) accept submissions regardless of errors (dangerous)
 
    NOTE: to change the database host, user, and password, set environment
          variables DBHOST, DBUSER, and DBPASS, or change your configuration in
@@ -92,7 +93,7 @@ EOU
 }
 
 our %opt; #GLOBAL options
-getopts('d:s:crfxl:GMSV',\%opt) or usage;
+getopts('d:s:crfxl:GMSVF',\%opt) or usage;
 $CXGN::Publish::dry_run = 1 if $opt{x};
 $CXGN::Publish::print_ops = 1 if DEBUG;
 
